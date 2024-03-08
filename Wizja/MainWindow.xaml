@@ -12,6 +12,5 @@
     <Grid>
         <Button Content="Play" Click="gotoGame" FontSize="36" Width="200" Height="80" BorderBrush="#FF020000" BorderThickness="4,4,4,4" FontWeight="Bold" Margin="860,550,860,450" ></Button>
         <Button Content="Exit" Click="gotoExit" FontSize="36" Width="200" Height="80" BorderBrush="#FF020000" BorderThickness="4,4,4,4" FontWeight="Bold" Margin="860,750,860,250" ></Button>
-
     </Grid>
 </Window>
