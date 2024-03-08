@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Wizja.classes;
 
 namespace Wizja
 {
@@ -22,6 +23,9 @@ namespace Wizja
         public GameWindow()
         {
             InitializeComponent();
+            Shop itemshop = new Shop(shopCanvas);
+            itemshop.ShowShop();
         }
+       
     }
 }
