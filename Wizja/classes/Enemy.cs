@@ -30,7 +30,7 @@ public class Enemy
             Height = 32,
             Fill = new ImageBrush(imageSource)
         };
-        imageType.RenderTransformOrigin =  new Point(0.5,0.5);
+        imageType.RenderTransformOrigin =  new Point(0.5, 0.5);
     }
     public bool IsColision(Rect secondObject)
     {
@@ -53,8 +53,24 @@ public class Enemy
             return true;
         }
     }
-    public void Follow() 
+    public void Follow(Rectangle playerLocation) 
     {
+        double x = Canvas.GetLeft(imageType);
+        double y = Canvas.GetTop(imageType);
+        double dx = Canvas.GetLeft(playerLocation) - x;
+        double dy = Canvas.GetTop(playerLocation) - y;
+        double distance = Math.Sqrt(dx * dx + dy * dy);
+        if (distance >= 0)
+        {
+            // Calculate normalized direction vector
+            double dirX = dx / distance;
+            double dirY = dy / distance;
 
+            // Move the projectile towards the target
+            x += dirX * movingSpeed;
+            y += dirY * movingSpeed;
+            Canvas.SetLeft(imageType, x);
+            Canvas.SetTop(imageType, y);
+        }
     }
 }
