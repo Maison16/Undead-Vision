@@ -20,5 +20,15 @@ namespace Wizja
         {
             InitializeComponent();
         }
+
+        private void gotoGame(object sender, RoutedEventArgs e)
+        {
+            GameWindow Game = new GameWindow();
+            Game.Show();
+        }
+        private void gotoExit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
