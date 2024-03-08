@@ -20,7 +20,7 @@ namespace Wizja.classes
         private Label moneyLabel;
         private Label hpLabel;
         private Label timeLabel;
-        public int totalCoins;
+        public int totalPoints;
 
 
         public HUD(int hp, int time, int money, Canvas statCanvas)
@@ -70,10 +70,22 @@ namespace Wizja.classes
             Canvas.SetTop(moneyLabel, 15);
             statCanvas.Children.Add(moneyLabel);
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(16); 
+            timer.Interval = TimeSpan.FromMilliseconds(1000); 
             timer.Tick += Timer_Tick;
             timer.Start();
         }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            time--;
+            TimeLabelSet();
+            if (time == 0)
+            {
+                timer.Stop();
+            }
+
+        }
+
         public int GetHp()
         {
             return hp;
@@ -95,24 +107,38 @@ namespace Wizja.classes
         {
             time = Time;
             TimeLabelSet();
+            timer.Start();
         }
         public void SetMoney(int Money)
         {
             money = Money;
             MoneyLabelSet();
         }
-        public void AddMoney(int Money)
+        public void ChangeMoney(int Money)
         {
             money += Money;
-            totalCoins += Money;
+            if(Money >= 0) 
+            {
+                totalPoints += Money;
+            }
+            MoneyLabelSet();
+        }
+        public void ChangeHp(int Hp)
+        {
+            hp += Hp;
+            if (hp <= 0)
+            {
+                hp = 0;
+            }
+            HpLabelSet();
         }
         private void TimeLabelSet()
         {
-            timeLabel.Content = $"Hp: {money}";
+            timeLabel.Content = $"Time: {time}";
         }
         private void HpLabelSet()
         {
-            hpLabel.Content = $"Hp: {money}";
+            hpLabel.Content = $"Hp: {hp}";
         }
         private void MoneyLabelSet()
         {
