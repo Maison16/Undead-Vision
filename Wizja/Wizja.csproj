@@ -8,9 +8,4 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="class\" />
-    <Folder Include="res\" />
-  </ItemGroup>
-
 </Project>
