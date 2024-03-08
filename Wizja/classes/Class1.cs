@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wizja.internal class
+namespace Wizja.classes
 {
-    private class Class1
+    internal class Class1
     {
     }
 }
