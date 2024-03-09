@@ -12,6 +12,7 @@ namespace Wizja
     public partial class GameWindow : Window
     {
         bool[] direction = new bool[4];
+        bool isBpressed = false;
 
         //Testy przeciwników
         private ObjectLoader objectLoader;
@@ -29,10 +30,10 @@ namespace Wizja
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
-            hud = new HUD(100, 0, 300, statCanvas);
-            //Tworzenie i otwieranie shop do testów
-            itemshop = new Shop(gameCanvas, shopCanvas, hud);
-            itemshop.ShowShop();
+            
+            hud = new HUD(100, 30, 300, statCanvas);
+            //Tworzenie shop
+            itemshop = new Shop(gameCanvas, shopCanvas, hud, this);
 
             KeyUp += KeyIsUp;
             KeyDown += KeyIsDown;
@@ -118,23 +119,23 @@ namespace Wizja
         {
             if (e.Key == Key.W)
             {
-                Console.WriteLine("W");
                 direction[0] = true;
             }
             else if (e.Key == Key.A)
             {
-                Console.WriteLine("A");
                 direction[1] = true;
             }
             else if (e.Key == Key.S)
             {
-                Console.WriteLine("S");
                 direction[2] = true;
             }
             else if (e.Key == Key.D)
             {
-                Console.WriteLine("D");
                 direction[3] = true;
+            }
+            else if (e.Key == Key.B)
+            {
+                isBpressed = true;
             }
         }
 
@@ -142,24 +143,28 @@ namespace Wizja
         {
             if (e.Key == Key.W)
             {
-                Console.WriteLine("W");
                 direction[0] = false;
             }
             else if (e.Key == Key.A)
             {
-                Console.WriteLine("A");
                 direction[1] = false;
             }
             else if (e.Key == Key.S)
             {
-                Console.WriteLine("S");
                 direction[2] = false;
             }
             else if (e.Key == Key.D)
             {
-                Console.WriteLine("D");
                 direction[3] = false;
             }
+            else if (e.Key == Key.B)
+            {
+                isBpressed = false;
+            }
+        }
+        public bool getB()
+        {
+            return isBpressed;
         }
     }
 }
