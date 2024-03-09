@@ -9,16 +9,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="res\armor.png" />
     <None Remove="res\background1.png" />
+    <None Remove="res\familyguy.png" />
     <None Remove="res\FastZombie.png" />
     <None Remove="res\fence.png" />
     <None Remove="res\grandcross.png" />
+    <None Remove="res\hppotion.jpg" />
+    <None Remove="res\HPpotion.png" />
+    <None Remove="res\m4.png" />
+    <None Remove="res\pistol.png" />
     <None Remove="res\Player.png" />
+    <None Remove="res\shotgun.png" />
     <None Remove="res\SlowZombie.png" />
+    <None Remove="res\smg.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="res\armor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\background1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\familyguy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\fence.png">
@@ -27,13 +41,28 @@
     <Resource Include="res\grandcross.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="res\HPpotion.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\m4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\pistol.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\Player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\FastZombie.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="res\shotgun.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\SlowZombie.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\smg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

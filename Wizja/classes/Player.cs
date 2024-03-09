@@ -35,6 +35,7 @@ namespace Wizja.classes
         }
         public void TakeDamage(int damage) 
         {
+            healthPoints = hud.GetHp();
             healthPoints -= damage;
             if (healthPoints <= 0) 
             {

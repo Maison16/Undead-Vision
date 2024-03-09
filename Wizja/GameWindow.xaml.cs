@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Wizja.classes;
+using Wizja.Enemies;
 
 namespace Wizja
 {
@@ -14,6 +15,8 @@ namespace Wizja
     public partial class GameWindow : Window
     {
         //Testy przeciwników
+        private ObjectLoader objectLoader;
+        private Shop iteamshop;
         public Spawner spawner;
         public Player player;
         public HUD hud;
@@ -56,6 +59,7 @@ namespace Wizja
                     spawner.Spawn();
                     spawner.MoveEveryOne(player);
                     EndOfGame();
+
                 });
             }
             catch { }
@@ -65,20 +69,21 @@ namespace Wizja
             player = new Player(gameCanvas, hud);
             List<Point> enemiesSpawner = new List<Point>() { new Point(4000, 1500), new Point(4000, 2500), new Point(2000, 1500), new Point(2000, 2500) };
             int[][] enemyLists = new int[5][];
+
             //Spawner(List<Point> enemiesSpawner, int rounds,int betweenRounds,Canvas gameScreen)
-/*            spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas,player);
-            enemyLists[0] = new int[] { 75, 25, 0, 0};
-            enemyLists[1] = new int[] { 60, 35, 15, 0 };
-            enemyLists[2] = new int[] { 40, 35, 25, 0 };
-            enemyLists[3] = new int[] { 25, 35, 25, 5 };
-            enemyLists[4] = new int[] { 10, 35, 25, 20 };
-            spawner.GenerateEnemies(enemyLists[0], 12, 0, 125);
-            spawner.GenerateEnemies(enemyLists[1], 24, 1, 115);
-            spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
-            spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
-            spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);*/
-                     
-            spawner = new Spawner(enemiesSpawner, 5, 100000, gameCanvas,player);
+            /*            spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas,player);
+                        enemyLists[0] = new int[] { 75, 25, 0, 0};
+                        enemyLists[1] = new int[] { 60, 35, 15, 0 };
+                        enemyLists[2] = new int[] { 40, 35, 25, 0 };
+                        enemyLists[3] = new int[] { 25, 35, 25, 5 };
+                        enemyLists[4] = new int[] { 10, 35, 25, 20 };
+                        spawner.GenerateEnemies(enemyLists[0], 12, 0, 125);
+                        spawner.GenerateEnemies(enemyLists[1], 24, 1, 115);
+                        spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
+                        spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
+                        spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);*/
+
+            spawner = new Spawner(enemiesSpawner, 5, 100000, gameCanvas, player);
             enemyLists[0] = new int[] { 0, 100, 0, 0 };
             enemyLists[1] = new int[] { 60, 35, 15, 0 };
             enemyLists[2] = new int[] { 40, 35, 25, 0 };
@@ -91,15 +96,27 @@ namespace Wizja
             spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);
         }
 
-        private void EndOfGame() 
+        private void EndOfGame()
         {
-            if (player.healthPoints == 0) 
+            if (player.healthPoints == 0)
             {
-                DeathWindow deathWindow = new DeathWindow();
+                DeathWindow deathWindow = new DeathWindow(hud);
                 gameTimer.Stop();
                 deathWindow.Show();
                 this.Close();
             }
+        }
+
+        // Zwraca obiekty typu rectangle o podanej nazwie dla przeciwnika "Enemy"
+        private List<Rectangle> GetRectanglesByName(string name)
+        {
+            var objects = gameCanvas.Children.OfType<Rectangle>().Where(x => !x.Name.Contains(name));
+            List <Rectangle> results = new List<Rectangle>();
+            foreach (var rectangle in objects) 
+            {
+                results.Add(rectangle);
+            }
+            return results;
         }
     }
 }
