@@ -4,8 +4,10 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -20,8 +22,11 @@ namespace Wizja.classes
         private Label moneyLabel;
         private Label hpLabel;
         private Label timeLabel;
+        private Label nearLabel;
+        private Rectangle nearBox;
+        private ImageBrush hpImage = new ImageBrush();
+        private ImageBrush coinImage = new ImageBrush();
         public int totalPoints;
-
 
         public HUD(int hp, int time, int money, Canvas statCanvas)
         {
@@ -39,40 +44,78 @@ namespace Wizja.classes
             Canvas.SetLeft(statBar, 0);
             Canvas.SetTop(statBar, 0);
             statCanvas.Children.Add(statBar);
-
+            hpImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/hpIcon.png"));
+            Rectangle hpIcon = new Rectangle
+            {
+                Width = 50,
+                Height = 50,
+                Fill = hpImage
+            };
+            Canvas.SetLeft(hpIcon, 50);
+            Canvas.SetTop(hpIcon, 30);
+            statCanvas.Children.Add(hpIcon);
             hpLabel = new Label
             {
-                Content = $"Hp: {hp}",
+                Content = $"{hp}",
                 FontSize = 50,
                 Foreground = Brushes.Gold
             };
-            Canvas.SetLeft(hpLabel, 50);
+            Canvas.SetLeft(hpLabel, 100);
             Canvas.SetTop(hpLabel, 15);
             statCanvas.Children.Add(hpLabel);
 
             timeLabel = new Label
             {
-                Content = $"Time: {time}",
+                Content = $"{time}s",
                 FontSize = 50,
                 Foreground = Brushes.Gold
             };
-            Canvas.SetLeft(timeLabel, 850);
+            Canvas.SetLeft(timeLabel, 900);
             Canvas.SetTop(timeLabel, 15);
             statCanvas.Children.Add(timeLabel);
+            coinImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/coinIcon.png"));
+            Rectangle coinIcon = new Rectangle
+            {
+                Width = 50,
+                Height = 50,
+                Fill = coinImage
+            };
+            Canvas.SetLeft(coinIcon, 1650);
+            Canvas.SetTop(coinIcon, 30);
+            statCanvas.Children.Add(coinIcon);
 
             moneyLabel = new Label
             {
-                Content = $"Money: {money}",
+                Content = $"{money}",
                 FontSize = 50,
                 Foreground = Brushes.Gold
             };
-            Canvas.SetLeft(moneyLabel, 1500);
+            Canvas.SetLeft(moneyLabel, 1700);
             Canvas.SetTop(moneyLabel, 15);
             statCanvas.Children.Add(moneyLabel);
+
+            nearBox = new Rectangle
+            {
+                Width = 400,
+                Height = 40,
+                Fill = Brushes.DarkRed
+            };
+            Canvas.SetLeft(nearBox, 1595);
+            Canvas.SetTop(nearBox, 1040);
+            statCanvas.Children.Add(nearBox);
+            nearLabel = new Label
+            {
+                Content = "Press 'B' to open Shop",
+                FontSize = 32,
+                Foreground = Brushes.Gold
+            };
+            Canvas.SetLeft(nearLabel, 1595);
+            Canvas.SetTop(nearLabel, 1030);
+            statCanvas.Children.Add(nearLabel);
+
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(1000); 
             timer.Tick += Timer_Tick;
-            timer.Start();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -85,7 +128,17 @@ namespace Wizja.classes
             }
 
         }
+        public void NearShopShow()
+        {
+            nearBox.Visibility = Visibility.Visible;
+            nearLabel.Visibility = Visibility.Visible;
 
+        }
+        public void NearShopHide()
+        {
+            nearBox.Visibility = Visibility.Hidden;
+            nearLabel.Visibility = Visibility.Hidden;
+        }
         public int GetHp()
         {
             return hp;
@@ -134,15 +187,15 @@ namespace Wizja.classes
         }
         private void TimeLabelSet()
         {
-            timeLabel.Content = $"Time: {time}";
+            timeLabel.Content = $"{time}s";
         }
         private void HpLabelSet()
         {
-            hpLabel.Content = $"Hp: {hp}";
+            hpLabel.Content = $"{hp}";
         }
         private void MoneyLabelSet()
         {
-            moneyLabel.Content = $"Money: {money}";
+            moneyLabel.Content = $"{money}";
         }
     }
 }

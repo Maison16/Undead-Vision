@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using Wizja.Enemies;
 
 namespace Wizja.classes
 {
@@ -13,12 +15,12 @@ namespace Wizja.classes
     public abstract class Weapon
     {
         private string name { get; set; } // nazwa
-        private double dmg { get; set; } // ilosc obrazen
+        private int dmg { get; set; } // ilosc obrazen
         private double range { get; set; } // max zasieg wystrzeliwanego pocisku
         private int cost { get; set; } // koszt w sklepie
         private BitmapImage img { get; set; }
 
-        public Weapon(string name, double dmg, double range, int cost, BitmapImage img)
+        public Weapon(string name, int dmg, double range, int cost, BitmapImage img)
         {
             this.name = name;
             this.dmg = dmg;
@@ -28,6 +30,6 @@ namespace Wizja.classes
             this.img = img;
         }
 
-        public abstract void Shoot(Point playerPos, Point endPoint, ObjectLoader objectLoader, Canvas gameCanvas);
+        public abstract void Shoot(Point playerPos, Vector direction, List<Rectangle> mapObjects, List<Enemy> enemies, Canvas gameCanvas);
     }
 }

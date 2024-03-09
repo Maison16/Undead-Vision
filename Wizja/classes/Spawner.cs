@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Wizja.Enemies;
 
@@ -10,7 +12,6 @@ public class Spawner
     private List<SpawnerObject> enemiesSpawner = new List<SpawnerObject>(); // Dajemy pozycje wszystkich puntków spawnujących
     private List<Enemy>[] enemies; //Przetrzymuje przeciwnków
     private int rounds;//Liczba rund
-    private int betweenRounds; //Czas między rundami
     private int enemyCurrentNumber = 0;
     private int currentRound = 0;
     private int tickCount = 0;
@@ -18,13 +19,12 @@ public class Spawner
     private Player player;
 
 
-    public Spawner(List<Point> enemiesSpawner, int rounds, int betweenRounds, Canvas gameScreen, Player player)
+    public Spawner(List<Point> enemiesSpawner, int rounds, Canvas gameScreen, Player player)
     {
         this.rounds = rounds;
         frequency = new int[rounds];
         this.enemies = new List<Enemy>[rounds];
         this.player = player;
-        this.betweenRounds = betweenRounds;
         this.gameScreen = gameScreen;
         foreach (Point place in enemiesSpawner)
         {
@@ -53,11 +53,11 @@ public class Spawner
             }
             else if (value <= wave[0] + wave[1] + wave[2])
             {
-                GetEnemies(3,noRound);
+                GetEnemies(3, noRound);
             }
             else if (value <= wave[0] + wave[1] + wave[3])
             {
-                GetEnemies(4,noRound);
+                GetEnemies(4, noRound);
             }
         }
     }
@@ -71,7 +71,7 @@ public class Spawner
                 enemies[noRound].Add(new SlowZombie());
                 break;
             case 2:
-                enemies[noRound].Add(new FastZombie());
+                enemies[noRound].Add(new Wolf());
                 break;
             case 3:
                 enemies[noRound].Add(new TankSkeleton());
@@ -97,7 +97,7 @@ public class Spawner
             Rectangle obj;
             foreach (SpawnerObject spawnerObj in TheClosestSpawners())
             {
-                if (enemies[currentRound].Count() <= enemyCurrentNumber) 
+                if (enemies[currentRound].Count() <= enemyCurrentNumber)
                 {
                     break;
                 }
@@ -111,8 +111,9 @@ public class Spawner
             }
         }
         tickCount++;
-        if (tickCount % betweenRounds == 0 && currentRound < rounds)
+        if (AllDead() && currentRound < rounds)
         {
+            player.hud.SetTime(30);
             enemyCurrentNumber = 0;
             currentRound++;
             tickCount = 0;
@@ -120,17 +121,26 @@ public class Spawner
     }
 
     //Przesuwa wszystkie potwory i sprawdza czy mogą one zatakować gracza
-    public void MoveEveryOne(Player player)
+    public void MoveEveryOne(Player player, List <Rectangle> mapObject)
     {
         for (int i = 0; i < rounds; i++)
         {
             foreach (Enemy enemy in enemies[i])
             {
                 Rectangle playerImage = player.playerImage;
-                if (enemy.isLiving)
+
+                if (enemy.isLiving )
                 {
-                    enemy.Follow(playerImage);
                     Rect hitbox = new Rect(Canvas.GetLeft(playerImage), Canvas.GetTop(playerImage), playerImage.Width, playerImage.Height);
+                    Rectangle rec = ColisionWithBulding(enemy, mapObject);
+                    if (!playerImage.Equals(rec))
+                    {
+                        enemy.BreakCollision(rec, gameScreen, playerImage);
+                    }
+                    else 
+                    {
+                        enemy.Follow(playerImage, gameScreen);
+                    }
                     if (enemy.IsColision(hitbox))
                     {
                         player.TakeDamage(enemy.DealDamage());
@@ -140,7 +150,27 @@ public class Spawner
             }
         }
     }
-
+    private bool AllDead() 
+    {
+        foreach (Enemy en in enemies[currentRound]) 
+        {
+            if(en.isLiving)
+            return false;
+        }
+        return true;
+    }
+    private Rectangle ColisionWithBulding(Enemy enemy,List<Rectangle> mapObject) 
+    {
+        foreach (Rectangle rectangle in mapObject)
+        {
+            Rect building = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rectangle.Width, rectangle.Height);
+            if (enemy.IsColision(building))
+            {
+                return rectangle;
+            }
+        }
+        return player.playerImage;
+    } 
     //Sprawdza który z spawnerów są najbliżej playera i powinny spawnować przeciwników
     public List<SpawnerObject> TheClosestSpawners()
     {
@@ -154,7 +184,7 @@ public class Spawner
                 result.Add(maxSpawnerObj);
                 maxSpawnerObj = spawnerObj;
             }
-            else 
+            else
             {
                 result.Add(spawnerObj);
             }
@@ -162,4 +192,15 @@ public class Spawner
         return result;
     }
 
+    public List<Enemy> GetAllEnemies()
+    {
+        List<Enemy> allEnemies = new List<Enemy>();
+
+        foreach (List<Enemy> enemyList in enemies)
+        {
+            allEnemies.AddRange(enemyList);
+        }
+
+        return allEnemies;
+    }
 }
