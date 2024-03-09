@@ -59,6 +59,18 @@ namespace Wizja.classes
             movingObjects.Add(build);
             gameCanvas.Children.Add(build);
         }
+        public Rectangle BuildShop(int leftPossition, int topPossition, ImageBrush imageBrush, int width, int height)
+        {
+            Rectangle build = new Rectangle
+            {
+                Width = width,
+                Height = height,
+                Fill = imageBrush
+            };
+            Canvas.SetLeft(build, leftPossition);
+            Canvas.SetTop(build, topPossition);
+            return build;
+        }
 
         public void BuildConstrution(int leftPossition, int topPossition, ImageBrush imageBrush,int width, int height)
         {

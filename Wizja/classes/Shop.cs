@@ -17,8 +17,10 @@ namespace Wizja.classes
         private Canvas gameCanvas;
         private HUD hud;
         private ObjectLoader objectLoader;
-        private ImageBrush shopOpenImage;
-        private ImageBrush shopCloseImage;
+        private ImageBrush shopImage;
+        private Rectangle shopBuild;
+        private List<Rectangle> listMapObjects;
+        private List<Rectangle> listHitObjects;
         // Konstruktor pobiera Canvas i hud (money)
         public Shop(Canvas gameCanvas, Canvas shopCanvas, HUD hud)
         {
@@ -26,13 +28,30 @@ namespace Wizja.classes
             this.shopCanvas = shopCanvas;
             this.hud = hud;
             objectLoader= new ObjectLoader(gameCanvas);
-            shopOpenImage = new ImageBrush();
-            shopOpenImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/shopOpen.png"));
-            shopCloseImage = new ImageBrush();
-            shopCloseImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/shopOpen.png"));
-            objectLoader.BuildConstrution(3000, 1700, shopOpenImage, 400, 300);
+            shopImage = new ImageBrush();
+            listMapObjects = objectLoader.GetListMapObjects();
+            listHitObjects = objectLoader.GetListMovingObjects();
+            ShopIsOpen();
         }
 
+        public void ShopIsClose()
+        {
+            shopImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/shopClosed.png"));
+            gameCanvas.Children.Remove(shopBuild);
+            shopBuild = objectLoader.BuildShop(3000, 1700, shopImage, 400, 300);
+            listMapObjects.Add(shopBuild);
+            listHitObjects.Add(shopBuild);
+            gameCanvas.Children.Add(shopBuild);
+        }
+        public void ShopIsOpen()
+        {
+            shopImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/shopOpen.png"));
+            gameCanvas.Children.Remove(shopBuild);
+            shopBuild = objectLoader.BuildShop(3000, 1700, shopImage, 400, 300);
+            listMapObjects.Add(shopBuild);
+            listHitObjects.Add(shopBuild);
+            gameCanvas.Children.Add(shopBuild);
+        }
         // Pokazywnaie Sklepu
         public void ShowShop()
         {
