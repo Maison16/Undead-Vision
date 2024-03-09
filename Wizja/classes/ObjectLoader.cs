@@ -32,7 +32,7 @@ namespace Wizja.classes
             treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             grandCrossImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             metalFenceImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fence.png"));
-            backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/background1.png"));
+            backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/ground.png"));
             gameCanvas = GameCanvas;
             LoadMap();
         }

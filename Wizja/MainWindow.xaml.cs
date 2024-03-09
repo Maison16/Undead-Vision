@@ -20,12 +20,37 @@ namespace Wizja
         public MainWindow()
         {
             InitializeComponent();
+            var menuBackground = new ImageBrush();
+            menuBackground.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/menu/menuBackground.png"));
+            mainCanvas.Background = menuBackground;
+
+
+            var logo = new ImageBrush();
+            logo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/menu/biglogo.png"));
+
+            Rectangle recLogo = new Rectangle
+            {
+                Width = 1920,
+                Height = 750,
+                Fill = logo
+            };
+            Canvas.SetLeft(recLogo, 0);
+            Canvas.SetTop(recLogo, -100);
+            mainCanvas.Children.Add(recLogo);
         }
 
         private void gotoGame(object sender, RoutedEventArgs e)
         {
             GameWindow Game = new GameWindow();
             Game.Show();
+            this.Close();
+        }
+        private void gotoManual(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void gotoCreators(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
         private void gotoExit(object sender, RoutedEventArgs e)
