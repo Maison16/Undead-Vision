@@ -74,6 +74,21 @@ namespace Wizja.classes
             hitObjects.Add(build);
             gameCanvas.Children.Add(build);
         }
+        public void SetListMapObjects(List<Rectangle> rectangles)
+        {
+            foreach (Rectangle temp in rectangles)
+            {
+                hitObjects.Add(temp);
+            }
+        }
+
+        public void SetListMovingObjects(List<Rectangle> rectangles)
+        {
+            foreach (Rectangle temp in rectangles)
+            {
+                movingObjects.Add(temp);
+            }
+        }
 
         public List<Rectangle> GetListMapObjects()
         {
@@ -82,20 +97,6 @@ namespace Wizja.classes
         public List<Rectangle> GetListMovingObjects()
         {
             return movingObjects;
-        }
-        public void SetListMapObjects(List<Rectangle> rectangles)
-        {
-            foreach (Rectangle temp in rectangles)
-            {
-                hitObjects.Add(temp);
-            }
-        }
-        public void SetListMovingObjects(List<Rectangle> rectangles)
-        {
-            foreach (Rectangle temp in rectangles)
-            {
-                hitObjects.Add(temp);
-            }
         }
     }
 }
