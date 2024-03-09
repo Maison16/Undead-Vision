@@ -20,12 +20,10 @@ namespace Wizja
 
 
         private System.Timers.Timer gameTimer = new System.Timers.Timer();
-        Point playerPosition; // testy
         ObjectLoader objectLoader;
         public GameWindow()
         {
             InitializeComponent();
-
 
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
@@ -35,58 +33,20 @@ namespace Wizja
             //Tworzenie i otwieranie shop do testów
             Shop itemshop = new Shop(shopCanvas, hud);
             itemshop.ShowShop();
-
-            // jakis test ziom do strzelania
-            Rectangle playerRect = new Rectangle
-            {
-                Width = 20,
-                Height = 20,
-                Fill = Brushes.Blue
-            };
-            Canvas.SetLeft(playerRect, 3100);
-            Canvas.SetTop(playerRect, 2100);
-            gameCanvas.Children.Add(playerRect);
-
+            
             playerPosition = new Point(Canvas.GetLeft(playerRect), Canvas.GetTop(playerRect));
             PreviewKeyDown += GameWindow_PreviewKeyDown;
            
             
             testing_ERYK();
 
-
-            //inicjalizacja gameTimera
-            gameTimer.Interval = 16; //16 MILISEKUND
-            gameTimer.Elapsed += GameTick;
-            gameTimer.Start(); //od razu zaczyna timer gameTimer
-
-
-
-        }
-
-        private void ShootProjectile()
-        {
-            // pozycja kursora
-            Point cursorPosition = Mouse.GetPosition(gameCanvas);
-
-            // wektor pocisku
-            Vector direction = cursorPosition - playerPosition;
-            direction.Normalize();
-
-            // koncowy punkt 
             Point endPoint = playerPosition + direction * 500; // 500 to range do zmiany 
 
             // Stworz pocisk
-            Projectile projectile = new Projectile(playerPosition.X, playerPosition.Y, endPoint.X, endPoint.Y, 2, objectLoader.GetListMapObjects(), gameCanvas);
+            weapon.Shoot(playerPosition, endPoint, objectLoader, gameCanvas);
+            //Projectile projectile = new Projectile(playerPosition.X, playerPosition.Y, endPoint.X, endPoint.Y, 2, objectLoader.GetListMapObjects(), gameCanvas);
         }
 
-        // cosik do klikania 
-        private void GameWindow_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-            {
-                ShootProjectile();
-            }
-        }
         private void GameTick(object sender, ElapsedEventArgs e)
         {
             try
