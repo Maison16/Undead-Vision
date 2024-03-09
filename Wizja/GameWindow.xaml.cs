@@ -34,15 +34,16 @@ namespace Wizja
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
             hud = new HUD(100, 30, 300, statCanvas);
-
             //Tworzenie i otwieranie shop do testów
             Shop itemshop = new Shop(gameCanvas, shopCanvas, hud);
             itemshop.ShowShop();
 
             KeyUp += KeyIsUp;
             KeyDown += KeyIsDown;
-
             testing_ERYK();
+            itemshop.initPlayer(player);
+            itemshop.timerShopCheck.Start();
+
 
 
             //inicjalizacja gameTimera
