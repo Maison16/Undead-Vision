@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Wizja.classes;
 
 namespace Wizja
 {
@@ -19,9 +20,18 @@ namespace Wizja
     /// </summary>
     public partial class DeathWindow : Window
     {
-        public DeathWindow()
+        HUD hud;
+        public DeathWindow(HUD hud)
         {
+            this.hud = hud;
             InitializeComponent();
+            Label score = new Label();
+            score.Content = "Score: " + hud.totalPoints.ToString();
+            score.FontSize = 36;
+            score.FontWeight = FontWeights.Bold;
+            Canvas.SetLeft(score, 920);
+            Canvas.SetTop(score, 350);
+            deathCanvas.Children.Add(score);
         }
         private void closeWindow(object sender, RoutedEventArgs e)
         {

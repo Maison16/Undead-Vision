@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Wizja.classes;
 using Wizja.Enemies;
+using Wizja.classes.guns;
 
 namespace Wizja
 {
@@ -21,13 +22,11 @@ namespace Wizja
         public Player player;
         public HUD hud;
 
-
         private System.Timers.Timer gameTimer = new System.Timers.Timer();
-        Point playerPosition; // testy
+
         public GameWindow()
         {
             InitializeComponent();
-
 
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
@@ -35,60 +34,12 @@ namespace Wizja
             hud = new HUD(100, 30, 300, statCanvas);
 
             //Tworzenie i otwieranie shop do testów
-            iteamshop = new Shop(shopCanvas, hud);
-            iteamshop.ShowShop();
-
-            // jakis test ziom do strzelania
-            Rectangle playerRect = new Rectangle
-            {
-                Width = 20,
-                Height = 20,
-                Fill = Brushes.Blue
-            };
-            Canvas.SetLeft(playerRect, 3100);
-            Canvas.SetTop(playerRect, 2100);
-            gameCanvas.Children.Add(playerRect);
-
-            playerPosition = new Point(Canvas.GetLeft(playerRect), Canvas.GetTop(playerRect));
-            PreviewKeyDown += GameWindow_PreviewKeyDown;
-
-
+            Shop itemshop = new Shop(shopCanvas, hud);
+            itemshop.ShowShop();
+           
             testing_ERYK();
-
-
-            //inicjalizacja gameTimera
-            gameTimer.Interval = 16; //16 MILISEKUND
-            gameTimer.Elapsed += GameTick;
-            gameTimer.Start(); //od razu zaczyna timer gameTimer
-
-
-
         }
 
-        private void ShootProjectile()
-        {
-            // pozycja kursora
-            Point cursorPosition = Mouse.GetPosition(gameCanvas);
-
-            // wektor pocisku
-            Vector direction = cursorPosition - playerPosition;
-            direction.Normalize();
-
-            // koncowy punkt 
-            Point endPoint = playerPosition + direction * 500; // 500 to range do zmiany 
-
-            // Stworz pocisk
-            Projectile projectile = new Projectile(playerPosition.X, playerPosition.Y, endPoint.X, endPoint.Y, 2, objectLoader.GetListMapObjects(), gameCanvas);
-        }
-
-        // cosik do klikania 
-        private void GameWindow_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-            {
-                ShootProjectile();
-            }
-        }
         private void GameTick(object sender, ElapsedEventArgs e)
         {
             try
@@ -149,7 +100,7 @@ namespace Wizja
         {
             if (player.healthPoints == 0)
             {
-                DeathWindow deathWindow = new DeathWindow();
+                DeathWindow deathWindow = new DeathWindow(hud);
                 gameTimer.Stop();
                 deathWindow.Show();
                 this.Close();
