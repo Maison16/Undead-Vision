@@ -16,7 +16,7 @@ namespace Wizja
     public partial class GameWindow : Window
     {
         bool[] direction = new bool[4];
-
+            
         //Testy przeciwników
         private ObjectLoader objectLoader;
         private Shop iteamshop;
@@ -74,14 +74,14 @@ namespace Wizja
         }
         private void testing_ERYK()
         {
-            player = new Player(gameCanvas, hud);
+            player = new Player(gameCanvas, hud, objectLoader.GetListMapObjects());
             player.MouseMoveHandler(gameCanvas);
             MovementHandler.initialize(player);
             List<Point> enemiesSpawner = new List<Point>() { new Point(4000, 1500), new Point(4000, 2500), new Point(2000, 1500), new Point(2000, 2500) };
             int[][] enemyLists = new int[5][];
 
             //Spawner(List<Point> enemiesSpawner, int rounds,int betweenRounds,Canvas gameScreen)
-                       spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas,player);
+                       spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas, player);
                         enemyLists[0] = new int[] { 75, 25, 0, 0};
                         enemyLists[1] = new int[] { 60, 35, 15, 0 };
                         enemyLists[2] = new int[] { 40, 35, 25, 0 };
@@ -104,7 +104,8 @@ namespace Wizja
             spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
             spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
             spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);
-            */          
+            */
+            player.SetAllEnemies(spawner.GetAllEnemies());
         }
 
         private void EndOfGame()
@@ -176,6 +177,12 @@ namespace Wizja
                 Console.WriteLine("D");
                 direction[3] = false;
             }
+        }
+
+        private void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Pass the mouse click position to the player object to handle shooting
+            player.MouseLeftButtonDown(sender, e);
         }
     }
 }

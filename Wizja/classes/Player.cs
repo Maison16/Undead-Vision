@@ -9,6 +9,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using Wizja.classes.guns;
+using Wizja.Enemies;
+using static Wizja.classes.Shop;
 namespace Wizja.classes
 {
     public class Player
@@ -17,14 +21,22 @@ namespace Wizja.classes
         public double movingSpeed;
         public Rectangle playerImage;
         public Rectangle flashLightImage;
+        private List<Rectangle> obstacles;
+        private List<Enemy> allEnemies;
+        private Weapon weapon;
+        private Point endPoint;
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
         public static ImageSource flashLightSource = new BitmapImage(new Uri("pack://application:,,,/res/flashlight.png"));
         HUD hud;
-        public Player(Canvas gameCanvas, HUD hud)
+
+        public Player(Canvas gameCanvas, HUD hud, List<Rectangle> obstacles)
         {
             healthPoints = 100;
             movingSpeed = 3.5;
             this.hud = hud;
+            this.obstacles = obstacles;
+            this.allEnemies = allEnemies;
+
             playerImage = new Rectangle()
             {
                 Width = 47,
@@ -46,6 +58,8 @@ namespace Wizja.classes
             gameCanvas.Children.Add(playerImage);
             gameCanvas.Children.Add(flashLightImage);
             playerImage.RenderTransformOrigin = new Point(0.5, 0.5);
+
+            this.weapon = new BaseGun();
         }
         public void TakeDamage(int damage)
         {
@@ -65,6 +79,7 @@ namespace Wizja.classes
         {
             this.gameCanvas = gameCanvas;
             gameCanvas.MouseMove += MouseMove;
+            gameCanvas.MouseLeftButtonDown += MouseLeftButtonDown;
         }
 
         private void MouseMove(object sender, MouseEventArgs e)
@@ -79,6 +94,27 @@ namespace Wizja.classes
             flashLightImage.RenderTransformOrigin = new Point(0.5, 0.5);
             RotateTransform rotateTransform = new RotateTransform(angle);
             flashLightImage.RenderTransform = rotateTransform;
+        }
+
+        public void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point endPoint;
+            Point playerPos = new Point(Canvas.GetLeft(playerImage), Canvas.GetTop(playerImage));
+
+            playerPos = new Point(Canvas.GetLeft(playerImage) + playerImage.Width / 2, Canvas.GetTop(playerImage) + playerImage.Height / 2);
+
+            // pojebana matma z chatu do endpointu strzalu
+            double flashlightAngle = ((RotateTransform)flashLightImage.RenderTransform).Angle;
+            Vector direction = new Vector(Math.Cos(flashlightAngle * Math.PI / 180), Math.Sin(flashlightAngle * Math.PI / 180));
+            // double distance = 1000;
+            // endPoint = new Point(playerPos.X + direction.X * distance, playerPos.Y + direction.Y * distance);
+
+            weapon.Shoot(playerPos, direction, obstacles, allEnemies, gameCanvas);
+        }
+
+        public void SetAllEnemies(List<Enemy> allEnemies)
+        {
+            this.allEnemies = allEnemies;
         }
     }
 }
