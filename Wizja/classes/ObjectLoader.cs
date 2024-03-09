@@ -22,7 +22,6 @@ namespace Wizja.classes
         private ImageBrush tombstoneImage = new ImageBrush();
         private ImageBrush treeImage = new ImageBrush();
         private ImageBrush grandCrossImage = new ImageBrush();
-        private ImageBrush metalFenceImage = new ImageBrush();
         private ImageBrush backgroundImage = new ImageBrush();
         private ImageBrush woodenFenceHorizontal = new ImageBrush();
         private ImageBrush woodenFenceVertical = new ImageBrush();
@@ -33,7 +32,6 @@ namespace Wizja.classes
             tombstoneImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             grandCrossImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
-            metalFenceImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fence2.png"));
             backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/background1.png"));
             woodenFenceHorizontal.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fenceHorizontal.png"));
             woodenFenceVertical.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fenceVertical.png"));
