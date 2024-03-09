@@ -27,8 +27,10 @@
     <None Remove="res\HPpotion.png" />
     <None Remove="res\m4.png" />
     <None Remove="res\menu\biglogo.png" />
+    <None Remove="res\menu\bigmanual.png" />
     <None Remove="res\menu\creator.png" />
     <None Remove="res\menu\logo.png" />
+    <None Remove="res\menu\manual.png" />
     <None Remove="res\menu\menuBackground.png" />
     <None Remove="res\pistol.png" />
     <None Remove="res\Player.png" />
@@ -38,6 +40,7 @@
     <None Remove="res\SlowZombie.png" />
     <None Remove="res\smg.png" />
     <None Remove="res\TankSkeleton.png" />
+    <None Remove="res\tombstone.png" />
     <None Remove="res\Wolf.png" />
   </ItemGroup>
 
@@ -66,6 +69,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\menu\biglogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\menu\bigmanual.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\menu\creator.png">
@@ -123,6 +129,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\TankSkeleton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\tombstone.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\Wolf.png">

@@ -29,7 +29,7 @@ namespace Wizja.classes
         public ObjectLoader(Canvas GameCanvas)
         {
             sanctuaryImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/chapel.png"));
-            tombstoneImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
+            tombstoneImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/tombstone.png"));
             treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             grandCrossImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/ground.png"));
@@ -43,8 +43,22 @@ namespace Wizja.classes
             BuildMap(backgroundImage);
             BuildFences();
             BuildConstrution(300, 800, sanctuaryImage, 200, 300);
-            BuildConstrution(3800, 2750, sanctuaryImage, 200, 300);
-            BuildConstrution(4800, 2000, sanctuaryImage, 200, 300);
+            BuildConstrution(3800, 3500, sanctuaryImage, 200, 300);
+            BuildConstrution(4600, 2000, sanctuaryImage, 200, 300);
+            BuildConstrution(5000, 2310, tombstoneImage, 50, 50);
+            BuildConstrution(5000, 2510, tombstoneImage, 50, 50);
+            BuildConstrution(5000, 2710, tombstoneImage, 50, 50);
+            BuildConstrution(4800, 2310, tombstoneImage, 50, 50);
+            BuildConstrution(4800, 2510, tombstoneImage, 50, 50);
+            BuildConstrution(4800, 2710, tombstoneImage, 50, 50);
+            BuildConstrution(4600, 2310, tombstoneImage, 50, 50);
+            BuildConstrution(4600, 2510, tombstoneImage, 50, 50);
+            BuildConstrution(4600, 2710, tombstoneImage, 50, 50);
+            BuildConstrution(4400, 2310, tombstoneImage, 50, 50);
+            BuildConstrution(4400, 2510, tombstoneImage, 50, 50);
+            BuildConstrution(4400, 2710, tombstoneImage, 50, 50);
+
+
 
         }
 
