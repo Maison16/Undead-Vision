@@ -83,5 +83,19 @@ namespace Wizja.classes
         {
             return movingObjects;
         }
+        public void SetListMapObjects(List<Rectangle> rectangles)
+        {
+            foreach (Rectangle temp in rectangles)
+            {
+                hitObjects.Add(temp);
+            }
+        }
+        public void SetListMovingObjects(List<Rectangle> rectangles)
+        {
+            foreach (Rectangle temp in rectangles)
+            {
+                hitObjects.Add(temp);
+            }
+        }
     }
 }

@@ -24,12 +24,11 @@ namespace Wizja
         public Player player;
         public HUD hud;
 
-
         private System.Timers.Timer gameTimer = new System.Timers.Timer();
         public GameWindow()
         {
             InitializeComponent();
-
+           
 
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
@@ -70,6 +69,9 @@ namespace Wizja
                     spawner.Spawn();
                     spawner.MoveEveryOne(player);
                     EndOfGame();
+                    objectLoader.SetListMapObjects(this.GetRectanglesByName("Enemy"));
+                    objectLoader.SetListMovingObjects(this.GetRectanglesByName("Enemy"));
+
                 });
             }
             catch { }
@@ -129,7 +131,7 @@ namespace Wizja
             return results;
         }
 
-        private void KeyIsDown(object sender, KeyEventArgs e)
+        public void KeyIsDown(object sender, KeyEventArgs e)
         {
             int direction = 0x0000;
 
@@ -146,7 +148,7 @@ namespace Wizja
                 direction += 0x0001;
         }
 
-        private void KeyIsUp(object sender, KeyEventArgs e)
+        public void KeyIsUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.W)
                 direction -= 0x1000;
