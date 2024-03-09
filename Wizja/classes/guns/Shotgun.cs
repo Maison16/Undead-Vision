@@ -18,7 +18,7 @@ namespace Wizja.classes.guns
     public class Shotgun : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/shotgun.png"));
-        public Shotgun() : base("Gun2", 1, 200, 200, img) { }
+        public Shotgun() : base("Shotgun", 1, 200, 200, img) { }
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
