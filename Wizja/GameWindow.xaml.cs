@@ -15,6 +15,8 @@ namespace Wizja
     /// </summary>
     public partial class GameWindow : Window
     {
+        int direction = 0x0000;
+
         //Testy przeciwników
         private ObjectLoader objectLoader;
         private Shop iteamshop;
@@ -127,6 +129,38 @@ namespace Wizja
                 results.Add(rectangle);
             }
             return results;
+        }
+
+        private void KeyIsDown(object sender, KeyEventArgs e)
+        {
+            int direction = 0x0000;
+
+            if (e.Key == Key.W)
+                direction += 0x1000;
+
+            if (e.Key == Key.A)
+                direction += 0x0100;
+
+            if (e.Key == Key.S)
+                direction += 0x0010;
+
+            if (e.Key == Key.D)
+                direction += 0x0001;
+        }
+
+        private void KeyIsUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.W)
+                direction -= 0x1000;
+
+            if (e.Key == Key.A)
+                direction -= 0x0100;
+
+            if (e.Key == Key.S)
+                direction -= 0x0010;
+
+            if (e.Key == Key.D)
+                direction -= 0x0001;
         }
     }
 }
