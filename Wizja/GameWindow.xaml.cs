@@ -23,8 +23,6 @@ namespace Wizja
         public GameWindow()
         {
             InitializeComponent();
-            Shop itemshop = new Shop(shopCanvas,statCanvas);
-            itemshop.ShowShop();
         }
        
     }

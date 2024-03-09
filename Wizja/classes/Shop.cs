@@ -15,6 +15,7 @@ namespace Wizja.classes
     {
         private Canvas shopCanvas;
         private Canvas statCanvas;
+        //private int money;
 
         // Konstruktor pobiera Canvas
         public Shop(Canvas shopCanvas, Canvas statCanvas)
@@ -130,6 +131,12 @@ namespace Wizja.classes
         };
 
         //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
+
+        //////////////////////////////////// DO USUNIĘCIA TYLKO TEST \/ \/ \/ 
+        int money = 350;
+        int j = 0;
+        //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
+
         private void weaponsShop()
         {
             for(int i=0;i<5; i++)
@@ -172,13 +179,17 @@ namespace Wizja.classes
                 buyButton.FontWeight = FontWeights.Bold;
                 buyButton.Width = 100;
                 buyButton.Height = 40;
-                buyButton.Background = Brushes.Green;
+                buyButton.Background = Brushes.Gray;
                 buyButton.Foreground = Brushes.White;
                 buyButton.BorderBrush = Brushes.Black;
                 buyButton.BorderThickness = new Thickness(3);
                 Canvas.SetLeft(buyButton, 500);
                 Canvas.SetTop(buyButton, 165 + i * 110);
-                buyButton.Click += buyClick;
+                if (w.cost < money)
+                {
+                    buyButton.Background = Brushes.Green;
+                    buyButton.Click += buyClick;
+                }
                 void buyClick(object sender, RoutedEventArgs e)
                 {
                     Buy(w);
@@ -187,22 +198,23 @@ namespace Wizja.classes
             }
         }
 
-        //////////////////////////////////// DO USUNIĘCIA TYLKO TEST \/ \/ \/ 
-        int money = 350;
-        int j = 0;
-        //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
+
         private void Buy(Weapon w) 
         {
             //////////////////////////////////// DO USUNIĘCIA TYLKO TEST \/ \/ \/ 
             Label buyInfo = new Label();
             buyInfo.Content = " Zapłacono:" +w.cost + "money:" + money;
-            buyInfo.FontSize = 36;
+            buyInfo.FontSize = 26;
             buyInfo.FontWeight = FontWeights.Bold;
             Canvas.SetLeft(buyInfo, 610);
             Canvas.SetTop(buyInfo, 190 + j * 110);
             money -= w.cost;
-            shopCanvas.Children.Add(buyInfo);
             j++;
+
+            shopCanvas.Children.Clear();
+            ShowShop();
+
+            shopCanvas.Children.Add(buyInfo);
             //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
 
             /*            
@@ -216,7 +228,63 @@ namespace Wizja.classes
 
         private void armorShop()
         {
+            for (int i = 0; i < 5; i++)
+            {
+                var w = weaponList[i];
 
+                Rectangle rec = new Rectangle();
+                rec.Height = 64;
+                rec.Width = 64;
+                /////// jak będą już zdjęcia \/\/\/ \/\/\/
+                //ImageBrush imgB = new ImageBrush(w.img);
+                //rec.Fill = imgB;
+                /////// /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\
+                //////////////////////////////////// DO USUNIĘCIA TYLKO TEST \/ \/ \/ 
+                rec.Fill = Brushes.White;
+                //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
+                Canvas.SetLeft(rec, 1020);
+                Canvas.SetTop(rec, 150 + i * 110);
+                shopCanvas.Children.Add(rec);
+
+                Label lblUp = new Label();
+                lblUp.Content = w.name;
+                lblUp.FontSize = 36;
+                lblUp.FontWeight = FontWeights.Bold;
+                Canvas.SetLeft(lblUp, 1100);
+                Canvas.SetTop(lblUp, 150 + i * 110);
+                shopCanvas.Children.Add(lblUp);
+
+                Label lblDown = new Label();
+                lblDown.Content = "dmg:" + w.dmg + " range:" + w.range;
+                lblDown.FontSize = 24;
+                lblDown.FontWeight = FontWeights.Bold;
+                Canvas.SetLeft(lblDown, 1110);
+                Canvas.SetTop(lblDown, 190 + i * 110);
+                shopCanvas.Children.Add(lblDown);
+
+                Button buyButton = new Button();
+                buyButton.Content = w.cost;
+                buyButton.FontSize = 24;
+                buyButton.FontWeight = FontWeights.Bold;
+                buyButton.Width = 100;
+                buyButton.Height = 40;
+                buyButton.Background = Brushes.Gray;
+                buyButton.Foreground = Brushes.White;
+                buyButton.BorderBrush = Brushes.Black;
+                buyButton.BorderThickness = new Thickness(3);
+                Canvas.SetLeft(buyButton, 1400);
+                Canvas.SetTop(buyButton, 165 + i * 110);
+                if (w.cost < money)
+                {
+                    buyButton.Background = Brushes.Green;
+                    buyButton.Click += buyClick;
+                }
+                void buyClick(object sender, RoutedEventArgs e)
+                {
+                    Buy(w);
+                }
+                shopCanvas.Children.Add(buyButton);
+            }
         }
 
         //Ukrywanie Sklepu
