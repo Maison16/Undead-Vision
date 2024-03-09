@@ -18,11 +18,11 @@ namespace Wizja.classes.guns
     public class FamilyGun : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/familyguy.png"));
-        public FamilyGun() : base("Gun2", 30, 900, 200, img) { }
+        public FamilyGun() : base("Family Gun", 8, 700, 600, img) { }
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
-            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 30, 900, 10, targets, enemies, gameCanvas);
+            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 12, 700, 8, targets, enemies, gameCanvas);
         }
     }
 }

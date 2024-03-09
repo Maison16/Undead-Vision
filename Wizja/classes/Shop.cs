@@ -310,13 +310,11 @@ namespace Wizja.classes
                 buyButton.BorderThickness = new Thickness(3);
                 Canvas.SetLeft(buyButton, 1400);
                 Canvas.SetTop(buyButton, 55 + i * 110);
-                // jak player wchodząc do sklepu ma 100 hp nie może kupić potionów
-                //if (hud.GetHp() >= 100)
-                //{
-                //    buyButton.Background = Brushes.Maroon;
-                //}
-                //else if (hud.GetMoney() >= 150)
-                if (hud.GetMoney() >= i*75)
+                if (hud.GetHp() >= 100)
+                {
+                    buyButton.Background = Brushes.Maroon;
+                }
+                else if (hud.GetMoney() >= i*75)
                 {
                     buyButton.Background = Brushes.Green;
                     buyButton.Click += buyClick;
