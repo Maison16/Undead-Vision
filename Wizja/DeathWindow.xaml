@@ -10,6 +10,7 @@
         WindowState="Maximized"
         WindowStyle="None">
     <Grid>
+        <Canvas x:Name="deathCanvas" Margin="0,0,0,0" Height="1080" Width="1920" Focusable="True"/>
         <Button Content="Close" Click="closeWindow" FontSize="36" Width="200" Height="80" BorderBrush="#FF020000" BorderThickness="4,4,4,4" FontWeight="Bold" Margin="860,550,860,450" ></Button>
     </Grid>
 </Window>

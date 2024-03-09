@@ -146,7 +146,7 @@ namespace Wizja
         {
             if (player.healthPoints == 0) 
             {
-                DeathWindow deathWindow = new DeathWindow();
+                DeathWindow deathWindow = new DeathWindow(hud);
                 gameTimer.Stop();
                 deathWindow.Show();
                 this.Close();
