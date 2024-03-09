@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using Wizja.Enemies;
 
-namespace Wizja.Enemies
+namespace Wizja.classes
 {
     public class FastZombie : Enemy
     {
