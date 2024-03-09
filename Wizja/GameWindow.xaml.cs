@@ -62,9 +62,12 @@ namespace Wizja
 
 
                     //Testowanie Przeciwników
-                    spawner.Spawn();
-                    spawner.MoveEveryOne(player, objectLoader.GetListMapObjects());
-                    EndOfGame();
+                    if (hud.GetTime() == 0)
+                    {
+                        spawner.Spawn();
+                        spawner.MoveEveryOne(player, objectLoader.GetListMapObjects());
+                        EndOfGame();
+                    }
 
                 });
             }

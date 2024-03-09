@@ -125,6 +125,7 @@ namespace Wizja.classes
             Canvas.SetTop(nearLabel, 1030);
             statCanvas.Children.Add(nearLabel);
 
+            
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(1000); 
             timer.Tick += Timer_Tick;
