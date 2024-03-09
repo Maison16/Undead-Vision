@@ -53,7 +53,7 @@ namespace Wizja.classes
         }
         private void NearChecker(object sender, EventArgs e)
         {
-            shopRange = new Rect(Canvas.GetLeft(shopBuild), Canvas.GetTop(shopBuild), shopBuild.Width, shopBuild.Height);
+            shopRange = new Rect(Canvas.GetLeft(shopBuild)-20, Canvas.GetTop(shopBuild)-20, shopBuild.Width+40, shopBuild.Height+40);
             playerHitBox = new Rect(Canvas.GetLeft(player.playerImage), Canvas.GetTop(player.playerImage), player.playerImage.Width, player.playerImage.Height);
             if (playerHitBox.IntersectsWith(shopRange))
             {
