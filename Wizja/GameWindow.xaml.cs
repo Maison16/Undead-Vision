@@ -14,6 +14,8 @@ namespace Wizja
     public partial class GameWindow : Window
     {
         //Testy przeciwników
+        private ObjectLoader objectLoader;
+        private Shop iteamshop;
         public Spawner spawner;
         public Player player;
         public HUD hud;
@@ -21,7 +23,6 @@ namespace Wizja
 
         private System.Timers.Timer gameTimer = new System.Timers.Timer();
         Point playerPosition; // testy
-        ObjectLoader objectLoader;
         public GameWindow()
         {
             InitializeComponent();
@@ -33,8 +34,8 @@ namespace Wizja
             hud = new HUD(100, 30, 300, statCanvas);
 
             //Tworzenie i otwieranie shop do testów
-            Shop itemshop = new Shop(shopCanvas, hud);
-            itemshop.ShowShop();
+            iteamshop = new Shop(shopCanvas, hud);
+            iteamshop.ShowShop();
 
             // jakis test ziom do strzelania
             Rectangle playerRect = new Rectangle
