@@ -26,6 +26,7 @@ namespace Wizja.classes
         private Rectangle nearBox;
         private ImageBrush hpImage = new ImageBrush();
         private ImageBrush coinImage = new ImageBrush();
+        private ImageBrush clockImage = new ImageBrush();
         public int totalPoints;
 
         public HUD(int hp, int time, int money, Canvas statCanvas)
@@ -64,13 +65,24 @@ namespace Wizja.classes
             Canvas.SetTop(hpLabel, 15);
             statCanvas.Children.Add(hpLabel);
 
+            clockImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/clockIcon.png"));
+            Rectangle clockIcon = new Rectangle
+            {
+                Width = 50,
+                Height = 50,
+                Fill = clockImage
+            };
+            Canvas.SetLeft(clockIcon, 900);
+            Canvas.SetTop(clockIcon, 30);
+            statCanvas.Children.Add(clockIcon);
+
             timeLabel = new Label
             {
                 Content = $"{time}s",
                 FontSize = 50,
                 Foreground = Brushes.Gold
             };
-            Canvas.SetLeft(timeLabel, 900);
+            Canvas.SetLeft(timeLabel, 950);
             Canvas.SetTop(timeLabel, 15);
             statCanvas.Children.Add(timeLabel);
             coinImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/coinIcon.png"));
@@ -116,6 +128,7 @@ namespace Wizja.classes
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(1000); 
             timer.Tick += Timer_Tick;
+            timer.Start();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
