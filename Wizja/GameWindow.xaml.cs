@@ -71,7 +71,6 @@ namespace Wizja
                     spawner.Spawn();
                     spawner.MoveEveryOne(player);
                     EndOfGame();
-
                 });
             }
             catch { }
