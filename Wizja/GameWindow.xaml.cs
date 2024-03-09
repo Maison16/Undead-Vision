@@ -60,9 +60,9 @@ namespace Wizja
             {
                 gameCanvas.Dispatcher.Invoke(() =>
                 {
-                    objectLoader.SetListMapObjects(this.GetRectanglesByName("Enemy"));
-                    objectLoader.SetListMovingObjects(this.GetRectanglesByName("Enemy"));
                     MovementHandler.Step(direction, objectLoader.GetListMovingObjects());
+                    MovementHandler.Step(direction, this.GetRectanglesByName("Enemy"));
+
 
                     //Testowanie Przeciwników
                     spawner.Spawn();
@@ -82,7 +82,7 @@ namespace Wizja
             int[][] enemyLists = new int[5][];
 
             //Spawner(List<Point> enemiesSpawner, int rounds,int betweenRounds,Canvas gameScreen)
-            /*            spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas,player);
+                       spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas,player);
                         enemyLists[0] = new int[] { 75, 25, 0, 0};
                         enemyLists[1] = new int[] { 60, 35, 15, 0 };
                         enemyLists[2] = new int[] { 40, 35, 25, 0 };
@@ -92,8 +92,8 @@ namespace Wizja
                         spawner.GenerateEnemies(enemyLists[1], 24, 1, 115);
                         spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
                         spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
-                        spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);*/
-
+                        spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);
+            /*
             spawner = new Spawner(enemiesSpawner, 5, 100000, gameCanvas, player);
             enemyLists[0] = new int[] { 0, 0, 100, 0 };
             enemyLists[1] = new int[] { 60, 35, 15, 0 };
@@ -105,6 +105,7 @@ namespace Wizja
             spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
             spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
             spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);
+            */          
         }
 
         private void EndOfGame()
