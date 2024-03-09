@@ -24,9 +24,11 @@ public class Enemy
         {
             Width = 64,
             Height = 64,
-            Fill = new ImageBrush(imageSource)
+            Fill = new ImageBrush(imageSource),
+            Name = "Enemy"
         };
         enemyImage.RenderTransformOrigin = new Point(0.5, 0.5);
+        Console.WriteLine(enemyImage.Tag);
     }
 
     //Sprawdza kolizje między potworem a drugim obiektem
@@ -101,7 +103,6 @@ public class Enemy
 
     public int DealDamage() 
     {
-        Console.WriteLine(tickCount);
         if (tickCount == 0)
         {
             tickCount++;
