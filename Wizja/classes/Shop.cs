@@ -182,33 +182,15 @@ namespace Wizja.classes
             armorShop();
         }
 
-        //////////////////////////////////// DO USUNIĘCIA TYLKO TEST \/ \/ \/
-        public class Weapon
-        {
-            public string name { get; set; }
-            public double dmg { get; set; }
-            public double range { get; set; }
-            public int cost { get; set; }
-            public BitmapImage img { get; set; }
-
-            public Weapon(string name, double dmg, double range, int cost, BitmapImage img)
-            {
-                this.name = name;
-                this.dmg = dmg;
-                this.range = range;
-                this.cost = cost;
-                this.img = img;
-            }
-        }
         // przykładowe bronie - do wyrzucenia potem !!!
         List<Weapon> weaponList = new List<Weapon>{
-            new Weapon("pistol", 20, 10, 100, new BitmapImage(new Uri("pack://application:,,,/res/pistol.png"))),
-            new Weapon("shothun", 30, 20, 200, new BitmapImage(new Uri("pack://application:,,,/res/shotgun.png"))),
-            new Weapon("smg", 40, 30, 300,new BitmapImage(new Uri("pack://application:,,,/res/smg.png"))),
-            new Weapon("m4", 50, 40, 400,new BitmapImage(new Uri("pack://application:,,,/res/m4.png"))),
-            new Weapon("family guy", 60, 50, 500,new BitmapImage(new Uri("pack://application:,,,/res/familyguy.png")))
+            new guns.BaseGun(),
+            new guns.Shotgun(),
+            new guns.BaseGunAuto(),
+            new guns.M4(),
+            new guns.FamilyGun()
         };
-        //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
+
 
         int[] used = {0,0,0,0,0};
 
@@ -222,7 +204,7 @@ namespace Wizja.classes
                 Rectangle rec = new Rectangle();
                 rec.Height = 128;
                 rec.Width = 128;
-                ImageBrush imgB = new ImageBrush(w.img);
+                ImageBrush imgB = new ImageBrush(w.img) ;
                 rec.Fill = imgB;
                 Canvas.SetLeft(rec, 60);
                 Canvas.SetTop(rec, 150 + i * 110);
@@ -279,6 +261,7 @@ namespace Wizja.classes
             hud.ChangeMoney(w.cost * -1);
             shopCanvas.Children.Clear();
             used[weaponList.IndexOf(w)] = 1;
+            player.setWeapon(w);
             ShowShop();
         }
 
