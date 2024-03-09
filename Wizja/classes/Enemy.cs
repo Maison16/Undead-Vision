@@ -14,22 +14,6 @@ public class Enemy
     public bool isLiving = false; // True jężeli przeciwnik żyje oraz jest na mapie
     private int coolDown = 62; // Co ileś ticków zadaje obrażenia
     private int tickCount = 0;
-    public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
-    {
-        this.healthPoints = healthPoints;
-        this.damagePoints = damagePoints;
-        this.value = value;
-        this.movingSpeed = movingSpeed;
-        enemyImage = new Rectangle()
-        {
-            Width = 64,
-            Height = 64,
-            Fill = new ImageBrush(imageSource),
-            Name = "Enemy"
-        };
-        enemyImage.RenderTransformOrigin = new Point(0.5, 0.5);
-        Console.WriteLine(enemyImage.Tag);
-    }
 
     public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource, int Width, int Height)
     {
@@ -39,8 +23,8 @@ public class Enemy
         this.movingSpeed = movingSpeed;
         enemyImage = new Rectangle()
         {
-            Width = 74,
-            Height = 74,
+            Width = Width,
+            Height = Height,
             Fill = new ImageBrush(imageSource),
             Name = "Enemy"
         };

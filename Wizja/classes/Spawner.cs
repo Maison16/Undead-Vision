@@ -71,7 +71,7 @@ public class Spawner
                 enemies[noRound].Add(new SlowZombie());
                 break;
             case 2:
-                enemies[noRound].Add(new FastZombie());
+                enemies[noRound].Add(new Wolf());
                 break;
             case 3:
                 enemies[noRound].Add(new TankSkeleton());

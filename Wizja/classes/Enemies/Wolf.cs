@@ -9,12 +9,12 @@ using Wizja.Enemies;
 
 namespace Wizja.classes
 {
-    public class FastZombie : Enemy
+    public class Wolf : Enemy
     {
-        public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/FastZombie.png"));
+        public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Wolf.png"));
         //    public Enemy(int healthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
 
-        public FastZombie() : base(125, 10, 10, 3.5, source)
+        public Wolf() : base(125, 10, 10, 3.5, source, 74, 119)
         { }
     }
 }

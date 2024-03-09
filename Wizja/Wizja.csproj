@@ -26,6 +26,7 @@
     <None Remove="res\SlowZombie.png" />
     <None Remove="res\smg.png" />
     <None Remove="res\TankSkeleton.png" />
+    <None Remove="res\Wolf.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,6 +76,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\TankSkeleton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\Wolf.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
