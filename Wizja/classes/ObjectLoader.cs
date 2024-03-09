@@ -29,14 +29,19 @@ namespace Wizja.classes
             tombstone.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             tree.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             grandCross.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
-            metalFence.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
-            backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
+            metalFence.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fence.png"));
+            backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/background1.png"));
             gameCanvas = GameCanvas;
             LoadMap();
         }
         public void LoadMap()
         {
-            BuildConstrution(80, 100, grandCross);
+            BuildConstrution(0, 0, metalFence, 6000, 10);
+            BuildConstrution(6000, 0, metalFence, 10, 4000);
+            BuildConstrution(6000, 4000, metalFence, 6000, 10);
+            BuildConstrution(0, 4000, metalFence, 10, 4000);
+            BuildConstrution(0, 0, backgroundImage, 6000, 4000);
+            BuildConstrution(3000, 1700, grandCross, 80, 100);
         }
         static private void BuildConstrution(int width, int height, ImageBrush imageBrush)
         {
