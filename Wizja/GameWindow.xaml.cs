@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Wizja.classes;
 using Wizja.Enemies;
+using Wizja.classes.guns;
 
 namespace Wizja
 {
@@ -23,11 +24,12 @@ namespace Wizja
         public Player player;
         public HUD hud;
 
-        private System.Timers.Timer gameTimer = new System.Timers.Timer();
 
+        private System.Timers.Timer gameTimer = new System.Timers.Timer();
         public GameWindow()
         {
             InitializeComponent();
+
 
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
@@ -35,12 +37,21 @@ namespace Wizja
             hud = new HUD(100, 30, 300, statCanvas);
 
             //Tworzenie i otwieranie shop do testów
-            Shop itemshop = new Shop(shopCanvas, hud);
-            itemshop.ShowShop();
-           
-            testing_ERYK();
-        }
+            iteamshop = new Shop(shopCanvas, hud);
+            iteamshop.ShowShop();
 
+
+            testing_ERYK();
+
+
+            //inicjalizacja gameTimera
+            gameTimer.Interval = 16; //16 MILISEKUND
+            gameTimer.Elapsed += GameTick;
+            gameTimer.Start(); //od razu zaczyna timer gameTimer
+
+
+
+        }
         private void GameTick(object sender, ElapsedEventArgs e)
         {
             try
@@ -60,7 +71,6 @@ namespace Wizja
                     spawner.Spawn();
                     spawner.MoveEveryOne(player);
                     EndOfGame();
-
                 });
             }
             catch { }
