@@ -39,11 +39,11 @@ namespace Wizja.classes
         public void LoadMap()
         {
             BuildMap(backgroundImage);
-            BuildConstrution(0, 0, metalFenceImage, 6000, 10);
-            BuildConstrution(6000, 0, metalFenceImage, 10, 4000);
-            BuildConstrution(6000, 4000, metalFenceImage, 6000, 10);
-            BuildConstrution(0, 4000, metalFenceImage, 10, 4000);
-            BuildConstrution(2800, 1750, grandCrossImage, 80, 100);
+            BuildConstrution(0, 0, metalFenceImage, 6000, 20);
+            BuildConstrution(5980, 0, metalFenceImage, 20, 4000);
+            BuildConstrution(0, 0, metalFenceImage, 20, 4000);
+            BuildConstrution(0, 3980, metalFenceImage, 6000, 20);
+            BuildConstrution(2800, 1750, grandCrossImage, 80, 100); //6000:4000
         }
 
         private void BuildMap(ImageBrush imageBrush)
