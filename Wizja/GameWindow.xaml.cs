@@ -59,7 +59,7 @@ namespace Wizja
                 {
                     MovementHandler.Step(direction, objectLoader.GetListMovingObjects());
                     MovementHandler.Step(direction, this.GetRectanglesByName("Enemy"));
-
+                    MovementHandler.Step(direction, this.GetRectanglesByName("SpawnerObject"));
 
                     //Testowanie Przeciwników
                     if (hud.GetTime() == 0)
@@ -78,7 +78,7 @@ namespace Wizja
             player = new Player(gameCanvas, hud, objectLoader.GetListMapObjects());
             player.MouseMoveHandler(gameCanvas);
             MovementHandler.initialize(player);
-            List<Point> enemiesSpawner = new List<Point>() { new Point(4000, 1500), new Point(4000, 2500), new Point(2000, 1500), new Point(2000, 2500) };
+            List<Point> enemiesSpawner = new List<Point>() { new Point(5500, 500), new Point(5500, 3500), new Point(500, 500), new Point(500, 3500) };
             int[][] enemyLists = new int[5][];
 
 

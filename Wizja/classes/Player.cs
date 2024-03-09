@@ -37,7 +37,7 @@ namespace Wizja.classes
 
         {
             healthPoints = 100;
-            movingSpeed = 4;
+            movingSpeed = 20;
             this.hud = hud;
             this.obstacles = obstacles;
             this.allEnemies = allEnemies;
@@ -53,7 +53,7 @@ namespace Wizja.classes
                 Width = 3000,
                 Height = 3000,
                 Fill = new ImageBrush(flashLightSource),
-                Opacity = 0.98
+                Opacity = 0.01
             };
             Panel.SetZIndex(flashLightImage, int.MaxValue);
             Canvas.SetLeft(playerImage, 3000);
