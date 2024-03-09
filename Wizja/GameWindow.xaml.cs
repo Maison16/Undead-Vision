@@ -30,6 +30,7 @@ namespace Wizja
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
+            
             hud = new HUD(100, 30, 300, statCanvas);
             //Tworzenie shop
             itemshop = new Shop(gameCanvas, shopCanvas, hud, this);

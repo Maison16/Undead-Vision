@@ -21,6 +21,9 @@ namespace Wizja.classes
 
         public static void Step(bool[] direction, List<Rectangle> movableEntities, List<Rectangle> staticobjects)
         {
+            if (!direction[0] && !direction[1] && !direction[2] && !direction[3])
+                return;
+
             foreach (Rectangle entity in movableEntities)
             {
                 
