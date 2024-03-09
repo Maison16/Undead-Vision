@@ -21,9 +21,8 @@ namespace Wizja
         public Player player;
         public HUD hud;
 
-
         private System.Timers.Timer gameTimer = new System.Timers.Timer();
-        ObjectLoader objectLoader;
+
         public GameWindow()
         {
             InitializeComponent();
