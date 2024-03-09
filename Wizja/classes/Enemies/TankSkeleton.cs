@@ -13,7 +13,7 @@ namespace Wizja.classes
     {
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/TankSkeleton.png"));
         //    public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
-        public TankSkeleton() : base(100, 10, 10, 2, source,106,110)
+        public TankSkeleton() : base(35, 10, 10, 2, source,106,110)
         { }
     }
 }

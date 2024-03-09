@@ -59,7 +59,7 @@ public class Enemy
             if (isLiving)
             {
                 player.hud.ChangeMoney(value);
-                    isLiving = false;//False jeżeli nie
+                isLiving = false;//False jeżeli nie
             }
             return !isLiving;
         }
