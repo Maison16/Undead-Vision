@@ -15,6 +15,8 @@ namespace Wizja
     /// </summary>
     public partial class GameWindow : Window
     {
+        int direction = 0x0000;
+
         //Testy przeciwników
         private ObjectLoader objectLoader;
         private Shop iteamshop;
@@ -22,11 +24,12 @@ namespace Wizja
         public Player player;
         public HUD hud;
 
-        private System.Timers.Timer gameTimer = new System.Timers.Timer();
 
+        private System.Timers.Timer gameTimer = new System.Timers.Timer();
         public GameWindow()
         {
             InitializeComponent();
+
 
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
@@ -38,8 +41,16 @@ namespace Wizja
             itemshop.ShowShop();
            
             testing_ERYK();
-        }
 
+
+            //inicjalizacja gameTimera
+            gameTimer.Interval = 16; //16 MILISEKUND
+            gameTimer.Elapsed += GameTick;
+            gameTimer.Start(); //od razu zaczyna timer gameTimer
+
+
+
+        }
         private void GameTick(object sender, ElapsedEventArgs e)
         {
             try
@@ -59,7 +70,6 @@ namespace Wizja
                     spawner.Spawn();
                     spawner.MoveEveryOne(player);
                     EndOfGame();
-
                 });
             }
             catch { }
@@ -117,6 +127,38 @@ namespace Wizja
                 results.Add(rectangle);
             }
             return results;
+        }
+
+        private void KeyIsDown(object sender, KeyEventArgs e)
+        {
+            int direction = 0x0000;
+
+            if (e.Key == Key.W)
+                direction += 0x1000;
+
+            if (e.Key == Key.A)
+                direction += 0x0100;
+
+            if (e.Key == Key.S)
+                direction += 0x0010;
+
+            if (e.Key == Key.D)
+                direction += 0x0001;
+        }
+
+        private void KeyIsUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.W)
+                direction -= 0x1000;
+
+            if (e.Key == Key.A)
+                direction -= 0x0100;
+
+            if (e.Key == Key.S)
+                direction -= 0x0010;
+
+            if (e.Key == Key.D)
+                direction -= 0x0001;
         }
     }
 }
