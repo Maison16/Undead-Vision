@@ -84,17 +84,21 @@ namespace Wizja
 
         private void GameTick(object sender, ElapsedEventArgs e)
         {
-            gameCanvas.Dispatcher.Invoke(() =>
+            try
             {
-                //tutaj pisz SEBA
-                /*w object loader masz:
-                public List<Rectangle> GetListMovingObjects()
+                gameCanvas.Dispatcher.Invoke(() =>
                 {
-                    return movingObjects;
-                }
-                więc obiekt objectLoader ma na liście wszystkie elementy, które mają się poruszać.
-                */
-            });
+                    //tutaj pisz SEBA
+                    /*w object loader masz:
+                    public List<Rectangle> GetListMovingObjects()
+                    {
+                        return movingObjects;
+                    }
+                    więc obiekt objectLoader ma na liście wszystkie elementy, które mają się poruszać.
+                    */
+                });
+            }
+            catch { }
         }
     }
 }
