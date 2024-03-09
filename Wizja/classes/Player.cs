@@ -24,7 +24,6 @@ namespace Wizja.classes
         private List<Rectangle> obstacles;
         private List<Enemy> allEnemies;
         private Weapon weapon;
-        private Point endPoint;
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
         public static ImageSource flashLightSource = new BitmapImage(new Uri("pack://application:,,,/res/flashlight.png"));
         public HUD hud;

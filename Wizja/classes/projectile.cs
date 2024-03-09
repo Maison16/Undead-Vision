@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Wizja.Enemies;
-using static System.Net.Mime.MediaTypeNames;
 using T = System.Timers;
 
 namespace Wizja.classes
@@ -45,7 +42,11 @@ namespace Wizja.classes
                     {
                         if (hitbox.IntersectsWith(new Rect(Canvas.GetLeft(target.enemyImage), Canvas.GetTop(target.enemyImage), target.enemyImage.Width, target.enemyImage.Height)))
                         {
-                            target.IsDead(damage);
+                            if (target.IsDead(damage))
+                            {
+                                gameCanvas.Children.Remove(target.enemyImage);
+                            }
+
                             break;
                         }
                     }

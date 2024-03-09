@@ -119,7 +119,6 @@ public class Spawner
             tickCount = 0;
         }
     }
-
     //Przesuwa wszystkie potwory i sprawdza czy mogą one zatakować gracza
     public void MoveEveryOne(Player player, List <Rectangle> mapObject)
     {
@@ -127,6 +126,7 @@ public class Spawner
         {
             foreach (Enemy enemy in enemies[i])
             {
+                enemy.SetPlayer(player);
                 Rectangle playerImage = player.playerImage;
 
                 if (enemy.isLiving )
