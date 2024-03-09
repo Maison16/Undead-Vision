@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="res\armor.png" />
     <None Remove="res\background1.png" />
+    <None Remove="res\chapel.png" />
     <None Remove="res\familyguy.png" />
     <None Remove="res\FastZombie.png" />
     <None Remove="res\fence.png" />
@@ -31,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="res\chapel.png" />
     <Resource Include="res\flashlight.png" />
   </ItemGroup>
 
