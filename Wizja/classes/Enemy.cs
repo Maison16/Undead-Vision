@@ -12,7 +12,8 @@ public class Enemy
     private double movingSpeed;
     public Rectangle enemyImage;
     public bool isLiving = false; // True jężeli przeciwnik żyje oraz jest na mapie
-
+    private int coolDown = 62; // Co ileś ticków zadaje obrażenia
+    private int tickCount = 0;
     public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
     {
         this.helthPoints = helthPoints;
@@ -67,8 +68,8 @@ public class Enemy
         double dirY;
         if (distance >= 40 && distance <= 120) // Jeżeli player jest dość blisko staraj podążać się obok niego 
         {
-            dirX = (dx + MinusOrPlus() * rnd.Next(32)) / distance;
-            dirY = (dy + MinusOrPlus() * rnd.Next(32)) / distance;
+            dirX = (dx + MinusOrPlus() * rnd.Next(16)) / distance;
+            dirY = (dy + MinusOrPlus() * rnd.Next(16)) / distance;
             x += dirX * movingSpeed;
             y += dirY * movingSpeed;
             Canvas.SetLeft(enemyImage, x);
@@ -76,8 +77,8 @@ public class Enemy
         }
         else if (distance >= 40) // Jeżeli player jest daleko Losuj bardziej jego scieżke
         {
-            dirX = (dx + MinusOrPlus() * rnd.Next(32, 128)) / distance;
-            dirY = (dy + MinusOrPlus() * rnd.Next(32, 128)) / distance;
+            dirX = (dx + MinusOrPlus() * rnd.Next(32, 64)) / distance;
+            dirY = (dy + MinusOrPlus() * rnd.Next(32, 64)) / distance;
             x += dirX * movingSpeed;
             y += dirY * movingSpeed;
             Canvas.SetLeft(enemyImage, x);
@@ -96,5 +97,24 @@ public class Enemy
             i = -1;
         }
         return i;
+    }
+
+    public int DealDamage() 
+    {
+        Console.WriteLine(tickCount);
+        if (tickCount == 0)
+        {
+            tickCount++;
+            return damagePoints;
+        }
+        else if (tickCount < coolDown) 
+        {
+            tickCount++;
+        }
+        else if(tickCount>= coolDown)
+        {
+            tickCount = 0; 
+        }
+        return 0;
     }
 }

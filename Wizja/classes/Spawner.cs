@@ -97,7 +97,7 @@ public class Spawner
             Rectangle obj;
             foreach (SpawnerObject spawnerObj in TheClosestSpawners())
             {
-                if (enemies.Count() < enemyCurrentNumber) 
+                if (enemies[currentRound].Count() <= enemyCurrentNumber) 
                 {
                     break;
                 }
@@ -113,6 +113,7 @@ public class Spawner
         tickCount++;
         if (tickCount % betweenRounds == 0 && currentRound < rounds)
         {
+            enemyCurrentNumber = 0;
             currentRound++;
             tickCount = 0;
         }
@@ -132,7 +133,7 @@ public class Spawner
                     Rect hitbox = new Rect(Canvas.GetLeft(playerImage), Canvas.GetTop(playerImage), playerImage.Width, playerImage.Height);
                     if (enemy.IsColision(hitbox))
                     {
-                        player.TakeDamage(enemy.damagePoints);
+                        player.TakeDamage(enemy.DealDamage());
                     }
 
                 }

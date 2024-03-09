@@ -12,15 +12,16 @@ namespace Wizja.classes
 {
     public class Player
     {
-        private int healthPoints;
+        public int healthPoints;
         public double movingSpeed;
         public Rectangle playerImage;
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
-
-        public Player(Canvas gameCanvas) 
+        HUD hud;
+        public Player(Canvas gameCanvas,HUD hud) 
         {
             healthPoints = 100;
-            movingSpeed = 25;
+            movingSpeed = 3.5;
+            this.hud = hud;
             playerImage = new Rectangle()
             {
                 Width = 64,
@@ -35,6 +36,14 @@ namespace Wizja.classes
         public void TakeDamage(int damage) 
         {
             healthPoints -= damage;
+            if (healthPoints <= 0) 
+            {
+                hud.SetHp(0);
+            }
+            else 
+            {
+                hud.SetHp(healthPoints);
+            }
         }
     }
 }

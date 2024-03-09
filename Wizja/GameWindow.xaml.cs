@@ -16,7 +16,7 @@ namespace Wizja
         //Testy przeciwników
         public Spawner spawner;
         public Player player;
-
+        public HUD hud;
 
 
         private System.Timers.Timer gameTimer = new System.Timers.Timer();
@@ -30,7 +30,7 @@ namespace Wizja
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
-            HUD hud = new HUD(100, 30, 300, statCanvas);
+            hud = new HUD(100, 30, 300, statCanvas);
 
             //Tworzenie i otwieranie shop do testów
             Shop itemshop = new Shop(shopCanvas, hud);
@@ -105,27 +105,51 @@ namespace Wizja
                     //Testowanie Przeciwników
                     spawner.Spawn();
                     spawner.MoveEveryOne(player);
+                    EndOfGame();
                 });
             }
             catch { }
         }
         private void testing_ERYK()
         {
-            player = new Player(gameCanvas);
+            player = new Player(gameCanvas, hud);
             List<Point> enemiesSpawner = new List<Point>() { new Point(4000, 1500), new Point(4000, 2500), new Point(2000, 1500), new Point(2000, 2500) };
-            //Spawner(List<Point> enemiesSpawner, int rounds,int betweenRounds,Canvas gameScreen)
-            spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas,player);
             int[][] enemyLists = new int[5][];
+            //Spawner(List<Point> enemiesSpawner, int rounds,int betweenRounds,Canvas gameScreen)
+/*            spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas,player);
             enemyLists[0] = new int[] { 75, 25, 0, 0};
             enemyLists[1] = new int[] { 60, 35, 15, 0 };
             enemyLists[2] = new int[] { 40, 35, 25, 0 };
             enemyLists[3] = new int[] { 25, 35, 25, 5 };
             enemyLists[4] = new int[] { 10, 35, 25, 20 };
-            spawner.GenerateEnemies(enemyLists[0], 10, 0, 105);
-            spawner.GenerateEnemies(enemyLists[1], 20, 1, 85);
-            spawner.GenerateEnemies(enemyLists[2], 40, 2, 75);
-            spawner.GenerateEnemies(enemyLists[3], 60, 3, 65);
-            spawner.GenerateEnemies(enemyLists[4], 100, 4, 55);
+            spawner.GenerateEnemies(enemyLists[0], 12, 0, 125);
+            spawner.GenerateEnemies(enemyLists[1], 24, 1, 115);
+            spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
+            spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
+            spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);*/
+                     
+            spawner = new Spawner(enemiesSpawner, 5, 100000, gameCanvas,player);
+            enemyLists[0] = new int[] { 0, 100, 0, 0 };
+            enemyLists[1] = new int[] { 60, 35, 15, 0 };
+            enemyLists[2] = new int[] { 40, 35, 25, 0 };
+            enemyLists[3] = new int[] { 25, 35, 25, 5 };
+            enemyLists[4] = new int[] { 10, 35, 25, 20 };
+            spawner.GenerateEnemies(enemyLists[0], 1, 0, 125);
+            spawner.GenerateEnemies(enemyLists[1], 24, 1, 115);
+            spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
+            spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
+            spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);
+        }
+
+        private void EndOfGame() 
+        {
+            if (player.healthPoints == 0) 
+            {
+                DeathWindow deathWindow = new DeathWindow();
+                gameTimer.Stop();
+                deathWindow.Show();
+                this.Close();
+            }
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Wizja
         {
             GameWindow Game = new GameWindow();
             Game.Show();
+            this.Close();
         }
         private void gotoExit(object sender, RoutedEventArgs e)
         {
