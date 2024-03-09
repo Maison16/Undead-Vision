@@ -27,10 +27,12 @@ namespace Wizja.classes
         private List<Rectangle> listMapObjects;
         private List<Rectangle> listHitObjects;
         public DispatcherTimer timerShopCheck;
+        GameWindow gameWindow;
         // Konstruktor pobiera Canvas i hud (money)
-        public Shop(Canvas gameCanvas, Canvas shopCanvas, HUD hud)
+        public Shop(Canvas gameCanvas, Canvas shopCanvas, HUD hud, GameWindow gameWindow)
         {
-            this.player= player;
+            this.gameWindow = gameWindow;
+            this.player = player;
             this.gameCanvas = gameCanvas;
             this.shopCanvas = shopCanvas;
             this.hud = hud;
@@ -51,6 +53,8 @@ namespace Wizja.classes
         {
             this.player = player;
         }
+        bool isShow = false;
+        bool onePress = true;
         private void NearChecker(object sender, EventArgs e)
         {
             shopRange = new Rect(Canvas.GetLeft(shopBuild)-20, Canvas.GetTop(shopBuild)-20, shopBuild.Width+40, shopBuild.Height+40);
@@ -59,11 +63,33 @@ namespace Wizja.classes
             {
                 hud.NearShopShow();
                 ShopIsOpen();
+
+                if (gameWindow.getB() == true)
+                {
+                    if (isShow == false && onePress == true)
+                    {
+                        ShowShop();
+                        isShow = true;
+                    }
+                    else if (isShow == true && onePress == true)
+                    {
+                        shopCanvas.Children.Clear();
+                        shopCanvas.Background = null;
+                        isShow = false;
+                    }
+                    onePress = false;
+                }
+                else
+                {
+                    onePress = true;
+                }
             }
             else
             {
                 hud.NearShopHide();
                 ShopIsClose();
+                shopCanvas.Children.Clear();
+                shopCanvas.Background = null;
             }
         }
 
