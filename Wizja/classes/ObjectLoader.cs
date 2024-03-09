@@ -24,6 +24,8 @@ namespace Wizja.classes
         private ImageBrush grandCrossImage = new ImageBrush();
         private ImageBrush metalFenceImage = new ImageBrush();
         private ImageBrush backgroundImage = new ImageBrush();
+        private ImageBrush woodenFenceHorizontal = new ImageBrush();
+        private ImageBrush woodenFenceVertical = new ImageBrush();
 
         public ObjectLoader(Canvas GameCanvas)
         {
@@ -31,18 +33,21 @@ namespace Wizja.classes
             tombstoneImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             grandCrossImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
-            metalFenceImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fence.png"));
-            backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/ground.png"));
+            metalFenceImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fence2.png"));
+            backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/background1.png"));
+            woodenFenceHorizontal.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fenceHorizontal.png"));
+            woodenFenceVertical.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fenceVertical.png"));
             gameCanvas = GameCanvas;
             LoadMap();
         }
         public void LoadMap()
         {
             BuildMap(backgroundImage);
-            BuildConstrution(0, 0, metalFenceImage, 6000, 20);
-            BuildConstrution(5980, 0, metalFenceImage, 20, 4000);
-            BuildConstrution(0, 0, metalFenceImage, 20, 4000);
-            BuildConstrution(0, 3980, metalFenceImage, 6000, 20);
+            //BuildConstrution(0, 0, metalFenceImage, 6000, 20);
+            //BuildConstrution(5980, 0, metalFenceImage, 20, 4000);
+            //BuildConstrution(0, 0, metalFenceImage, 20, 4000);
+            //BuildConstrution(0, 3980, metalFenceImage, 6000, 20);
+            BuildFences();
             BuildConstrution(2800, 1750, grandCrossImage, 80, 100); //6000:4000
         }
 
@@ -58,6 +63,23 @@ namespace Wizja.classes
             Canvas.SetTop(build, 0);
             movingObjects.Add(build);
             gameCanvas.Children.Add(build);
+        }
+
+        private void BuildFences()
+        {
+            for (int i = 0; i <= 5744; i += 256)
+            {
+                BuildConstrution(i, -80, woodenFenceHorizontal, 312, 120);
+                BuildConstrution(i, 3880, woodenFenceHorizontal, 312, 120);
+            }
+
+
+            for (int i = 0; i <= 3744; i += 256)
+            {
+                BuildConstrution(0, i-78, woodenFenceVertical, 56, 376);
+                BuildConstrution(5944, i-78, woodenFenceVertical, 56, 376);
+            }
+            BuildConstrution(5944, 3640, woodenFenceVertical, 56, 376);
         }
         public Rectangle BuildShop(int leftPossition, int topPossition, ImageBrush imageBrush, int width, int height)
         {

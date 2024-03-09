@@ -14,7 +14,9 @@
     <None Remove="res\chapel.png" />
     <None Remove="res\familyguy.png" />
     <None Remove="res\FastZombie.png" />
-    <None Remove="res\fence.png" />
+    <None Remove="res\fenceFlipped.png" />
+    <None Remove="res\fenceHorizontal.png" />
+    <None Remove="res\fenceVertical.png" />
     <None Remove="res\flashlight.png" />
     <None Remove="res\grandcross.png" />
     <None Remove="res\ground.png" />
@@ -37,6 +39,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="res\fenceFlipped.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fenceHorizontal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fenceVertical.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\chapel.png" />
     <Resource Include="res\flashlight.png" />
   </ItemGroup>
@@ -64,9 +75,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\familyguy.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="res\fence.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\grandcross.png">

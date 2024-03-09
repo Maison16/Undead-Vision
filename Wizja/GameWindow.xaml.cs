@@ -29,7 +29,7 @@ namespace Wizja
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
-            hud = new HUD(100, 30, 300, statCanvas);
+            hud = new HUD(100, 0, 300, statCanvas);
             //Tworzenie i otwieranie shop do testów
             itemshop = new Shop(gameCanvas, shopCanvas, hud);
             itemshop.ShowShop();
