@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Wizja.classes;
 using Wizja.Enemies;
+using Wizja.classes.guns;
 
 namespace Wizja
 {
