@@ -53,7 +53,7 @@ namespace Wizja.classes
                 Width = 3000,
                 Height = 3000,
                 Fill = new ImageBrush(flashLightSource),
-                Opacity = 0.98
+                Opacity = 0.999
             };
             Panel.SetZIndex(flashLightImage, int.MaxValue);
             Canvas.SetLeft(playerImage, 3000);
