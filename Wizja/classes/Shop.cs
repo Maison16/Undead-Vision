@@ -27,7 +27,7 @@ namespace Wizja.classes
         // Pokazywnaie Sklepu
         public void ShowShop()
         {
-            // -->  Sekcja ogólna
+            /// Sekcja ogólna
 
             // Zewnetrzne tlo
             shopCanvas.Background = Brushes.DarkRed;
@@ -68,7 +68,7 @@ namespace Wizja.classes
             closeButton.Click += HideShop;
             shopCanvas.Children.Add(closeButton);
 
-            // --> Sekcja Weapons
+            /// Sekcja Weapons
 
             // Label Item Shop
             Label weaponsLabel = new Label();

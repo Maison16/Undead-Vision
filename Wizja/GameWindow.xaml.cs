@@ -25,6 +25,10 @@ namespace Wizja
             InitializeComponent();
             HUD hud= new HUD(100, 30, 300, statCanvas);
             ObjectLoader objectLoader=new ObjectLoader(gameCanvas);
+
+            //Tworzenie i otwieranie shop do testów
+            Shop itemshop = new Shop(shopCanvas, statCanvas);
+            itemshop.ShowShop();
         }
        
     }
