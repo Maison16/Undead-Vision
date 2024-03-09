@@ -56,8 +56,8 @@ namespace Wizja
             {
                 gameCanvas.Dispatcher.Invoke(() =>
                 {
-                    MovementHandler.Step(direction, objectLoader.GetListMovingObjects(),objectLoader.GetListMapObjects());
-                    MovementHandler.Step(direction, this.GetRectanglesByName("Enemy"), objectLoader.GetListMapObjects());
+                    MovementHandler.Step(direction, objectLoader.GetListMovingObjects());
+                    MovementHandler.Step(direction, this.GetRectanglesByName("Enemy"));
 
 
                     //Testowanie Przeciwników
@@ -118,22 +118,18 @@ namespace Wizja
         {
             if (e.Key == Key.W)
             {
-                Console.WriteLine("W");
                 direction[0] = true;
             }
             else if (e.Key == Key.A)
             {
-                Console.WriteLine("A");
                 direction[1] = true;
             }
             else if (e.Key == Key.S)
             {
-                Console.WriteLine("S");
                 direction[2] = true;
             }
             else if (e.Key == Key.D)
             {
-                Console.WriteLine("D");
                 direction[3] = true;
             }
         }
@@ -142,22 +138,18 @@ namespace Wizja
         {
             if (e.Key == Key.W)
             {
-                Console.WriteLine("W");
                 direction[0] = false;
             }
             else if (e.Key == Key.A)
             {
-                Console.WriteLine("A");
                 direction[1] = false;
             }
             else if (e.Key == Key.S)
             {
-                Console.WriteLine("S");
                 direction[2] = false;
             }
             else if (e.Key == Key.D)
             {
-                Console.WriteLine("D");
                 direction[3] = false;
             }
         }

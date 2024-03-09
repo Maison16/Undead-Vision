@@ -33,7 +33,6 @@ namespace Wizja.classes
             tombstoneImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             grandCrossImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
-            metalFenceImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fence2.png"));
             backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/background1.png"));
             woodenFenceHorizontal.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fenceHorizontal.png"));
             woodenFenceVertical.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fenceVertical.png"));

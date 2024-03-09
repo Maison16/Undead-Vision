@@ -40,6 +40,7 @@ namespace Wizja
         }
         private void closeWindow(object sender, RoutedEventArgs e)
         {
+            
             MainWindow backToMenu = new MainWindow();
             backToMenu.Show();
             this.Close();

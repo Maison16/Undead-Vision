@@ -104,7 +104,7 @@ public class Enemy
         Canvas.SetLeft(enemyImage, x);
         Canvas.SetTop(enemyImage, y);
         Rect hitbox = new Rect(Canvas.GetLeft(obj), Canvas.GetTop(obj), obj.Width, obj.Height);
-        if (IsColision(hitbox)) 
+        if (IsColision(hitbox))
         {
             x -= dirX * movingSpeed;
             y += dirY * movingSpeed;
