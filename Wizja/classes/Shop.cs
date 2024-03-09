@@ -14,14 +14,13 @@ namespace Wizja.classes
     public class Shop
     {
         private Canvas shopCanvas;
-        private Canvas statCanvas;
-        //private int money;
+        private HUD hud;
 
-        // Konstruktor pobiera Canvas
-        public Shop(Canvas shopCanvas, Canvas statCanvas)
+        // Konstruktor pobiera Canvas i hud (money)
+        public Shop(Canvas shopCanvas, HUD hud)
         {
             this.shopCanvas = shopCanvas;
-            this.statCanvas = statCanvas;
+            this.hud = hud;
         }
 
         // Pokazywnaie Sklepu
@@ -123,20 +122,17 @@ namespace Wizja.classes
         }
         // przykładowe bronie - do wyrzucenia potem !!!
         List<Weapon> weaponList = new List<Weapon>{
-            new Weapon("gun", 20, 10, 100, new BitmapImage()),
-            new Weapon("better gun", 30, 20, 200, new BitmapImage()),
-            new Weapon("good gun", 40, 30, 300,new BitmapImage()),
-            new Weapon("excellent gun", 50, 40, 400,new BitmapImage()),
-            new Weapon("family guy", 60, 50, 500,new BitmapImage())
+            new Weapon("gun", 20, 10, 100, new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"))),
+            new Weapon("better gun", 30, 20, 200, new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"))),
+            new Weapon("good gun", 40, 30, 300,new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"))),
+            new Weapon("excellent gun", 50, 40, 400,new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"))),
+            new Weapon("family guy", 60, 50, 500,new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png")))
         };
-
         //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
 
-        //////////////////////////////////// DO USUNIĘCIA TYLKO TEST \/ \/ \/ 
-        int money = 350;
-        int j = 0;
-        //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
+        int[] used = {0,0,0,0,0};
 
+        // Sklep z bronia
         private void weaponsShop()
         {
             for(int i=0;i<5; i++)
@@ -146,13 +142,8 @@ namespace Wizja.classes
                 Rectangle rec = new Rectangle();
                 rec.Height = 64;
                 rec.Width = 64;
-                /////// jak będą już zdjęcia \/\/\/ \/\/\/
-                //ImageBrush imgB = new ImageBrush(w.img);
-                //rec.Fill = imgB;
-                /////// /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\
-                //////////////////////////////////// DO USUNIĘCIA TYLKO TEST \/ \/ \/ 
-                rec.Fill = Brushes.White;
-                //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
+                ImageBrush imgB = new ImageBrush(w.img);
+                rec.Fill = imgB;
                 Canvas.SetLeft(rec, 120);
                 Canvas.SetTop(rec, 150 + i * 110);
                 shopCanvas.Children.Add(rec);
@@ -185,7 +176,11 @@ namespace Wizja.classes
                 buyButton.BorderThickness = new Thickness(3);
                 Canvas.SetLeft(buyButton, 500);
                 Canvas.SetTop(buyButton, 165 + i * 110);
-                if (w.cost < money)
+                if (used[weaponList.IndexOf(w)] == 1)
+                {
+                    buyButton.Background = Brushes.Maroon;
+                }
+                else if (w.cost <= hud.GetMoney())
                 {
                     buyButton.Background = Brushes.Green;
                     buyButton.Click += buyClick;
@@ -198,93 +193,19 @@ namespace Wizja.classes
             }
         }
 
-
+        // Odejmowanie pieniędzy z hudu
         private void Buy(Weapon w) 
         {
-            //////////////////////////////////// DO USUNIĘCIA TYLKO TEST \/ \/ \/ 
-            Label buyInfo = new Label();
-            buyInfo.Content = " Zapłacono:" +w.cost + "money:" + money;
-            buyInfo.FontSize = 26;
-            buyInfo.FontWeight = FontWeights.Bold;
-            Canvas.SetLeft(buyInfo, 610);
-            Canvas.SetTop(buyInfo, 190 + j * 110);
-            money -= w.cost;
-            j++;
-
+            hud.ChangeMoney(w.cost * -1);
             shopCanvas.Children.Clear();
+            used[weaponList.IndexOf(w)] = 1;
             ShowShop();
-
-            shopCanvas.Children.Add(buyInfo);
-            //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
-
-            /*            
-                          if (statCanvas.GetMoney() > w.cost)
-                        {
-                            w.cost *= -1;
-                            statCanvas.ChangeMoney(w.cost);
-                        }
-            */
         }
 
+        // Sklep z armorem
         private void armorShop()
         {
-            for (int i = 0; i < 5; i++)
-            {
-                var w = weaponList[i];
-
-                Rectangle rec = new Rectangle();
-                rec.Height = 64;
-                rec.Width = 64;
-                /////// jak będą już zdjęcia \/\/\/ \/\/\/
-                //ImageBrush imgB = new ImageBrush(w.img);
-                //rec.Fill = imgB;
-                /////// /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\
-                //////////////////////////////////// DO USUNIĘCIA TYLKO TEST \/ \/ \/ 
-                rec.Fill = Brushes.White;
-                //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
-                Canvas.SetLeft(rec, 1020);
-                Canvas.SetTop(rec, 150 + i * 110);
-                shopCanvas.Children.Add(rec);
-
-                Label lblUp = new Label();
-                lblUp.Content = w.name;
-                lblUp.FontSize = 36;
-                lblUp.FontWeight = FontWeights.Bold;
-                Canvas.SetLeft(lblUp, 1100);
-                Canvas.SetTop(lblUp, 150 + i * 110);
-                shopCanvas.Children.Add(lblUp);
-
-                Label lblDown = new Label();
-                lblDown.Content = "dmg:" + w.dmg + " range:" + w.range;
-                lblDown.FontSize = 24;
-                lblDown.FontWeight = FontWeights.Bold;
-                Canvas.SetLeft(lblDown, 1110);
-                Canvas.SetTop(lblDown, 190 + i * 110);
-                shopCanvas.Children.Add(lblDown);
-
-                Button buyButton = new Button();
-                buyButton.Content = w.cost;
-                buyButton.FontSize = 24;
-                buyButton.FontWeight = FontWeights.Bold;
-                buyButton.Width = 100;
-                buyButton.Height = 40;
-                buyButton.Background = Brushes.Gray;
-                buyButton.Foreground = Brushes.White;
-                buyButton.BorderBrush = Brushes.Black;
-                buyButton.BorderThickness = new Thickness(3);
-                Canvas.SetLeft(buyButton, 1400);
-                Canvas.SetTop(buyButton, 165 + i * 110);
-                if (w.cost < money)
-                {
-                    buyButton.Background = Brushes.Green;
-                    buyButton.Click += buyClick;
-                }
-                void buyClick(object sender, RoutedEventArgs e)
-                {
-                    Buy(w);
-                }
-                shopCanvas.Children.Add(buyButton);
-            }
+           
         }
 
         //Ukrywanie Sklepu

@@ -27,7 +27,7 @@ namespace Wizja
             ObjectLoader objectLoader=new ObjectLoader(gameCanvas);
 
             //Tworzenie i otwieranie shop do testów
-            Shop itemshop = new Shop(shopCanvas, statCanvas);
+            Shop itemshop = new Shop(shopCanvas, hud);
             itemshop.ShowShop();
         }
        
