@@ -14,7 +14,7 @@ namespace Wizja.classes
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Wolf.png"));
         //    public Enemy(int healthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
 
-        public Wolf() : base(10, 10, 10, 3.5, source, 74, 119)
+        public Wolf() : base(7, 10, 10, 3.5, source, 74, 119)
         { }
     }
 }
