@@ -19,6 +19,7 @@ namespace Wizja.classes
         static private List<Rectangle> movingObjects = new List<Rectangle>();
         static private Canvas gameCanvas;
         private ImageBrush sanctuary = new ImageBrush();
+        private ImageBrush shop = new ImageBrush();
         private ImageBrush tombstone = new ImageBrush();
         private ImageBrush tree = new ImageBrush();
         private ImageBrush grandCross = new ImageBrush();
@@ -33,6 +34,7 @@ namespace Wizja.classes
             grandCross.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             metalFence.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fence.png"));
             backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/background1.png"));
+            shop.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/shopOpen.png"));
             gameCanvas = GameCanvas;
             LoadMap();
         }
@@ -43,7 +45,7 @@ namespace Wizja.classes
             BuildConstrution(6000, 0, metalFence, 10, 4000);
             BuildConstrution(6000, 4000, metalFence, 6000, 10);
             BuildConstrution(0, 4000, metalFence, 10, 4000);
-            BuildConstrution(3000, 1700, grandCross, 80, 100);
+            BuildConstrution(3000, 1700, shop, 300, 200);
         }
 
         private void BuildMap(ImageBrush imageBrush)
