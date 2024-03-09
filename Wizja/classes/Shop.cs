@@ -411,5 +411,4 @@ namespace Wizja.classes
             shopCanvas.Background = null;
         }
     }
-
 }
