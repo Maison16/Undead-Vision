@@ -13,14 +13,13 @@ namespace Wizja.classes
         private Point start;
         private Point end;
         private double thickness;
-        private Rectangle target; // podmienic potem na liste przeciwnikow
         private List<Rect> hitBoxes;
         private Canvas gameCanvas;
         private Line projectileLine;
         T.Timer timer;
 
         // Rectangle target do podmianki na liste
-        public Projectile(double startX, double startY, double endX, double endY, double thickness, Rectangle target, Canvas gameCanvas)
+        public Projectile(double startX, double startY, double endX, double endY, double thickness, List<Rectangle> mapObjects, Canvas gameCanvas)
         {
             this.start = new Point(startX, startY);
             this.end = new Point(endX, endY);
@@ -29,7 +28,10 @@ namespace Wizja.classes
 
             this.hitBoxes = GenerateHitBoxes(); // generowanie hitboxow w zdluz linii
             DrawLine(); // rysuj linie
-            UpdateEndWithCollision(target); // aktualizuj dane do narysowania linii po sprawdzeniu kolizji  
+            foreach(Rectangle target in mapObjects) 
+            {
+                UpdateEndWithCollision(target); // aktualizuj dane do narysowania linii po sprawdzeniu kolizji  
+            }
 
             // Timer do usuniencia linii po pewnym czasie (potencjalnie mozna dodac do konstruktora jako custom zmienna)
             timer = new T.Timer();
@@ -95,7 +97,7 @@ namespace Wizja.classes
                     // Update the line with the new end point
                     projectileLine.X2 = end.X;
                     projectileLine.Y2 = end.Y;
-                    this.target = target;
+                    //this.target = target;
                     break; // Exit the loop after the first collision
                 }
             }

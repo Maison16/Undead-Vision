@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -14,7 +15,7 @@ namespace Wizja.classes
 {
     public class ObjectLoader
     {
-        static public List<Rectangle> mapObjects = new List<Rectangle>();
+        static private List<Rectangle> mapObjects = new List<Rectangle>();
         static private Canvas gameCanvas;
         private ImageBrush sanctuary = new ImageBrush();
         private ImageBrush tombstone = new ImageBrush();
@@ -40,9 +41,10 @@ namespace Wizja.classes
             BuildConstrution(6000, 0, metalFence, 10, 4000);
             BuildConstrution(6000, 4000, metalFence, 6000, 10);
             BuildConstrution(0, 4000, metalFence, 10, 4000);
-            BuildConstrution(0, 0, backgroundImage, 6000, 4000);
+            //BuildConstrution(0, 0, backgroundImage, 6000, 4000);
             BuildConstrution(3000, 1700, grandCross, 80, 100);
         }
+
         static private void BuildConstrution(int leftPossition, int topPossition, ImageBrush imageBrush,int width, int height)
         {
             Rectangle build = new Rectangle
@@ -55,6 +57,11 @@ namespace Wizja.classes
             Canvas.SetTop(build, topPossition);
             mapObjects.Add(build);
             gameCanvas.Children.Add(build);
+        }
+
+        public List<Rectangle> GetList()
+        {
+            return mapObjects;
         }
     }
 }
