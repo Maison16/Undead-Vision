@@ -24,8 +24,8 @@ namespace Wizja.classes
             this.hud = hud;
             playerImage = new Rectangle()
             {
-                Width = 64,
-                Height = 64,
+                Width = 47,
+                Height = 75,
                 Fill = new ImageBrush(source)
             };
             Canvas.SetLeft(playerImage, 3000);

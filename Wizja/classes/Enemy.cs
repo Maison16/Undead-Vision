@@ -6,7 +6,7 @@ using System.Windows.Shapes;
 namespace Wizja.Enemies;
 public class Enemy
 {
-    public int helthPoints;
+    public int healthPoints;
     public int damagePoints;
     public int value; // Wartość pięniedzy które opuszcza po śmierci
     private double movingSpeed;
@@ -16,7 +16,7 @@ public class Enemy
     private int tickCount = 0;
     public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
     {
-        this.helthPoints = helthPoints;
+        this.healthPoints = healthPoints;
         this.damagePoints = damagePoints;
         this.value = value;
         this.movingSpeed = movingSpeed;
@@ -24,6 +24,23 @@ public class Enemy
         {
             Width = 64,
             Height = 64,
+            Fill = new ImageBrush(imageSource),
+            Name = "Enemy"
+        };
+        enemyImage.RenderTransformOrigin = new Point(0.5, 0.5);
+        Console.WriteLine(enemyImage.Tag);
+    }
+
+    public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource, int Width, int Height)
+    {
+        this.healthPoints = healthPoints;
+        this.damagePoints = damagePoints;
+        this.value = value;
+        this.movingSpeed = movingSpeed;
+        enemyImage = new Rectangle()
+        {
+            Width = 74,
+            Height = 74,
             Fill = new ImageBrush(imageSource),
             Name = "Enemy"
         };
@@ -44,8 +61,8 @@ public class Enemy
     //public bool IsDead(int takenDamage,Map mapa)
     public bool IsDead(int takenDamage)
     {
-        helthPoints -= takenDamage;
-        if (helthPoints > 0)
+        healthPoints -= takenDamage;
+        if (healthPoints > 0)
         {
             return !isLiving; //True jeżeli żyje
         }

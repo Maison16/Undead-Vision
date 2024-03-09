@@ -133,7 +133,7 @@ namespace Wizja
                         spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);*/
 
             spawner = new Spawner(enemiesSpawner, 5, 100000, gameCanvas, player);
-            enemyLists[0] = new int[] { 0, 100, 0, 0 };
+            enemyLists[0] = new int[] { 0, 0, 100, 0 };
             enemyLists[1] = new int[] { 60, 35, 15, 0 };
             enemyLists[2] = new int[] { 40, 35, 25, 0 };
             enemyLists[3] = new int[] { 25, 35, 25, 5 };

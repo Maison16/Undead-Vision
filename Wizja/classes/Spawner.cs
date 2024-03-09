@@ -53,11 +53,11 @@ public class Spawner
             }
             else if (value <= wave[0] + wave[1] + wave[2])
             {
-                //GetEnemies(3,noRound);
+                GetEnemies(3,noRound);
             }
             else if (value <= wave[0] + wave[1] + wave[3])
             {
-                //GetEnemies(4,noRound);
+                GetEnemies(4,noRound);
             }
         }
     }
@@ -74,10 +74,10 @@ public class Spawner
                 enemies[noRound].Add(new FastZombie());
                 break;
             case 3:
-                enemies[noRound].Add(new FastZombie());
+                enemies[noRound].Add(new TankSkeleton());
                 break;
             case 4:
-                enemies[noRound].Add(new FastZombie());
+                enemies[noRound].Add(new ShootingZombie());
                 break;
 
 
