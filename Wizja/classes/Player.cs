@@ -27,7 +27,7 @@ namespace Wizja.classes
         private Point endPoint;
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
         public static ImageSource flashLightSource = new BitmapImage(new Uri("pack://application:,,,/res/flashlight.png"));
-        HUD hud;
+        public HUD hud;
         public Player(Canvas gameCanvas, HUD hud, List<Rectangle> obstacles)
 
 
