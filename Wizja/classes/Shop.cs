@@ -59,7 +59,7 @@ namespace Wizja.classes
         {
             shopRange = new Rect(Canvas.GetLeft(shopBuild)-20, Canvas.GetTop(shopBuild)-20, shopBuild.Width+40, shopBuild.Height+40);
             playerHitBox = new Rect(Canvas.GetLeft(player.playerImage), Canvas.GetTop(player.playerImage), player.playerImage.Width, player.playerImage.Height);
-            if (playerHitBox.IntersectsWith(shopRange))
+            if ((playerHitBox.IntersectsWith(shopRange))&&(hud.GetTime()>0))
             {
                 hud.NearShopShow();
                 ShopIsOpen();
