@@ -14,13 +14,23 @@ namespace Wizja.classes
     public class Shop
     {
         private Canvas shopCanvas;
+        private Canvas gameCanvas;
         private HUD hud;
-
+        private ObjectLoader objectLoader;
+        private ImageBrush shopOpenImage;
+        private ImageBrush shopCloseImage;
         // Konstruktor pobiera Canvas i hud (money)
-        public Shop(Canvas shopCanvas, HUD hud)
+        public Shop(Canvas gameCanvas, Canvas shopCanvas, HUD hud)
         {
+            this.gameCanvas = gameCanvas;
             this.shopCanvas = shopCanvas;
             this.hud = hud;
+            objectLoader= new ObjectLoader(gameCanvas);
+            shopOpenImage = new ImageBrush();
+            shopOpenImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/shopOpen.png"));
+            shopCloseImage = new ImageBrush();
+            shopCloseImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/shopOpen.png"));
+            objectLoader.BuildConstrution(3000, 1700, shopOpenImage, 400, 300);
         }
 
         // Pokazywnaie Sklepu

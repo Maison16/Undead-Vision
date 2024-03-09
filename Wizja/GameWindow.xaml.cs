@@ -37,10 +37,9 @@ namespace Wizja
             hud = new HUD(100, 30, 300, statCanvas);
 
             //Tworzenie i otwieranie shop do testów
-            iteamshop = new Shop(shopCanvas, hud);
-            iteamshop.ShowShop();
-
-
+            Shop itemshop = new Shop(gameCanvas, shopCanvas, hud);
+            itemshop.ShowShop();
+           
             testing_ERYK();
 
 
