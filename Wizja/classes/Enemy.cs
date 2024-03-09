@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Wizja.classes;
 
 namespace Wizja.Enemies;
 public class Enemy
@@ -59,7 +60,7 @@ public class Enemy
     }
 
     // Porusz przeciwników w strone playera 
-    public void Follow(Rectangle playerLocation)
+    public void Follow(Rectangle playerLocation, Canvas gameScreen)
     {
         Random rnd = new Random();
         double x = Canvas.GetLeft(enemyImage);
@@ -80,12 +81,49 @@ public class Enemy
         }
         else if (distance >= 40) // Jeżeli player jest daleko Losuj bardziej jego scieżke
         {
-            dirX = (dx + MinusOrPlus() * rnd.Next(32, 64)) / distance;
-            dirY = (dy + MinusOrPlus() * rnd.Next(32, 64)) / distance;
+            dirX = (dx + MinusOrPlus() * rnd.Next(24, 48)) / distance;
+            dirY = (dy + MinusOrPlus() * rnd.Next(24, 48)) / distance;
             x += dirX * movingSpeed;
             y += dirY * movingSpeed;
             Canvas.SetLeft(enemyImage, x);
             Canvas.SetTop(enemyImage, y);
+        }
+    }
+    public void BreakCollision(Rectangle obj, Canvas gameScreen,Rectangle playerLocation)
+    {
+        Random rnd = new Random();
+        double x = Canvas.GetLeft(enemyImage);
+        double y = Canvas.GetTop(enemyImage);
+        double dx = Canvas.GetLeft(playerLocation) - x;
+        double dy = Canvas.GetTop(playerLocation) - y;
+        double distance = Math.Sqrt(dx * dx + dy * dy);
+        double dirX;
+        double dirY;
+        dirX = (dx + MinusOrPlus() * rnd.Next(24, 48)) / distance;
+        dirY = (dy + MinusOrPlus() * rnd.Next(24, 48)) / distance;
+        Canvas.SetLeft(enemyImage, x);
+        Canvas.SetTop(enemyImage, y);
+        Rect hitbox = new Rect(Canvas.GetLeft(obj), Canvas.GetTop(obj), obj.Width, obj.Height);
+        if (IsColision(hitbox)) 
+        {
+            x -= dirX * movingSpeed;
+            y += dirY * movingSpeed;
+            Canvas.SetLeft(enemyImage, x);
+            Canvas.SetTop(enemyImage, y);
+            if (IsColision(hitbox))
+            {
+                x -= dirX * movingSpeed;
+                y -= dirY * movingSpeed;
+                Canvas.SetLeft(enemyImage, x);
+                Canvas.SetTop(enemyImage, y);
+                if (IsColision(hitbox))
+                {
+                    x += dirX * movingSpeed;
+                    y -= dirY * movingSpeed;
+                    Canvas.SetLeft(enemyImage, x);
+                    Canvas.SetTop(enemyImage, y);
+                }
+            }
         }
     }
 
