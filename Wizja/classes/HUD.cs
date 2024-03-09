@@ -75,22 +75,21 @@ namespace Wizja.classes
 
             nearBox = new Rectangle
             {
-                Width = 200,
-                Height = 100,
+                Width = 400,
+                Height = 40,
                 Fill = Brushes.DarkRed
             };
-            Canvas.SetLeft(nearBox, 1720);
-            Canvas.SetTop(nearBox, 980);
+            Canvas.SetLeft(nearBox, 1595);
+            Canvas.SetTop(nearBox, 1040);
             statCanvas.Children.Add(nearBox);
             nearLabel = new Label
             {
-                Content = $"  You are\n" +
-                $"near shop!",
+                Content = "Press 'B' to open Shop",
                 FontSize = 32,
                 Foreground = Brushes.Gold
             };
-            Canvas.SetLeft(nearLabel, 1750);
-            Canvas.SetTop(nearLabel, 980);
+            Canvas.SetLeft(nearLabel, 1595);
+            Canvas.SetTop(nearLabel, 1030);
             statCanvas.Children.Add(nearLabel);
 
             timer = new DispatcherTimer();

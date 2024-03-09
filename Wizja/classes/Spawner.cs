@@ -192,4 +192,15 @@ public class Spawner
         return result;
     }
 
+    public List<Enemy> GetAllEnemies()
+    {
+        List<Enemy> allEnemies = new List<Enemy>();
+
+        foreach (List<Enemy> enemyList in enemies)
+        {
+            allEnemies.AddRange(enemyList);
+        }
+
+        return allEnemies;
+    }
 }

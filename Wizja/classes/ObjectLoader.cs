@@ -22,7 +22,6 @@ namespace Wizja.classes
         private ImageBrush tombstoneImage = new ImageBrush();
         private ImageBrush treeImage = new ImageBrush();
         private ImageBrush grandCrossImage = new ImageBrush();
-        private ImageBrush metalFenceImage = new ImageBrush();
         private ImageBrush backgroundImage = new ImageBrush();
         private ImageBrush woodenFenceHorizontal = new ImageBrush();
         private ImageBrush woodenFenceVertical = new ImageBrush();
