@@ -11,32 +11,28 @@ namespace Wizja.classes
 {
     public static class MovementHandler
     {
-        static Rectangle Player;
+        static Player Player;
 
-        public static void initialize(Rectangle player)
+        public static void initialize(Player player)
         {
             Player = player;
         }
 
-        public static void Step(int direction, List<Rectangle> movableEntities)
+        public static void Step(bool[] direction, List<Rectangle> movableEntities)
         {
-
-            if (direction == 0x0000)
-                return;
-
             foreach (Rectangle entity in movableEntities)
             {
-                if ((direction & 0x1000) == 1)
-                    Canvas.SetTop(entity, Canvas.GetTop(entity) - 30);
+                if (direction[0])
+                    Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
 
-                if ((direction & 0x0100) == 1)
-                    Canvas.SetLeft(entity, Canvas.GetLeft(entity) - 30);
+                if (direction[1])
+                    Canvas.SetLeft(entity, Canvas.GetLeft(entity) + Player.movingSpeed);
 
-                if ((direction & 0x0010) == 1)
-                    Canvas.SetLeft(entity, Canvas.GetTop(entity) + 30);
+                if (direction[2])
+                    Canvas.SetTop(entity, Canvas.GetTop(entity) - Player.movingSpeed);
 
-                if ((direction & 0x0001) == 1)
-                    Canvas.SetTop(entity, Canvas.GetTop(entity) + 30);
+                if (direction[3])
+                    Canvas.SetLeft(entity, Canvas.GetLeft(entity) - Player.movingSpeed);
             }
         }
     }

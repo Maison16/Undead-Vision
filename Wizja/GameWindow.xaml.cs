@@ -15,7 +15,7 @@ namespace Wizja
     /// </summary>
     public partial class GameWindow : Window
     {
-        int direction = 0x0000;
+        bool[] direction = new bool[4];
 
         //Testy przeciwników
         private ObjectLoader objectLoader;
@@ -38,7 +38,10 @@ namespace Wizja
             //Tworzenie i otwieranie shop do testów
             Shop itemshop = new Shop(gameCanvas, shopCanvas, hud);
             itemshop.ShowShop();
-           
+
+            KeyUp += KeyIsUp;
+            KeyDown += KeyIsDown;
+
             testing_ERYK();
 
 
@@ -56,21 +59,14 @@ namespace Wizja
             {
                 gameCanvas.Dispatcher.Invoke(() =>
                 {
-                    //tutaj pisz SEBA
-                    /*w object loader masz:
-                    public List<Rectangle> GetListMovingObjects()
-                    {
-                        return movingObjects;
-                    }
-                    więc obiekt objectLoader ma na liście wszystkie elementy, które mają się poruszać.
-                    */
+                    MovementHandler.Step(direction, objectLoader.GetListMovingObjects());
+                    MovementHandler.Step(direction, this.GetRectanglesByName("Enemy"));
+
 
                     //Testowanie Przeciwników
                     spawner.Spawn();
                     spawner.MoveEveryOne(player);
                     EndOfGame();
-                    objectLoader.SetListMapObjects(this.GetRectanglesByName("Enemy"));
-                    objectLoader.SetListMovingObjects(this.GetRectanglesByName("Enemy"));
 
                 });
             }
@@ -79,11 +75,13 @@ namespace Wizja
         private void testing_ERYK()
         {
             player = new Player(gameCanvas, hud);
+            player.MouseMoveHandler(gameCanvas);
+            MovementHandler.initialize(player);
             List<Point> enemiesSpawner = new List<Point>() { new Point(4000, 1500), new Point(4000, 2500), new Point(2000, 1500), new Point(2000, 2500) };
             int[][] enemyLists = new int[5][];
 
             //Spawner(List<Point> enemiesSpawner, int rounds,int betweenRounds,Canvas gameScreen)
-            /*            spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas,player);
+                       spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas,player);
                         enemyLists[0] = new int[] { 75, 25, 0, 0};
                         enemyLists[1] = new int[] { 60, 35, 15, 0 };
                         enemyLists[2] = new int[] { 40, 35, 25, 0 };
@@ -93,8 +91,8 @@ namespace Wizja
                         spawner.GenerateEnemies(enemyLists[1], 24, 1, 115);
                         spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
                         spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
-                        spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);*/
-
+                        spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);
+            /*
             spawner = new Spawner(enemiesSpawner, 5, 100000, gameCanvas, player);
             enemyLists[0] = new int[] { 0, 0, 100, 0 };
             enemyLists[1] = new int[] { 60, 35, 15, 0 };
@@ -106,6 +104,7 @@ namespace Wizja
             spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
             spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
             spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);
+            */          
         }
 
         private void EndOfGame()
@@ -122,7 +121,7 @@ namespace Wizja
         // Zwraca obiekty typu rectangle o podanej nazwie dla przeciwnika "Enemy"
         private List<Rectangle> GetRectanglesByName(string name)
         {
-            var objects = gameCanvas.Children.OfType<Rectangle>().Where(x => !x.Name.Contains(name));
+            var objects = gameCanvas.Children.OfType<Rectangle>().Where(x => x.Name.Contains(name));
             List <Rectangle> results = new List<Rectangle>();
             foreach (var rectangle in objects) 
             {
@@ -133,34 +132,50 @@ namespace Wizja
 
         public void KeyIsDown(object sender, KeyEventArgs e)
         {
-            int direction = 0x0000;
-
             if (e.Key == Key.W)
-                direction += 0x1000;
-
-            if (e.Key == Key.A)
-                direction += 0x0100;
-
-            if (e.Key == Key.S)
-                direction += 0x0010;
-
-            if (e.Key == Key.D)
-                direction += 0x0001;
+            {
+                Console.WriteLine("W");
+                direction[0] = true;
+            }
+            else if (e.Key == Key.A)
+            {
+                Console.WriteLine("A");
+                direction[1] = true;
+            }
+            else if (e.Key == Key.S)
+            {
+                Console.WriteLine("S");
+                direction[2] = true;
+            }    
+            else if (e.Key == Key.D)
+            {
+                Console.WriteLine("D");
+                direction[3] = true;
+            }
         }
 
         public void KeyIsUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.W)
-                direction -= 0x1000;
-
-            if (e.Key == Key.A)
-                direction -= 0x0100;
-
-            if (e.Key == Key.S)
-                direction -= 0x0010;
-
-            if (e.Key == Key.D)
-                direction -= 0x0001;
+            {
+                Console.WriteLine("W");
+                direction[0] = false;
+            }
+            else if (e.Key == Key.A)
+            {
+                Console.WriteLine("A");
+                direction[1] = false;
+            }
+            else if (e.Key == Key.S)
+            {
+                Console.WriteLine("S");
+                direction[2] = false;
+            }
+            else if (e.Key == Key.D)
+            {
+                Console.WriteLine("D");
+                direction[3] = false;
+            }
         }
     }
 }

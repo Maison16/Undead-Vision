@@ -14,6 +14,7 @@
     <None Remove="res\familyguy.png" />
     <None Remove="res\FastZombie.png" />
     <None Remove="res\fence.png" />
+    <None Remove="res\flashlight.png" />
     <None Remove="res\grandcross.png" />
     <None Remove="res\hppotion.jpg" />
     <None Remove="res\HPpotion.png" />
@@ -27,6 +28,10 @@
     <None Remove="res\smg.png" />
     <None Remove="res\TankSkeleton.png" />
     <None Remove="res\Wolf.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="res\flashlight.png" />
   </ItemGroup>
 
   <ItemGroup>
