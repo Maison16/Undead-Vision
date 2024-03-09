@@ -43,7 +43,7 @@ namespace Wizja.classes
             BuildConstrution(0, 0, backgroundImage, 6000, 4000);
             BuildConstrution(3000, 1700, grandCross, 80, 100);
         }
-        static private void BuildConstrution(int width, int height, ImageBrush imageBrush)
+        static private void BuildConstrution(int leftPossition, int topPossition, ImageBrush imageBrush,int width, int height)
         {
             Rectangle build = new Rectangle
             {
@@ -51,8 +51,8 @@ namespace Wizja.classes
                 Height = height,
                 Fill = imageBrush
             };
-            Canvas.SetLeft(build, 3000);
-            Canvas.SetTop(build, 1700);
+            Canvas.SetLeft(build, leftPossition);
+            Canvas.SetTop(build, topPossition);
             mapObjects.Add(build);
             gameCanvas.Children.Add(build);
         }
