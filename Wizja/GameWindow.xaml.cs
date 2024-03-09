@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Wizja.classes;
+using Wizja.classes.guns;
 
 namespace Wizja
 {
@@ -22,6 +23,7 @@ namespace Wizja
         private System.Timers.Timer gameTimer = new System.Timers.Timer();
         Point playerPosition; // testy
         ObjectLoader objectLoader;
+        Weapon weapon; // testy
         public GameWindow()
         {
             InitializeComponent();
@@ -46,6 +48,10 @@ namespace Wizja
             Canvas.SetLeft(playerRect, 3100);
             Canvas.SetTop(playerRect, 2100);
             gameCanvas.Children.Add(playerRect);
+            
+            // test pistoletu
+            BaseGun gun = new BaseGun();
+            weapon = gun;
 
             playerPosition = new Point(Canvas.GetLeft(playerRect), Canvas.GetTop(playerRect));
             PreviewKeyDown += GameWindow_PreviewKeyDown;
@@ -76,7 +82,8 @@ namespace Wizja
             Point endPoint = playerPosition + direction * 500; // 500 to range do zmiany 
 
             // Stworz pocisk
-            Projectile projectile = new Projectile(playerPosition.X, playerPosition.Y, endPoint.X, endPoint.Y, 2, objectLoader.GetListMapObjects(), gameCanvas);
+            weapon.Shoot(playerPosition, endPoint, objectLoader, gameCanvas);
+            //Projectile projectile = new Projectile(playerPosition.X, playerPosition.Y, endPoint.X, endPoint.Y, 2, objectLoader.GetListMapObjects(), gameCanvas);
         }
 
         // cosik do klikania 

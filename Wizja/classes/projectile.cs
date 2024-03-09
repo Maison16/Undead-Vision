@@ -37,7 +37,7 @@ namespace Wizja.classes
             timer = new T.Timer();
             timer.Interval = 95; // milliseconds
             timer.Elapsed += OnTimerElapsed;
-            timer.AutoReset = false; // Only fire once
+            timer.AutoReset = false; // strzeli tylko raz
             timer.Start();
         }
 
@@ -53,7 +53,7 @@ namespace Wizja.classes
         public void DrawLine()
         {
             projectileLine = new Line();
-            projectileLine.Stroke = Brushes.Black; // kolor lini
+            projectileLine.Stroke = Brushes.LightGoldenrodYellow; // kolor lini
             projectileLine.StrokeThickness = thickness; // grubos lini (wybrana w konstruktorze)
             projectileLine.X1 = start.X; // x startu
             projectileLine.Y1 = start.Y; // y startu
