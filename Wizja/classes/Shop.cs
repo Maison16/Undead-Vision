@@ -295,7 +295,7 @@ namespace Wizja.classes
                 shopCanvas.Children.Add(rec);
 
                 Label lblUp = new Label();
-                lblUp.Content = 25 * amount + " Armor";
+                lblUp.Content = 20 * amount + " Armor";
                 lblUp.FontSize = 36;
                 lblUp.FontWeight = FontWeights.Bold;
                 Canvas.SetLeft(lblUp, 1100);
@@ -303,7 +303,7 @@ namespace Wizja.classes
                 shopCanvas.Children.Add(lblUp);
 
                 Label lblDown = new Label();
-                lblDown.Content = "adds " + 25 * amount + " player's HP";
+                lblDown.Content = "adds " + 20 * amount + " player's HP";
                 lblDown.FontSize = 24;
                 lblDown.FontWeight = FontWeights.Bold;
                 Canvas.SetLeft(lblDown, 1110);
@@ -333,7 +333,7 @@ namespace Wizja.classes
                 }
                 void buyClick(object sender, RoutedEventArgs e)
                 {
-                    hud.SetHp(hud.GetHp() + 25 * amount);
+                    hud.SetHp(hud.GetHp() + 20 * amount);
                     hud.ChangeMoney(-1 * amount * 100);
                     usedArmor[amount] = 1;
                     shopCanvas.Children.Clear();
