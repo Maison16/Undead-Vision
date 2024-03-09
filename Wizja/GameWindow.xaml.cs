@@ -19,7 +19,7 @@ namespace Wizja
 
         //Testy przeciwników
         private ObjectLoader objectLoader;
-        private Shop iteamshop;
+        private Shop itemshop;
         public Spawner spawner;
         public Player player;
         public HUD hud;
@@ -35,7 +35,7 @@ namespace Wizja
             //dodawanie obiektu hudu
             hud = new HUD(100, 30, 300, statCanvas);
             //Tworzenie i otwieranie shop do testów
-            Shop itemshop = new Shop(gameCanvas, shopCanvas, hud);
+            itemshop = new Shop(gameCanvas, shopCanvas, hud);
             itemshop.ShowShop();
 
             KeyUp += KeyIsUp;
