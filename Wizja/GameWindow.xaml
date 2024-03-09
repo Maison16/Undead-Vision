@@ -10,10 +10,8 @@
         WindowState="Maximized"
         WindowStyle="None">
     <Grid>
-        <Grid>
-            <Canvas x:Name="gameCanvas" Margin="0,0,0,950" Height="130" Width="1920" Focusable="True"/>
-            <Canvas x:Name="statCanvas" Margin="0,130,0,0" Height="950" Width="1920" Focusable="True"/>
-            <Canvas x:Name="shopCanvas" Margin="130,130,130,130" Height="820" Width="1660" Focusable="True"/>
-        </Grid>
+        <Canvas x:Name="gameCanvas" Margin="0,0,0,950" Height="130" Width="1920" Focusable="True"/>
+        <Canvas x:Name="statCanvas" Margin="0,130,0,0" Height="950" Width="1920" Focusable="True"/>
+        <Canvas x:Name="shopCanvas" Margin="130,130,130,130" Height="820" Width="1660" Focusable="True"/>
     </Grid>
 </Window>
