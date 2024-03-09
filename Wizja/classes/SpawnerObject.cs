@@ -15,7 +15,6 @@ namespace Wizja.classes
             {
                 Width = 32,
                 Height = 32,
-                Fill = Brushes.Red
             };
             Canvas.SetLeft(place, placeToSpawn.X);
             Canvas.SetTop(place, placeToSpawn.Y);

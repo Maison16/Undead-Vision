@@ -15,10 +15,12 @@ public class Enemy
     public bool isLiving = false; // True jężeli przeciwnik żyje oraz jest na mapie
     private int coolDown = 62; // Co ileś ticków zadaje obrażenia
     private int tickCount = 0;
+    static private Player player;
 
+    
     public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource, int Width, int Height)
     {
-        this.healthPoints = healthPoints;
+        this.healthPoints = helthPoints;
         this.damagePoints = damagePoints;
         this.value = value;
         this.movingSpeed = movingSpeed;
@@ -49,16 +51,23 @@ public class Enemy
         healthPoints -= takenDamage;
         if (healthPoints > 0)
         {
+            Console.WriteLine(!isLiving);
             return !isLiving; //True jeżeli żyje
         }
-        else
+        else 
         {
-            //Map.AddCoins(money);
-            isLiving = false;//False jeżeli nie
+            if (isLiving)
+            {
+                player.hud.ChangeMoney(value);
+                    isLiving = false;//False jeżeli nie
+            }
             return !isLiving;
         }
     }
-
+    public void SetPlayer(Player player1) 
+    {
+        player = player1;
+    }
     // Porusz przeciwników w strone playera 
     public void Follow(Rectangle playerLocation, Canvas gameScreen)
     {
