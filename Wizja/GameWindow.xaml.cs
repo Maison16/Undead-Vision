@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wizja.classes;
-using System.Timers;
 
 namespace Wizja
 {
@@ -21,22 +13,24 @@ namespace Wizja
     /// </summary>
     public partial class GameWindow : Window
     {
-        private System.Timers.Timer gameTimer= new System.Timers.Timer();
+        //Testy przeciwników
+        public Spawner spawner;
+        public Player player;
+
+
+
+        private System.Timers.Timer gameTimer = new System.Timers.Timer();
         Point playerPosition; // testy
         ObjectLoader objectLoader;
         public GameWindow()
         {
             InitializeComponent();
-            //inicjalizacja gameTimera
-            gameTimer.Interval = 16; //16 MILISEKUND
-            gameTimer.Elapsed += GameTick;
-            gameTimer.Start(); //od razu zaczyna timer gameTimer
 
 
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
-            HUD hud= new HUD(100, 30, 300, statCanvas);
+            HUD hud = new HUD(100, 30, 300, statCanvas);
 
             //Tworzenie i otwieranie shop do testów
             Shop itemshop = new Shop(shopCanvas, hud);
@@ -49,12 +43,22 @@ namespace Wizja
                 Height = 20,
                 Fill = Brushes.Blue
             };
-            Canvas.SetLeft(playerRect, 3000);
-            Canvas.SetTop(playerRect, 2000);
+            Canvas.SetLeft(playerRect, 3100);
+            Canvas.SetTop(playerRect, 2100);
             gameCanvas.Children.Add(playerRect);
 
             playerPosition = new Point(Canvas.GetLeft(playerRect), Canvas.GetTop(playerRect));
             PreviewKeyDown += GameWindow_PreviewKeyDown;
+            testing_ERYK();
+
+
+            //inicjalizacja gameTimera
+            gameTimer.Interval = 16; //16 MILISEKUND
+            gameTimer.Elapsed += GameTick;
+            gameTimer.Start(); //od razu zaczyna timer gameTimer
+
+
+
         }
 
         private void ShootProjectile()
@@ -81,7 +85,6 @@ namespace Wizja
                 ShootProjectile();
             }
         }
-
         private void GameTick(object sender, ElapsedEventArgs e)
         {
             try
@@ -96,9 +99,27 @@ namespace Wizja
                     }
                     więc obiekt objectLoader ma na liście wszystkie elementy, które mają się poruszać.
                     */
+
+                    //Testowanie Przeciwników
+                    spawner.Spawn();
+                    spawner.MoveEveryOne(player.playerImage);
                 });
             }
             catch { }
+        }
+        private void testing_ERYK()
+        {
+            player = new Player(gameCanvas);
+            List<Point> enemiesSpawner = new List<Point>() { new Point(1500, 1000), new Point(1000, 1500), new Point(2000, 1500), new Point(1500, 2000) };
+            //    Spawner(int frequency, List<Point> enemiesSpawner, int rounds,int betweenRounds,Canvas gameScreen)
+            spawner = new Spawner(20, enemiesSpawner, 5, 200, gameCanvas);
+            List<int>[] enemyLists = new List<int>[5];
+            enemyLists[0] = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
+            enemyLists[1] = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
+            enemyLists[2] = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
+            enemyLists[3] = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
+            enemyLists[4] = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
+            spawner.GetEnemies(enemyLists);
         }
     }
 }

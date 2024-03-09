@@ -17,24 +17,25 @@ public class Enemy
     public int damagePoints;
     public int value;
     public double movingSpeed;
-    public Rectangle imageType;
+    public Rectangle enemyImage;
+    public bool isLiving = false; // True jężeli przeciwnik żyje oraz jest na mapie
     public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
     {
         this.helthPoints=helthPoints;
         this.damagePoints=damagePoints;
         this.value=value;
         this.movingSpeed=movingSpeed;
-        imageType = new Rectangle()
+        enemyImage = new Rectangle()
         {
-            Width = 32,
-            Height = 32,
+            Width = 64,
+            Height = 64,
             Fill = new ImageBrush(imageSource)
         };
-        imageType.RenderTransformOrigin =  new Point(0.5, 0.5);
+        enemyImage.RenderTransformOrigin =  new Point(0.5, 0.5);
     }
     public bool IsColision(Rect secondObject)
     {
-        Rect hitbox = new Rect(Canvas.GetLeft(imageType), Canvas.GetTop(imageType), imageType.Width, imageType.Height);
+        Rect hitbox = new Rect(Canvas.GetLeft(enemyImage), Canvas.GetTop(enemyImage), enemyImage.Width, enemyImage.Height);
         if (hitbox.IntersectsWith(secondObject))
             return true;
         else
@@ -46,21 +47,24 @@ public class Enemy
     {
         helthPoints -= takenDamage;
         if (helthPoints > 0)
-            return false;
+        {
+            return !isLiving; //True jeżeli żyje
+        }
         else
         {
             //Map.AddCoins(money);
-            return true;
+            isLiving = false;//False jeżeli nie
+            return !isLiving;
         }
     }
     public void Follow(Rectangle playerLocation) 
     {
-        double x = Canvas.GetLeft(imageType);
-        double y = Canvas.GetTop(imageType);
+        double x = Canvas.GetLeft(enemyImage);
+        double y = Canvas.GetTop(enemyImage);
         double dx = Canvas.GetLeft(playerLocation) - x;
         double dy = Canvas.GetTop(playerLocation) - y;
         double distance = Math.Sqrt(dx * dx + dy * dy);
-        if (distance >= 0)
+        if (distance >= 40)
         {
             // Calculate normalized direction vector
             double dirX = dx / distance;
@@ -69,8 +73,8 @@ public class Enemy
             // Move the projectile towards the target
             x += dirX * movingSpeed;
             y += dirY * movingSpeed;
-            Canvas.SetLeft(imageType, x);
-            Canvas.SetTop(imageType, y);
+            Canvas.SetLeft(enemyImage, x);
+            Canvas.SetTop(enemyImage, y);
         }
     }
 }
