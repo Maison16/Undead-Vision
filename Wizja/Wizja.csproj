@@ -12,6 +12,7 @@
     <None Remove="res\armor.png" />
     <None Remove="res\background1.png" />
     <None Remove="res\chapel.png" />
+    <None Remove="res\coinIcon.png" />
     <None Remove="res\familyguy.png" />
     <None Remove="res\FastZombie.png" />
     <None Remove="res\fenceFlipped.png" />
@@ -20,6 +21,7 @@
     <None Remove="res\flashlight.png" />
     <None Remove="res\grandcross.png" />
     <None Remove="res\ground.png" />
+    <None Remove="res\hpIcon.png" />
     <None Remove="res\hppotion.jpg" />
     <None Remove="res\HPpotion.png" />
     <None Remove="res\m4.png" />
@@ -39,6 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="res\coinIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\fenceFlipped.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -93,6 +98,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\FastZombie.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\hpIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\shopClosed.png">

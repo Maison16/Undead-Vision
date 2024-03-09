@@ -33,7 +33,7 @@ namespace Wizja.classes
 
         {
             healthPoints = 100;
-            movingSpeed = 3.5;
+            movingSpeed = 20;
             this.hud = hud;
             this.obstacles = obstacles;
             this.allEnemies = allEnemies;

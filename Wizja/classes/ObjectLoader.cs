@@ -28,7 +28,7 @@ namespace Wizja.classes
 
         public ObjectLoader(Canvas GameCanvas)
         {
-            sanctuaryImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
+            sanctuaryImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/chapel.png"));
             tombstoneImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             grandCrossImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
@@ -41,12 +41,11 @@ namespace Wizja.classes
         public void LoadMap()
         {
             BuildMap(backgroundImage);
-            //BuildConstrution(0, 0, metalFenceImage, 6000, 20);
-            //BuildConstrution(5980, 0, metalFenceImage, 20, 4000);
-            //BuildConstrution(0, 0, metalFenceImage, 20, 4000);
-            //BuildConstrution(0, 3980, metalFenceImage, 6000, 20);
             BuildFences();
-            BuildConstrution(2800, 1750, grandCrossImage, 80, 100); //6000:4000
+            BuildConstrution(300, 800, sanctuaryImage, 200, 300);
+            BuildConstrution(3800, 2750, sanctuaryImage, 200, 300);
+            BuildConstrution(4800, 2000, sanctuaryImage, 200, 300);
+
         }
 
         private void BuildMap(ImageBrush imageBrush)
