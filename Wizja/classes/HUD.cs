@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -71,25 +72,7 @@ namespace Wizja.classes
             Canvas.SetLeft(moneyLabel, 1500);
             Canvas.SetTop(moneyLabel, 15);
             statCanvas.Children.Add(moneyLabel);
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1000); 
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            time--;
-            TimeLabelSet();
-            if (time == 0)
-            {
-                NearShopHide();
-                timer.Stop();
-            }
-
-        }
-        private void NearShopShow()
-        {
             nearBox = new Rectangle
             {
                 Width = 200,
@@ -110,11 +93,32 @@ namespace Wizja.classes
             Canvas.SetTop(nearLabel, 980);
             statCanvas.Children.Add(nearLabel);
 
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(1000); 
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
-        private void NearShopHide()
+
+        private void Timer_Tick(object sender, EventArgs e)
         {
-            statCanvas.Children.Remove(nearLabel);
-            statCanvas.Children.Remove(nearBox);
+            time--;
+            TimeLabelSet();
+            if (time == 0)
+            {
+                timer.Stop();
+            }
+
+        }
+        public void NearShopShow()
+        {
+            nearBox.Visibility = Visibility.Visible;
+            nearLabel.Visibility = Visibility.Visible;
+
+        }
+        public void NearShopHide()
+        {
+            nearBox.Visibility = Visibility.Hidden;
+            nearLabel.Visibility = Visibility.Hidden;
         }
         public int GetHp()
         {

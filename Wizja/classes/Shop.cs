@@ -8,49 +8,74 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using Wizja.Enemies;
 
 namespace Wizja.classes
 {
     public class Shop
     {
+        private Player player;
         private Canvas shopCanvas;
         private Canvas gameCanvas;
         private HUD hud;
         private ObjectLoader objectLoader;
         private ImageBrush shopImage;
         private Rectangle shopBuild;
+        private Rect shopRange;
+        private Rect playerHitBox;
         private List<Rectangle> listMapObjects;
         private List<Rectangle> listHitObjects;
+        public DispatcherTimer timerShopCheck;
         // Konstruktor pobiera Canvas i hud (money)
         public Shop(Canvas gameCanvas, Canvas shopCanvas, HUD hud)
         {
+            this.player= player;
             this.gameCanvas = gameCanvas;
             this.shopCanvas = shopCanvas;
             this.hud = hud;
-            objectLoader= new ObjectLoader(gameCanvas);
+            timerShopCheck = new DispatcherTimer();
+            timerShopCheck.Interval = TimeSpan.FromMilliseconds(16);
+            timerShopCheck.Tick += NearChecker;
+            objectLoader = new ObjectLoader(gameCanvas);
             shopImage = new ImageBrush();
             listMapObjects = objectLoader.GetListMapObjects();
             listHitObjects = objectLoader.GetListMovingObjects();
+            shopBuild = objectLoader.BuildShop(3000, 1700, shopImage, 400, 300);
+            listMapObjects.Add(shopBuild);
+            listHitObjects.Add(shopBuild);
             ShopIsOpen();
+            gameCanvas.Children.Add(shopBuild);
+        }
+        public void initPlayer(Player player)
+        {
+            this.player = player;
+        }
+        private void NearChecker(object sender, EventArgs e)
+        {
+            shopRange = new Rect(Canvas.GetLeft(shopBuild), Canvas.GetTop(shopBuild), shopBuild.Width, shopBuild.Height);
+            playerHitBox = new Rect(Canvas.GetLeft(player.playerImage), Canvas.GetTop(player.playerImage), player.playerImage.Width, player.playerImage.Height);
+            if (playerHitBox.IntersectsWith(shopRange))
+            {
+                hud.NearShopShow();
+                ShopIsOpen();
+            }
+            else
+            {
+                hud.NearShopHide();
+                ShopIsClose();
+            }
         }
 
         public void ShopIsClose()
         {
             shopImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/shopClosed.png"));
-            gameCanvas.Children.Remove(shopBuild);
-            shopBuild = objectLoader.BuildShop(3000, 1700, shopImage, 400, 300);
-            listMapObjects.Add(shopBuild);
-            listHitObjects.Add(shopBuild);
-            gameCanvas.Children.Add(shopBuild);
+            shopBuild.Fill= shopImage;
         }
         public void ShopIsOpen()
         {
             shopImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/shopOpen.png"));
-            gameCanvas.Children.Remove(shopBuild);
-            shopBuild = objectLoader.BuildShop(3000, 1700, shopImage, 400, 300);
-            listMapObjects.Add(shopBuild);
-            listHitObjects.Add(shopBuild);
-            gameCanvas.Children.Add(shopBuild);
+            shopBuild.Fill = shopImage;
         }
         // Pokazywnaie Sklepu
         public void ShowShop()
