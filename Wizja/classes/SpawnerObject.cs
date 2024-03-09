@@ -16,7 +16,6 @@ namespace Wizja.classes
                 Width = 32,
                 Height = 32,
                 Name = "SpawnerObject",
-                Fill = Brushes.White
             };
             Canvas.SetLeft(place, placeToSpawn.X);
             Canvas.SetTop(place, placeToSpawn.Y);
@@ -28,7 +27,7 @@ namespace Wizja.classes
             double y = Canvas.GetTop(place);
             double dx = Canvas.GetLeft(player) - x;
             double dy = Canvas.GetTop(player) - y;
-            double distance = Math.Sqrt(dx * dx + dy * dy);
+            double distance = Math.Sqrt((dx * dx + dy * dy));
             return distance;
         }
     }
