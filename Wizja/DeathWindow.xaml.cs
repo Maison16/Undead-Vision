@@ -25,12 +25,17 @@ namespace Wizja
         {
             this.hud = hud;
             InitializeComponent();
+            var deathBackground = new ImageBrush();
+            deathBackground.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/menu/menuBackground.png"));
+            deathCanvas.Background = deathBackground;
+            
             Label score = new Label();
             score.Content = "Score: " + hud.totalPoints.ToString();
-            score.FontSize = 36;
+            score.FontSize = 82;
             score.FontWeight = FontWeights.Bold;
-            Canvas.SetLeft(score, 920);
-            Canvas.SetTop(score, 350);
+            score.Foreground = Brushes.White;
+            Canvas.SetLeft(score, 800);
+            Canvas.SetTop(score, 450);
             deathCanvas.Children.Add(score);
         }
         private void closeWindow(object sender, RoutedEventArgs e)

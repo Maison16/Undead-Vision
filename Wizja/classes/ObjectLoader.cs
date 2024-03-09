@@ -32,18 +32,18 @@ namespace Wizja.classes
             treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             grandCrossImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             metalFenceImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fence.png"));
-            backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/background1.png"));
+            backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/ground.png"));
             gameCanvas = GameCanvas;
             LoadMap();
         }
         public void LoadMap()
         {
             BuildMap(backgroundImage);
-            BuildConstrution(0, 0, metalFenceImage, 6000, 10);
-            BuildConstrution(6000, 0, metalFenceImage, 10, 4000);
-            BuildConstrution(6000, 4000, metalFenceImage, 6000, 10);
-            BuildConstrution(0, 4000, metalFenceImage, 10, 4000);
-            BuildConstrution(2800, 1750, grandCrossImage, 80, 100);
+            BuildConstrution(0, 0, metalFenceImage, 6000, 20);
+            BuildConstrution(5980, 0, metalFenceImage, 20, 4000);
+            BuildConstrution(0, 0, metalFenceImage, 20, 4000);
+            BuildConstrution(0, 3980, metalFenceImage, 6000, 20);
+            BuildConstrution(2800, 1750, grandCrossImage, 80, 100); //6000:4000
         }
 
         private void BuildMap(ImageBrush imageBrush)
@@ -58,6 +58,18 @@ namespace Wizja.classes
             Canvas.SetTop(build, 0);
             movingObjects.Add(build);
             gameCanvas.Children.Add(build);
+        }
+        public Rectangle BuildShop(int leftPossition, int topPossition, ImageBrush imageBrush, int width, int height)
+        {
+            Rectangle build = new Rectangle
+            {
+                Width = width,
+                Height = height,
+                Fill = imageBrush
+            };
+            Canvas.SetLeft(build, leftPossition);
+            Canvas.SetTop(build, topPossition);
+            return build;
         }
 
         public void BuildConstrution(int leftPossition, int topPossition, ImageBrush imageBrush,int width, int height)

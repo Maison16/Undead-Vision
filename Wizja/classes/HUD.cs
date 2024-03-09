@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -20,6 +21,8 @@ namespace Wizja.classes
         private Label moneyLabel;
         private Label hpLabel;
         private Label timeLabel;
+        private Label nearLabel;
+        private Rectangle nearBox;
         public int totalPoints;
 
 
@@ -52,7 +55,7 @@ namespace Wizja.classes
 
             timeLabel = new Label
             {
-                Content = $"Time: {time}",
+                Content = $"Time: {time}s",
                 FontSize = 50,
                 Foreground = Brushes.Gold
             };
@@ -69,6 +72,27 @@ namespace Wizja.classes
             Canvas.SetLeft(moneyLabel, 1500);
             Canvas.SetTop(moneyLabel, 15);
             statCanvas.Children.Add(moneyLabel);
+
+            nearBox = new Rectangle
+            {
+                Width = 200,
+                Height = 100,
+                Fill = Brushes.DarkRed
+            };
+            Canvas.SetLeft(nearBox, 1720);
+            Canvas.SetTop(nearBox, 980);
+            statCanvas.Children.Add(nearBox);
+            nearLabel = new Label
+            {
+                Content = $"  You are\n" +
+                $"near shop!",
+                FontSize = 32,
+                Foreground = Brushes.Gold
+            };
+            Canvas.SetLeft(nearLabel, 1750);
+            Canvas.SetTop(nearLabel, 980);
+            statCanvas.Children.Add(nearLabel);
+
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(1000); 
             timer.Tick += Timer_Tick;
@@ -85,7 +109,17 @@ namespace Wizja.classes
             }
 
         }
+        public void NearShopShow()
+        {
+            nearBox.Visibility = Visibility.Visible;
+            nearLabel.Visibility = Visibility.Visible;
 
+        }
+        public void NearShopHide()
+        {
+            nearBox.Visibility = Visibility.Hidden;
+            nearLabel.Visibility = Visibility.Hidden;
+        }
         public int GetHp()
         {
             return hp;
@@ -134,7 +168,7 @@ namespace Wizja.classes
         }
         private void TimeLabelSet()
         {
-            timeLabel.Content = $"Time: {time}";
+            timeLabel.Content = $"Time: {time}s";
         }
         private void HpLabelSet()
         {
