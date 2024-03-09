@@ -18,7 +18,7 @@ namespace Wizja.classes.guns
     public class M4 : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/m4.png"));
-        public M4() : base("M4A1", 1, 700, 200, img) { }
+        public M4() : base("Gun2", 1, 700, 200, img) { }
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
