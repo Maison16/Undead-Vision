@@ -26,5 +26,6 @@ namespace Wizja
             HUD hud= new HUD(100, 30, 300, statCanvas);
             ObjectLoader objectLoader=new ObjectLoader(gameCanvas);
         }
+       
     }
 }
