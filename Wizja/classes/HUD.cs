@@ -20,6 +20,8 @@ namespace Wizja.classes
         private Label moneyLabel;
         private Label hpLabel;
         private Label timeLabel;
+        private Label nearLabel;
+        private Rectangle nearBox;
         public int totalPoints;
 
 
@@ -52,7 +54,7 @@ namespace Wizja.classes
 
             timeLabel = new Label
             {
-                Content = $"Time: {time}",
+                Content = $"Time: {time}s",
                 FontSize = 50,
                 Foreground = Brushes.Gold
             };
@@ -81,11 +83,39 @@ namespace Wizja.classes
             TimeLabelSet();
             if (time == 0)
             {
+                NearShopHide();
                 timer.Stop();
             }
 
         }
+        private void NearShopShow()
+        {
+            nearBox = new Rectangle
+            {
+                Width = 200,
+                Height = 100,
+                Fill = Brushes.DarkRed
+            };
+            Canvas.SetLeft(nearBox, 1720);
+            Canvas.SetTop(nearBox, 980);
+            statCanvas.Children.Add(nearBox);
+            nearLabel = new Label
+            {
+                Content = $"  You are\n" +
+                $"near shop!",
+                FontSize = 32,
+                Foreground = Brushes.Gold
+            };
+            Canvas.SetLeft(nearLabel, 1750);
+            Canvas.SetTop(nearLabel, 980);
+            statCanvas.Children.Add(nearLabel);
 
+        }
+        private void NearShopHide()
+        {
+            statCanvas.Children.Remove(nearLabel);
+            statCanvas.Children.Remove(nearBox);
+        }
         public int GetHp()
         {
             return hp;
@@ -134,7 +164,7 @@ namespace Wizja.classes
         }
         private void TimeLabelSet()
         {
-            timeLabel.Content = $"Time: {time}";
+            timeLabel.Content = $"Time: {time}s";
         }
         private void HpLabelSet()
         {
