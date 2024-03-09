@@ -79,6 +79,7 @@ namespace Wizja
         private void testing_ERYK()
         {
             player = new Player(gameCanvas, hud);
+            player.MouseMoveHandler(gameCanvas);
             List<Point> enemiesSpawner = new List<Point>() { new Point(4000, 1500), new Point(4000, 2500), new Point(2000, 1500), new Point(2000, 2500) };
             int[][] enemyLists = new int[5][];
 
