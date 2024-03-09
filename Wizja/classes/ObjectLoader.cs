@@ -15,7 +15,7 @@ namespace Wizja.classes
 {
     public class ObjectLoader
     {
-        static private List<Rectangle> mapObjects = new List<Rectangle>();
+        static private List<Rectangle> hitObjects = new List<Rectangle>();
         static private List<Rectangle> movingObjects = new List<Rectangle>();
         static private Canvas gameCanvas;
         private ImageBrush sanctuary = new ImageBrush();
@@ -71,13 +71,28 @@ namespace Wizja.classes
             Canvas.SetLeft(build, leftPossition);
             Canvas.SetTop(build, topPossition);
             movingObjects.Add(build);
-            mapObjects.Add(build);
+            hitObjects.Add(build);
             gameCanvas.Children.Add(build);
+        }
+        public void SetListMapObjects(List<Rectangle> rectangles)
+        {
+            foreach (Rectangle temp in rectangles)
+            {
+                hitObjects.Add(temp);
+            }
+        }
+
+        public void SetListMovingObjects(List<Rectangle> rectangles)
+        {
+            foreach (Rectangle temp in rectangles)
+            {
+                movingObjects.Add(temp);
+            }
         }
 
         public List<Rectangle> GetListMapObjects()
         {
-            return mapObjects;
+            return hitObjects;
         }
         public List<Rectangle> GetListMovingObjects()
         {
