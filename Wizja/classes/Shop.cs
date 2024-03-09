@@ -122,11 +122,11 @@ namespace Wizja.classes
         }
         // przykładowe bronie - do wyrzucenia potem !!!
         List<Weapon> weaponList = new List<Weapon>{
-            new Weapon("gun", 20, 10, 100, new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"))),
-            new Weapon("better gun", 30, 20, 200, new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"))),
-            new Weapon("good gun", 40, 30, 300,new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"))),
-            new Weapon("excellent gun", 50, 40, 400,new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"))),
-            new Weapon("family guy", 60, 50, 500,new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png")))
+            new Weapon("pistol", 20, 10, 100, new BitmapImage(new Uri("pack://application:,,,/res/pistol.png"))),
+            new Weapon("shothun", 30, 20, 200, new BitmapImage(new Uri("pack://application:,,,/res/shotgun.png"))),
+            new Weapon("smg", 40, 30, 300,new BitmapImage(new Uri("pack://application:,,,/res/smg.png"))),
+            new Weapon("m4", 50, 40, 400,new BitmapImage(new Uri("pack://application:,,,/res/m4.png"))),
+            new Weapon("family guy", 60, 50, 500,new BitmapImage(new Uri("pack://application:,,,/res/familyguy.png")))
         };
         //////////////////////////////////// DO USUNIĘCIA TYLKO TEST /\ /\ /\
 
@@ -140,11 +140,11 @@ namespace Wizja.classes
                 var w = weaponList[i];
 
                 Rectangle rec = new Rectangle();
-                rec.Height = 64;
-                rec.Width = 64;
+                rec.Height = 128;
+                rec.Width = 128;
                 ImageBrush imgB = new ImageBrush(w.img);
                 rec.Fill = imgB;
-                Canvas.SetLeft(rec, 120);
+                Canvas.SetLeft(rec, 60);
                 Canvas.SetTop(rec, 150 + i * 110);
                 shopCanvas.Children.Add(rec);
 
@@ -193,7 +193,7 @@ namespace Wizja.classes
             }
         }
 
-        // Odejmowanie pieniędzy z hudu
+        // Odejmowanie pieniędzy z hudu tylko kupywanie broni
         private void Buy(Weapon w) 
         {
             hud.ChangeMoney(w.cost * -1);
@@ -202,10 +202,145 @@ namespace Wizja.classes
             ShowShop();
         }
 
+        int[] usedArmor = {1,0,0};
         // Sklep z armorem
         private void armorShop()
-        {
-           
+        {   
+            //hp potions
+            for(int i=1; i <= 3; i++)
+            {
+                int amount = (int)Math.Pow(2, i - 1);
+                Rectangle rec = new Rectangle();
+                rec.Height = 128;
+                rec.Width = 128;
+                ImageBrush imgB = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/res/HPpotion.png")));
+                rec.Fill = imgB;
+                Canvas.SetLeft(rec, 960);
+                Canvas.SetTop(rec, 40 + i * 110);
+                shopCanvas.Children.Add(rec);
+
+                Label lblUp = new Label();
+                lblUp.Content = 25 * amount + " HP potion";
+                lblUp.FontSize = 36;
+                lblUp.FontWeight = FontWeights.Bold;
+                Canvas.SetLeft(lblUp, 1100);
+                Canvas.SetTop(lblUp, 40 + i * 110);
+                shopCanvas.Children.Add(lblUp);
+
+                Label lblDown = new Label();
+                lblDown.Content = "heals "+ 25 * amount + " player's HP";
+                lblDown.FontSize = 24;
+                lblDown.FontWeight = FontWeights.Bold;
+                Canvas.SetLeft(lblDown, 1110);
+                Canvas.SetTop(lblDown, 80 + i * 110);
+                shopCanvas.Children.Add(lblDown);
+
+                Button buyButton = new Button();
+                buyButton.Content = 75 * amount + "";
+                buyButton.FontSize = 24;
+                buyButton.FontWeight = FontWeights.Bold;
+                buyButton.Width = 100;
+                buyButton.Height = 40;
+                buyButton.Background = Brushes.Gray;
+                buyButton.Foreground = Brushes.White;
+                buyButton.BorderBrush = Brushes.Black;
+                buyButton.BorderThickness = new Thickness(3);
+                Canvas.SetLeft(buyButton, 1400);
+                Canvas.SetTop(buyButton, 55 + i * 110);
+                // jak player wchodząc do sklepu ma 100 hp nie może kupić potionów
+                //if (hud.GetHp() >= 100)
+                //{
+                //    buyButton.Background = Brushes.Maroon;
+                //}
+                //else if (hud.GetMoney() >= 150)
+                if (hud.GetMoney() >= i*75)
+                {
+                    buyButton.Background = Brushes.Green;
+                    buyButton.Click += buyClick;
+                }
+                void buyClick(object sender, RoutedEventArgs e)
+                {
+                    if (hud.GetHp() + 25 * amount > 100)
+                    {
+                        hud.SetHp(100);
+                    }
+                    else
+                    {
+                        hud.SetHp(hud.GetHp() + 25 * amount);
+                    }
+                    hud.ChangeMoney(75 * amount * -1);
+                    shopCanvas.Children.Clear();
+                    ShowShop();
+                }
+                shopCanvas.Children.Add(buyButton);
+            }
+
+
+            if (hud.GetHp() <= 125)
+                usedArmor[2] = 0;
+            if (hud.GetHp() <= 100)
+                usedArmor[1] = 0;
+
+            //armors
+            for (int j = 1; j <= 2; j++)
+            {
+                int amount = j;
+                Rectangle rec = new Rectangle();
+                rec.Height = 128;
+                rec.Width = 128;
+                ImageBrush imgB = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/res/armor.png")));
+                rec.Fill = imgB;
+                Canvas.SetLeft(rec, 960);
+                Canvas.SetTop(rec, 370 + amount * 110);
+                shopCanvas.Children.Add(rec);
+
+                Label lblUp = new Label();
+                lblUp.Content = 25 * amount + " Armor";
+                lblUp.FontSize = 36;
+                lblUp.FontWeight = FontWeights.Bold;
+                Canvas.SetLeft(lblUp, 1100);
+                Canvas.SetTop(lblUp, 370 + amount * 110);
+                shopCanvas.Children.Add(lblUp);
+
+                Label lblDown = new Label();
+                lblDown.Content = "adds " + 25 * amount + " player's HP";
+                lblDown.FontSize = 24;
+                lblDown.FontWeight = FontWeights.Bold;
+                Canvas.SetLeft(lblDown, 1110);
+                Canvas.SetTop(lblDown, 410 + amount * 110);
+                shopCanvas.Children.Add(lblDown);
+
+                Button buyButton = new Button();
+                buyButton.Content = 100 * amount + "";
+                buyButton.FontSize = 24;
+                buyButton.FontWeight = FontWeights.Bold;
+                buyButton.Width = 100;
+                buyButton.Height = 40;
+                buyButton.Background = Brushes.Gray;
+                buyButton.Foreground = Brushes.White;
+                buyButton.BorderBrush = Brushes.Black;
+                buyButton.BorderThickness = new Thickness(3);
+                Canvas.SetLeft(buyButton, 1400);
+                Canvas.SetTop(buyButton, 385 + amount * 110);
+                if (usedArmor[amount] == 1)
+                {
+                    buyButton.Background = Brushes.Maroon;
+                }
+                else if (hud.GetMoney() >= amount * 100)
+                {
+                    buyButton.Background = Brushes.Green;
+                    buyButton.Click += buyClick;
+                }
+                void buyClick(object sender, RoutedEventArgs e)
+                {
+                    hud.SetHp(hud.GetHp() + 25 * amount);
+                    hud.ChangeMoney(-1 * amount * 100);
+                    usedArmor[amount] = 1;
+                    shopCanvas.Children.Clear();
+                    ShowShop();
+                }
+                shopCanvas.Children.Add(buyButton);
+            }
         }
 
         //Ukrywanie Sklepu
