@@ -18,11 +18,11 @@ namespace Wizja.classes.guns
     public class BaseGunAuto : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/smg.png"));
-        public BaseGunAuto() : base("SMG", 1, 400, 200, img) { }
+        public BaseGunAuto() : base("SMG", 3, 400, 300, img) { }
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
-            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 5, 400, 10, targets, enemies, gameCanvas);
+            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 2, 400, 3, targets, enemies, gameCanvas);
         }
     }
 }
