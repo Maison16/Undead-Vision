@@ -49,6 +49,8 @@ namespace Wizja
 
             playerPosition = new Point(Canvas.GetLeft(playerRect), Canvas.GetTop(playerRect));
             PreviewKeyDown += GameWindow_PreviewKeyDown;
+           
+            
             testing_ERYK();
 
 
@@ -102,7 +104,7 @@ namespace Wizja
 
                     //Testowanie Przeciwników
                     spawner.Spawn();
-                    spawner.MoveEveryOne(player.playerImage);
+                    spawner.MoveEveryOne(player);
                 });
             }
             catch { }
@@ -110,16 +112,20 @@ namespace Wizja
         private void testing_ERYK()
         {
             player = new Player(gameCanvas);
-            List<Point> enemiesSpawner = new List<Point>() { new Point(1500, 1000), new Point(1000, 1500), new Point(2000, 1500), new Point(1500, 2000) };
-            //    Spawner(int frequency, List<Point> enemiesSpawner, int rounds,int betweenRounds,Canvas gameScreen)
-            spawner = new Spawner(20, enemiesSpawner, 5, 200, gameCanvas);
-            List<int>[] enemyLists = new List<int>[5];
-            enemyLists[0] = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
-            enemyLists[1] = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
-            enemyLists[2] = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
-            enemyLists[3] = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
-            enemyLists[4] = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
-            spawner.GetEnemies(enemyLists);
+            List<Point> enemiesSpawner = new List<Point>() { new Point(4000, 1500), new Point(4000, 2500), new Point(2000, 1500), new Point(2000, 2500) };
+            //Spawner(List<Point> enemiesSpawner, int rounds,int betweenRounds,Canvas gameScreen)
+            spawner = new Spawner(enemiesSpawner, 5, 1000, gameCanvas,player);
+            int[][] enemyLists = new int[5][];
+            enemyLists[0] = new int[] { 75, 25, 0, 0};
+            enemyLists[1] = new int[] { 60, 35, 15, 0 };
+            enemyLists[2] = new int[] { 40, 35, 25, 0 };
+            enemyLists[3] = new int[] { 25, 35, 25, 5 };
+            enemyLists[4] = new int[] { 10, 35, 25, 20 };
+            spawner.GenerateEnemies(enemyLists[0], 10, 0, 105);
+            spawner.GenerateEnemies(enemyLists[1], 20, 1, 85);
+            spawner.GenerateEnemies(enemyLists[2], 40, 2, 75);
+            spawner.GenerateEnemies(enemyLists[3], 60, 3, 65);
+            spawner.GenerateEnemies(enemyLists[4], 100, 4, 55);
         }
     }
 }

@@ -12,14 +12,14 @@ namespace Wizja.classes
 {
     public class Player
     {
-        public int helthPoints;
+        private int healthPoints;
         public double movingSpeed;
         public Rectangle playerImage;
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
 
         public Player(Canvas gameCanvas) 
         {
-            helthPoints = 100;
+            healthPoints = 100;
             movingSpeed = 25;
             playerImage = new Rectangle()
             {
@@ -31,6 +31,10 @@ namespace Wizja.classes
             Canvas.SetTop(playerImage,  2000);
             gameCanvas.Children.Add(playerImage);
             playerImage.RenderTransformOrigin = new Point(0.5, 0.5);
+        }
+        public void TakeDamage(int damage) 
+        {
+            healthPoints -= damage;
         }
     }
 }
