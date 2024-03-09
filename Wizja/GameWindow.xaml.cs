@@ -33,18 +33,8 @@ namespace Wizja
             //Tworzenie i otwieranie shop do testów
             Shop itemshop = new Shop(shopCanvas, hud);
             itemshop.ShowShop();
-            
-            playerPosition = new Point(Canvas.GetLeft(playerRect), Canvas.GetTop(playerRect));
-            PreviewKeyDown += GameWindow_PreviewKeyDown;
            
-            
             testing_ERYK();
-
-            Point endPoint = playerPosition + direction * 500; // 500 to range do zmiany 
-
-            // Stworz pocisk
-            weapon.Shoot(playerPosition, endPoint, objectLoader, gameCanvas);
-            //Projectile projectile = new Projectile(playerPosition.X, playerPosition.Y, endPoint.X, endPoint.Y, 2, objectLoader.GetListMapObjects(), gameCanvas);
         }
 
         private void GameTick(object sender, ElapsedEventArgs e)
