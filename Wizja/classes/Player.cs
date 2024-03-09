@@ -28,6 +28,11 @@ namespace Wizja.classes
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
         public static ImageSource flashLightSource = new BitmapImage(new Uri("pack://application:,,,/res/flashlight.png"));
         public HUD hud;
+
+        public void setWeapon(Weapon w)
+        {
+            this.weapon = w;
+        }
         public Player(Canvas gameCanvas, HUD hud, List<Rectangle> obstacles)
 
 

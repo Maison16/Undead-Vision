@@ -12,6 +12,7 @@
     <None Remove="res\armor.png" />
     <None Remove="res\background1.png" />
     <None Remove="res\chapel.png" />
+    <None Remove="res\clockIcon.png" />
     <None Remove="res\coinIcon.png" />
     <None Remove="res\familyguy.png" />
     <None Remove="res\FastZombie.png" />
@@ -41,6 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="res\clockIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\coinIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

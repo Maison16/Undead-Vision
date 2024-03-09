@@ -15,14 +15,14 @@ using Wizja.Enemies;
 
 namespace Wizja.classes.guns
 {
-    public class Shotgun : Weapon
+    public class M4 : Weapon
     {
-        public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/shotgun.png"));
-        public Shotgun() : base("Shotgun", 1, 200, 200, img) { }
+        public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/m4.png"));
+        public M4() : base("M4A1", 1, 700, 200, img) { }
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
-            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 2, 200, 10, targets, enemies, gameCanvas);
+            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 5, 700, 10, targets, enemies, gameCanvas);
         }
     }
 }

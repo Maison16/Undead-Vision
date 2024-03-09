@@ -14,11 +14,11 @@ namespace Wizja.classes
 
     public abstract class Weapon
     {
-        private string name { get; set; } // nazwa
-        private int dmg { get; set; } // ilosc obrazen
-        private double range { get; set; } // max zasieg wystrzeliwanego pocisku
-        private int cost { get; set; } // koszt w sklepie
-        private BitmapImage img { get; set; }
+        public string name { get; set; } // nazwa
+        public int dmg { get; set; } // ilosc obrazen
+        public double range { get; set; } // max zasieg wystrzeliwanego pocisku
+        public int cost { get; set; } // koszt w sklepie
+        public BitmapImage img { get; set; }
 
         public Weapon(string name, int dmg, double range, int cost, BitmapImage img)
         {
