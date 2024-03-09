@@ -72,11 +72,12 @@ namespace Wizja
         }
         private void testing_ERYK()
         {
-            player = new Player(gameCanvas, hud);
+            player = new Player(gameCanvas, hud, objectLoader.GetListMapObjects());
             player.MouseMoveHandler(gameCanvas);
             MovementHandler.initialize(player);
             List<Point> enemiesSpawner = new List<Point>() { new Point(4000, 1500), new Point(4000, 2500), new Point(2000, 1500), new Point(2000, 2500) };
             int[][] enemyLists = new int[5][];
+
 
             spawner = new Spawner(enemiesSpawner, 5, gameCanvas, player);
             enemyLists[0] = new int[] { 75, 25, 0, 0 };
@@ -89,6 +90,8 @@ namespace Wizja
             spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
             spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
             spawner.GenerateEnemies(enemyLists[4], 60, 4, 100);
+
+            player.SetAllEnemies(spawner.GetAllEnemies());
 
         }
 
@@ -165,6 +168,12 @@ namespace Wizja
         public bool getB()
         {
             return isBpressed;
+        }
+
+        private void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Pass the mouse click position to the player object to handle shooting
+            player.MouseLeftButtonDown(sender, e);
         }
     }
 }

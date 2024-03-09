@@ -10,17 +10,19 @@ using System.Security.Cryptography;
 using System.Windows.Controls;
 using System.Timers;
 using System.Windows;
+using System.Windows.Shapes;
+using Wizja.Enemies;
 
 namespace Wizja.classes.guns
 {
     public class BaseGun : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/FastZombie.png"));
-        public BaseGun() : base("Gun1", 1, 250, 0, img) { }
+        public BaseGun() : base("Gun1", 1, 250, 10, img) { }
 
-        public override void Shoot(Point playerPos, Point endPoint, ObjectLoader objectLoader, Canvas gameCanvas)
+        public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
-            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, endPoint.X, endPoint.Y, 2, objectLoader.GetListMapObjects(), gameCanvas);
+            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 2, 300, 10, targets, enemies, gameCanvas);
         }
     }
 }
