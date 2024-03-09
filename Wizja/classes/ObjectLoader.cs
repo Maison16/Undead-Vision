@@ -16,6 +16,7 @@ namespace Wizja.classes
     public class ObjectLoader
     {
         static private List<Rectangle> mapObjects = new List<Rectangle>();
+        static private List<Rectangle> movingObjects = new List<Rectangle>();
         static private Canvas gameCanvas;
         private ImageBrush sanctuary = new ImageBrush();
         private ImageBrush tombstone = new ImageBrush();
@@ -37,12 +38,26 @@ namespace Wizja.classes
         }
         public void LoadMap()
         {
+            BuildMap(backgroundImage);
             BuildConstrution(0, 0, metalFence, 6000, 10);
             BuildConstrution(6000, 0, metalFence, 10, 4000);
             BuildConstrution(6000, 4000, metalFence, 6000, 10);
             BuildConstrution(0, 4000, metalFence, 10, 4000);
-            //BuildConstrution(0, 0, backgroundImage, 6000, 4000);
             BuildConstrution(3000, 1700, grandCross, 80, 100);
+        }
+
+        private void BuildMap(ImageBrush imageBrush)
+        {
+            Rectangle build = new Rectangle
+            {
+                Width = gameCanvas.Width,
+                Height = gameCanvas.Height,
+                Fill = imageBrush
+            };
+            Canvas.SetLeft(build, 0);
+            Canvas.SetTop(build, 0);
+            movingObjects.Add(build);
+            gameCanvas.Children.Add(build);
         }
 
         static private void BuildConstrution(int leftPossition, int topPossition, ImageBrush imageBrush,int width, int height)
@@ -55,13 +70,18 @@ namespace Wizja.classes
             };
             Canvas.SetLeft(build, leftPossition);
             Canvas.SetTop(build, topPossition);
+            movingObjects.Add(build);
             mapObjects.Add(build);
             gameCanvas.Children.Add(build);
         }
 
-        public List<Rectangle> GetList()
+        public List<Rectangle> GetListMapObjects()
         {
             return mapObjects;
+        }
+        public List<Rectangle> GetListMovingObjects()
+        {
+            return movingObjects;
         }
     }
 }

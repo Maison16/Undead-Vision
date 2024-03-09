@@ -70,7 +70,7 @@ namespace Wizja
             Point endPoint = playerPosition + direction * 500; // 500 to range do zmiany 
 
             // Stworz pocisk
-            Projectile projectile = new Projectile(playerPosition.X, playerPosition.Y, endPoint.X, endPoint.Y, 2, objectLoader.GetList(), gameCanvas);
+            Projectile projectile = new Projectile(playerPosition.X, playerPosition.Y, endPoint.X, endPoint.Y, 2, objectLoader.GetListMapObjects(), gameCanvas);
         }
 
         // cosik do klikania 
@@ -86,7 +86,14 @@ namespace Wizja
         {
             gameCanvas.Dispatcher.Invoke(() =>
             {
-
+                //tutaj pisz SEBA
+                /*w object loader masz:
+                public List<Rectangle> GetListMovingObjects()
+                {
+                    return movingObjects;
+                }
+                więc obiekt objectLoader ma na liście wszystkie elementy, które mają się poruszać.
+                */
             });
         }
     }
