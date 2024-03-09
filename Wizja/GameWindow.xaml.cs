@@ -31,7 +31,7 @@ namespace Wizja
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
             
-            hud = new HUD(100, 30, 50, statCanvas);
+            hud = new HUD(100, 10, 50, statCanvas);
             //Tworzenie shop
             itemshop = new Shop(gameCanvas, shopCanvas, hud, this);
 
