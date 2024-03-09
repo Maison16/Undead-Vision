@@ -21,6 +21,7 @@
     <None Remove="res\HPpotion.png" />
     <None Remove="res\m4.png" />
     <None Remove="res\menu\biglogo.png" />
+    <None Remove="res\menu\creator.png" />
     <None Remove="res\menu\logo.png" />
     <None Remove="res\menu\menuBackground.png" />
     <None Remove="res\pistol.png" />
@@ -43,6 +44,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\menu\biglogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\menu\creator.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\menu\menuBackground.png">

@@ -47,10 +47,14 @@ namespace Wizja
         }
         private void gotoManual(object sender, RoutedEventArgs e)
         {
+            Manual manual = new Manual();
+            manual.Show();
             this.Close();
         }
         private void gotoCreators(object sender, RoutedEventArgs e)
         {
+            Creators creators= new Creators();
+            creators.Show();
             this.Close();
         }
         private void gotoExit(object sender, RoutedEventArgs e)
