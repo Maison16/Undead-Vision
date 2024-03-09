@@ -23,7 +23,7 @@ namespace Wizja.classes
         public Player(Canvas gameCanvas, HUD hud)
         {
             healthPoints = 100;
-            movingSpeed = 3.5;
+            movingSpeed = 20;
             this.hud = hud;
             playerImage = new Rectangle()
             {

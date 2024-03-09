@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -23,8 +24,9 @@ namespace Wizja.classes
         private Label timeLabel;
         private Label nearLabel;
         private Rectangle nearBox;
+        private ImageBrush hpImage = new ImageBrush();
+        private ImageBrush coinImage = new ImageBrush();
         public int totalPoints;
-
 
         public HUD(int hp, int time, int money, Canvas statCanvas)
         {
@@ -42,34 +44,53 @@ namespace Wizja.classes
             Canvas.SetLeft(statBar, 0);
             Canvas.SetTop(statBar, 0);
             statCanvas.Children.Add(statBar);
-
+            hpImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/hpIcon.png"));
+            Rectangle hpIcon = new Rectangle
+            {
+                Width = 50,
+                Height = 50,
+                Fill = hpImage
+            };
+            Canvas.SetLeft(hpIcon, 50);
+            Canvas.SetTop(hpIcon, 30);
+            statCanvas.Children.Add(hpIcon);
             hpLabel = new Label
             {
-                Content = $"Hp: {hp}",
+                Content = $"{hp}",
                 FontSize = 50,
                 Foreground = Brushes.Gold
             };
-            Canvas.SetLeft(hpLabel, 50);
+            Canvas.SetLeft(hpLabel, 100);
             Canvas.SetTop(hpLabel, 15);
             statCanvas.Children.Add(hpLabel);
 
             timeLabel = new Label
             {
-                Content = $"Time: {time}s",
+                Content = $"{time}s",
                 FontSize = 50,
                 Foreground = Brushes.Gold
             };
-            Canvas.SetLeft(timeLabel, 850);
+            Canvas.SetLeft(timeLabel, 900);
             Canvas.SetTop(timeLabel, 15);
             statCanvas.Children.Add(timeLabel);
+            coinImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/coinIcon.png"));
+            Rectangle coinIcon = new Rectangle
+            {
+                Width = 50,
+                Height = 50,
+                Fill = coinImage
+            };
+            Canvas.SetLeft(coinIcon, 1650);
+            Canvas.SetTop(coinIcon, 30);
+            statCanvas.Children.Add(coinIcon);
 
             moneyLabel = new Label
             {
-                Content = $"Money: {money}",
+                Content = $"{money}",
                 FontSize = 50,
                 Foreground = Brushes.Gold
             };
-            Canvas.SetLeft(moneyLabel, 1500);
+            Canvas.SetLeft(moneyLabel, 1700);
             Canvas.SetTop(moneyLabel, 15);
             statCanvas.Children.Add(moneyLabel);
 
@@ -166,15 +187,15 @@ namespace Wizja.classes
         }
         private void TimeLabelSet()
         {
-            timeLabel.Content = $"Time: {time}s";
+            timeLabel.Content = $"{time}s";
         }
         private void HpLabelSet()
         {
-            hpLabel.Content = $"Hp: {hp}";
+            hpLabel.Content = $"{hp}";
         }
         private void MoneyLabelSet()
         {
-            moneyLabel.Content = $"Money: {money}";
+            moneyLabel.Content = $"{money}";
         }
     }
 }
