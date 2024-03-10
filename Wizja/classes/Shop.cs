@@ -43,7 +43,7 @@ namespace Wizja.classes
             shopImage = new ImageBrush();
             listMapObjects = objectLoader.GetListMapObjects();
             listHitObjects = objectLoader.GetListMovingObjects();
-            shopBuild = objectLoader.BuildShop(3000, 1700, shopImage, 400, 300);
+            shopBuild = objectLoader.BuildShop(3000, 1650, shopImage, 400, 300);
             listMapObjects.Add(shopBuild);
             listHitObjects.Add(shopBuild);
             ShopIsOpen();
