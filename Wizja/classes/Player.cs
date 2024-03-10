@@ -18,11 +18,16 @@ namespace Wizja.classes
         private List<Rectangle> obstacles;
         private List<Enemy> allEnemies;
         private Weapon weapon;
-        //public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
         public static ImageSource flashLightSource = new BitmapImage(new Uri("pack://application:,,,/res/flashlight.png"));
         public HUD hud;
         public int gameTick =0;
         //odtwarzanie  strzału
+        int isWalking = 0;
+        public TransformedBitmap rotatedPlayer = new TransformedBitmap();
+        public TransformedBitmap rotatedPlayer1 = new TransformedBitmap();
+        public TransformedBitmap rotatedPlayer2 = new TransformedBitmap();
+
+
         public SoundPlayer shoot;
 
         public void setWeapon(Weapon w)
@@ -42,12 +47,19 @@ namespace Wizja.classes
             this.allEnemies = allEnemies;
 
             // tutaj wczytuje obraz playera nasz nowy player to rotated player
-            TransformedBitmap rotatedPlayer = new TransformedBitmap();
+           
             rotatedPlayer.BeginInit();
             rotatedPlayer.Source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
             rotatedPlayer.Transform = new RotateTransform(-90);
             rotatedPlayer.EndInit();
-
+            rotatedPlayer1.BeginInit();
+            rotatedPlayer1.Source = new BitmapImage(new Uri("pack://application:,,,/res/PlayerWalk1.png"));
+            rotatedPlayer1.Transform = new RotateTransform(-90);
+            rotatedPlayer1.EndInit();
+            rotatedPlayer2.BeginInit();
+            rotatedPlayer2.Source = new BitmapImage(new Uri("pack://application:,,,/res/PlayerWalk2.png"));
+            rotatedPlayer2.Transform = new RotateTransform(-90);
+            rotatedPlayer2.EndInit();
             playerImage = new Rectangle()
             {
                 Width = 75,
@@ -100,10 +112,10 @@ namespace Wizja.classes
             Point mousePosition = e.GetPosition(gameCanvas);
             Point playerPosition = new Point(Canvas.GetLeft(flashLightImage) + flashLightImage.Width / 2, Canvas.GetTop(flashLightImage) + flashLightImage.Height / 2);
             double angle = Math.Atan2(mousePosition.Y - playerPosition.Y, mousePosition.X - playerPosition.X) * (180 / Math.PI);
-            RotateDarknes(angle);
+            RotateDarkness(angle);
             RotatePlayer(angle);
         }
-        private void RotateDarknes(double angle)
+        private void RotateDarkness(double angle)
         {
             flashLightImage.RenderTransformOrigin = new Point(0.5, 0.5);
             RotateTransform rotateTransform = new RotateTransform(angle);
