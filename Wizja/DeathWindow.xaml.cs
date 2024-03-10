@@ -41,6 +41,7 @@ namespace Wizja
 
             SoundPlayer deathSound = new SoundPlayer("sound/death.wav");
             deathSound.Play();
+
         }
         private void closeWindow(object sender, RoutedEventArgs e)
         {
