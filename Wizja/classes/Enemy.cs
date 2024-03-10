@@ -103,15 +103,29 @@ public class Enemy
     }
     public void BreakCollision(Rectangle obj, Canvas gameScreen, Rectangle playerLocation)
     {
-        Random rnd = new Random();
         double x = Canvas.GetLeft(enemyImage);
         double y = Canvas.GetTop(enemyImage);
         double dx;
         double dy;
+        double distance;
         double or_x = x;
         double or_y = y;
         double dirX;
         double dirY;
+        dx = Canvas.GetLeft(playerLocation) - x;
+        dy = Canvas.GetTop(playerLocation) - y;
+        distance = Math.Sqrt(dx * dx + dy * dy);
+        if (distance > 1800) 
+        {
+            dirX = dx / distance;
+            dirY = dy / distance;
+            x += dirX * movingSpeed*100;
+            y += dirY * movingSpeed*100;
+            Canvas.SetLeft(enemyImage, x);
+            Canvas.SetTop(enemyImage, y);
+            return;
+        }
+    
         if (x > Canvas.GetLeft(playerLocation))
         {
             dx = 4000 - x;
@@ -129,7 +143,7 @@ public class Enemy
         {
             dy = 100 - y;
         }
-        double distance = Math.Sqrt(dx * dx + dy * dy);
+        distance = Math.Sqrt(dx * dx + dy * dy);
         dirX = dx / distance;
         dirY = dy / distance;
         x = or_x + dirX * movingSpeed*1.5;
