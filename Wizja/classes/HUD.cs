@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +31,10 @@ namespace Wizja.classes
         private ImageBrush coinImage = new ImageBrush();
         private ImageBrush clockImage = new ImageBrush();
         public int totalPoints;
+
+        //odtwarzanie dzwięku
+        public SoundPlayer start = new SoundPlayer("sound/start.wav");
+        public SoundPlayer finish = new SoundPlayer("sound/finish.wav");
 
         public HUD(int hp, int time, int money, Canvas statCanvas)
         {
@@ -139,16 +145,20 @@ namespace Wizja.classes
             TimeLabelSet();
             if (time == 0)
             {
+                start.Play();
                 clockIcon.Visibility = Visibility.Hidden;
                 timeLabel.Visibility = Visibility.Hidden;
                 timer.Stop();
             }
             else
             {
-                timeLabel.Visibility=Visibility.Visible;
+                timeLabel.Visibility = Visibility.Visible;
                 clockIcon.Visibility = Visibility.Visible;
             }
-
+            if (time == 29)
+            {
+                finish.Play();
+            }
         }
         public void NearShopShow()
         {
