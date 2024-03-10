@@ -59,6 +59,8 @@
     <None Remove="res\tombstone.png" />
     <None Remove="res\tree.png" />
     <None Remove="res\Wolf.png" />
+    <None Remove="res\WolfLF1.png" />
+    <None Remove="res\WolfRF1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -179,6 +181,8 @@
     <Resource Include="res\Wolf.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="res\WolfLF1.png" />
+    <Resource Include="res\WolfRF1.png" />
   </ItemGroup>
 
 </Project>
