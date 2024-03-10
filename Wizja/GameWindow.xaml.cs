@@ -48,7 +48,7 @@ namespace Wizja
 
             KeyUp += KeyIsUp;
             KeyDown += KeyIsDown;
-            testing_ERYK();
+            GameStarter();
             itemshop.initPlayer(player);
             itemshop.timerShopCheck.Start();
 
@@ -75,6 +75,7 @@ namespace Wizja
             Canvas.SetLeft(pathLabel, 3100);
             Canvas.SetTop(pathLabel, 1650);
             pathCanvas.Children.Add(pathLabel);
+            pathLabel.Visibility = Visibility.Hidden;
 
         }
         private void GameTick(object sender, ElapsedEventArgs e)
@@ -105,7 +106,7 @@ namespace Wizja
 
        
 
-        private void testing_ERYK()
+        private void GameStarter()
         {
             player = new Player(gameCanvas, hud, objectLoader.GetListMapObjects());
             player.MouseMoveHandler(gameCanvas);
