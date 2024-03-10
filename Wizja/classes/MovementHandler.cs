@@ -7,8 +7,8 @@ using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
-using System.Net.NetworkInformation;
-using System.Runtime.CompilerServices;
+using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace Wizja.classes
 {
@@ -141,5 +141,155 @@ namespace Wizja.classes
             return true;
         }
 
+            }
+            return true;
+        }
+        private static bool TryRight(List<Rectangle> staticobjects)
+        {
+
+            foreach (Rectangle entity in staticobjects)
+            {
+                Rect entityHitbox = new Rect(new Point(Canvas.GetLeft(entity) - Player.movingSpeed, Canvas.GetTop(entity)), new Point(Canvas.GetLeft(entity) - Player.movingSpeed + entity.Width, Canvas.GetTop(entity) + entity.Height));
+                if (playerHitbox.IntersectsWith(entityHitbox))
+                {
+                    //Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
+                    return false;
+                }
+            }
+            return true;
+        }
+        private static bool IsColision(List<Rectangle> staticobjects) 
+        {
+            foreach (Rectangle entity in staticobjects)
+            {
+                Rect entityHitbox = new Rect(new Point(Canvas.GetLeft(entity), Canvas.GetTop(entity) + Player.movingSpeed), new Point(Canvas.GetLeft(entity) + entity.Width, Canvas.GetTop(entity) + Player.movingSpeed + entity.Height));
+                if (playerHitbox.IntersectsWith(entityHitbox))
+                {
+                    //Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
+                    return true;
+                }
+            }
+            return false;
+        }
+            }
+            return true;
+        }
+        private static bool TryRight(List<Rectangle> staticobjects)
+        {
+
+            foreach (Rectangle entity in staticobjects)
+            {
+                Rect entityHitbox = new Rect(new Point(Canvas.GetLeft(entity) - Player.movingSpeed, Canvas.GetTop(entity)), new Point(Canvas.GetLeft(entity) - Player.movingSpeed + entity.Width, Canvas.GetTop(entity) + entity.Height));
+                if (playerHitbox.IntersectsWith(entityHitbox))
+                {
+                    //Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
+                    return false;
+                }
+            }
+            return true;
+        }
+        private static bool IsColision(List<Rectangle> staticobjects) 
+        {
+            foreach (Rectangle entity in staticobjects)
+            {
+                Rect entityHitbox = new Rect(new Point(Canvas.GetLeft(entity), Canvas.GetTop(entity) + Player.movingSpeed), new Point(Canvas.GetLeft(entity) + entity.Width, Canvas.GetTop(entity) + Player.movingSpeed + entity.Height));
+                if (playerHitbox.IntersectsWith(entityHitbox))
+                {
+                    //Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
+                    return true;
+                }
+            }
+            return false;
+        }
+            }
+            return true;
+        }
+        private static bool TryRight(List<Rectangle> staticobjects)
+        {
+
+            foreach (Rectangle entity in staticobjects)
+            {
+                Rect entityHitbox = new Rect(new Point(Canvas.GetLeft(entity) - Player.movingSpeed, Canvas.GetTop(entity)), new Point(Canvas.GetLeft(entity) - Player.movingSpeed + entity.Width, Canvas.GetTop(entity) + entity.Height));
+                if (playerHitbox.IntersectsWith(entityHitbox))
+                {
+                    //Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
+                    return false;
+                }
+            }
+            return true;
+        }
+        private static bool IsColision(List<Rectangle> staticobjects) 
+        {
+            foreach (Rectangle entity in staticobjects)
+            {
+                Rect entityHitbox = new Rect(new Point(Canvas.GetLeft(entity), Canvas.GetTop(entity) + Player.movingSpeed), new Point(Canvas.GetLeft(entity) + entity.Width, Canvas.GetTop(entity) + Player.movingSpeed + entity.Height));
+                if (playerHitbox.IntersectsWith(entityHitbox))
+                {
+                    //Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
+                    return true;
+                }
+            }
+            return false;
+        }
+            }
+            return true;
+        }
+        private static bool TryRight(List<Rectangle> staticobjects)
+        {
+
+            foreach (Rectangle entity in staticobjects)
+            {
+                Rect entityHitbox = new Rect(new Point(Canvas.GetLeft(entity) - Player.movingSpeed, Canvas.GetTop(entity)), new Point(Canvas.GetLeft(entity) - Player.movingSpeed + entity.Width, Canvas.GetTop(entity) + entity.Height));
+                if (playerHitbox.IntersectsWith(entityHitbox))
+                {
+                    //Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
+                    return false;
+                }
+            }
+            return true;
+        }
+        private static bool IsColision(List<Rectangle> staticobjects) 
+        {
+            foreach (Rectangle entity in staticobjects)
+            {
+                Rect entityHitbox = new Rect(new Point(Canvas.GetLeft(entity), Canvas.GetTop(entity) + Player.movingSpeed), new Point(Canvas.GetLeft(entity) + entity.Width, Canvas.GetTop(entity) + Player.movingSpeed + entity.Height));
+                if (playerHitbox.IntersectsWith(entityHitbox))
+                {
+                    //Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
+                    return true;
+                }
+            }
+            return false;
+        }
+            }
+            return true;
+        }
+        private static bool TryRight(List<Rectangle> staticobjects)
+        {
+
+            foreach (Rectangle entity in staticobjects)
+            {
+                Rect entityHitbox = new Rect(new Point(Canvas.GetLeft(entity) - Player.movingSpeed, Canvas.GetTop(entity)), new Point(Canvas.GetLeft(entity) - Player.movingSpeed + entity.Width, Canvas.GetTop(entity) + entity.Height));
+                if (playerHitbox.IntersectsWith(entityHitbox))
+                {
+                    //Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
+                    return false;
+                }
+            }
+            return true;
+        }
+        private static bool IsColision(List<Rectangle> staticobjects) 
+        {
+            foreach (Rectangle entity in staticobjects)
+            {
+                Rect entityHitbox = new Rect(new Point(Canvas.GetLeft(entity), Canvas.GetTop(entity) + Player.movingSpeed), new Point(Canvas.GetLeft(entity) + entity.Width, Canvas.GetTop(entity) + Player.movingSpeed + entity.Height));
+                if (playerHitbox.IntersectsWith(entityHitbox))
+                {
+                    //Canvas.SetTop(entity, Canvas.GetTop(entity) + Player.movingSpeed);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
