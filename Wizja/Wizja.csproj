@@ -42,6 +42,8 @@
     <None Remove="res\menu\menuBackground.png" />
     <None Remove="res\pistol.png" />
     <None Remove="res\Player.png" />
+    <None Remove="res\PlayerWalk1.png" />
+    <None Remove="res\PlayerWalk2.png" />
     <None Remove="res\shopClosed.png" />
     <None Remove="res\shopOpen.png" />
     <None Remove="res\shotgun.png" />
@@ -124,6 +126,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\hpIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\PlayerWalk1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\PlayerWalk2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\shopClosed.png">
