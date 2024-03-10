@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
-
 namespace Wizja.classes
 {
     public class ObjectLoader
@@ -124,8 +116,8 @@ namespace Wizja.classes
 
             for (int i = 0; i <= 3744; i += 256)
             {
-                BuildConstrution(0, i-78, woodenFenceVertical, 56, 376);
-                BuildConstrution(5944, i-78, woodenFenceVertical, 56, 376);
+                BuildConstrution(0, i - 78, woodenFenceVertical, 56, 376);
+                BuildConstrution(5944, i - 78, woodenFenceVertical, 56, 376);
             }
             BuildConstrution(5944, 3640, woodenFenceVertical, 56, 376);
         }
@@ -137,12 +129,13 @@ namespace Wizja.classes
                 Height = height,
                 Fill = imageBrush
             };
+            build.RenderTransformOrigin = new Point(0.5, 0.5);
             Canvas.SetLeft(build, leftPossition);
             Canvas.SetTop(build, topPossition);
             return build;
         }
 
-        public void BuildConstrution(int leftPossition, int topPossition, ImageBrush imageBrush,int width, int height)
+        public void BuildConstrution(int leftPossition, int topPossition, ImageBrush imageBrush, int width, int height)
         {
             Rectangle build = new Rectangle
             {

@@ -11,7 +11,7 @@ public class Spawner
     public List<Enemy>[] enemies; //Przetrzymuje przeciwnków
     private int rounds;//Liczba rund
     private int enemyCurrentNumber = 0;
-    private int currentRound = 0;
+    public int currentRound = 0;
     private int tickCount = 0;
     private Canvas gameScreen;
     private Player player;
@@ -148,8 +148,12 @@ public class Spawner
             }
         }
     }
-    private bool AllDead()
+    public bool AllDead()
     {
+        if (currentRound >= rounds) 
+        {
+            return true;
+        }
         foreach (Enemy en in enemies[currentRound])
         {
             if (en.isLiving)
@@ -165,7 +169,12 @@ public class Spawner
         }
         foreach (Rectangle rectangle in mapObject)
         {
-            Rect building = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rectangle.Width, rectangle.Height);
+            double hg = rectangle.Height;
+            if (rectangle.Height > 130)
+                hg -= 60;
+            else if (rectangle.Height > 40)
+                hg -= 30;
+            Rect building = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rectangle.Width-30, hg);
             if (enemy.IsColision(building))
             {
                 return rectangle;
