@@ -23,6 +23,7 @@ namespace Wizja.classes
         private Label hpLabel;
         private Label timeLabel;
         private Label nearLabel;
+        private Rectangle clockIcon;
         private Rectangle nearBox;
         private ImageBrush hpImage = new ImageBrush();
         private ImageBrush coinImage = new ImageBrush();
@@ -66,7 +67,7 @@ namespace Wizja.classes
             statCanvas.Children.Add(hpLabel);
 
             clockImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/clockIcon.png"));
-            Rectangle clockIcon = new Rectangle
+            clockIcon = new Rectangle
             {
                 Width = 50,
                 Height = 50,
@@ -138,7 +139,14 @@ namespace Wizja.classes
             TimeLabelSet();
             if (time == 0)
             {
+                clockIcon.Visibility = Visibility.Hidden;
+                timeLabel.Visibility = Visibility.Hidden;
                 timer.Stop();
+            }
+            else
+            {
+                timeLabel.Visibility=Visibility.Visible;
+                clockIcon.Visibility = Visibility.Visible;
             }
 
         }

@@ -1,7 +1,11 @@
 ﻿using System.Media;
+using System.Threading;
 using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wizja.classes;
 
@@ -18,6 +22,9 @@ namespace Wizja
         //Testy przeciwników
         private ObjectLoader objectLoader;
         private Shop itemshop;
+        private Label enemyCounterLabel;
+        private Rectangle skullIcon;
+        private ImageBrush skullImage = new ImageBrush();
         public Spawner spawner;
         public Player player;
         public HUD hud;
@@ -27,12 +34,12 @@ namespace Wizja
         {
             InitializeComponent();
 
-
             //ładowanie mapy
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
             
             hud = new HUD(100, 10, 50, statCanvas);
+            CreateEnemyCounter();
             //Tworzenie shop
             itemshop = new Shop(gameCanvas, shopCanvas, hud, this);
 
@@ -61,12 +68,19 @@ namespace Wizja
                     MovementHandler.Step(direction, objectLoader.GetListMovingObjects(), this.GetRectanglesByName("Enemy"), this.GetRectanglesByName("SpawnerObject"), objectLoader.GetListMapObjects());
 
 
-                    //Testowanie Przeciwników
+                    //po przerwie spawnuje nowych przeciwników
                     if (hud.GetTime() == 0)
                     {
+                        enemyCounterLabel.Visibility = Visibility.Visible;
+                        skullIcon.Visibility = Visibility.Visible;
                         spawner.Spawn();
                         spawner.MoveEveryOne(player, objectLoader.GetListMapObjects());
                         EndOfGame();
+                    }
+                    else
+                    {
+                        enemyCounterLabel.Visibility = Visibility.Hidden;
+                        skullIcon.Visibility = Visibility.Hidden;
                     }
 
                 });
@@ -107,6 +121,31 @@ namespace Wizja
                 deathWindow.Show();
                 this.Close();
             }
+        }
+
+        private void CreateEnemyCounter()
+        {
+            skullImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/skull.png"));
+            skullIcon = new Rectangle
+            {
+                Width = 50,
+                Height = 50,
+                Fill = skullImage
+            };
+            Canvas.SetLeft(skullIcon, 900);
+            Canvas.SetTop(skullIcon, 30);
+            statCanvas.Children.Add(skullIcon);
+            skullIcon.Visibility = Visibility.Hidden;
+            enemyCounterLabel = new Label
+            {
+                Content = $"",
+                FontSize = 50,
+                Foreground = Brushes.Gold
+            };
+            Canvas.SetLeft(enemyCounterLabel, 950);
+            Canvas.SetTop(enemyCounterLabel, 15);
+            statCanvas.Children.Add(enemyCounterLabel);
+            enemyCounterLabel.Visibility = Visibility.Hidden;
         }
 
         // Zwraca obiekty typu rectangle o podanej nazwie dla przeciwnika "Enemy"
