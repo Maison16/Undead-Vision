@@ -53,7 +53,7 @@ public class Spawner
             {
                 GetEnemies(3, noRound);
             }
-            else if (value <= wave[0] + wave[1] + wave[3])
+            else if (value <= wave[0] + wave[1] + wave[2]+ wave[3])
             {
                 GetEnemies(4, noRound);
             }
