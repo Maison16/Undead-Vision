@@ -50,7 +50,7 @@ namespace Wizja.classes
             BuildConstrution(3800, 400, tombstoneImage, 50, 50);
             BuildConstrution(4600, 100, tombstoneImage, 50, 50);
             BuildConstrution(2700, 2000, grandCrossImage, 66, 100);
-            BuildConstrution(2500, 2000, grandCrossImage, 66, 100);
+            BuildConstrution(2400, 2000, grandCrossImage, 66, 100);
             BuildConstrution(1100, 2000, treeImage, 200, 250);
             BuildConstrution(5000, 1600, treeImage, 200, 250);
 

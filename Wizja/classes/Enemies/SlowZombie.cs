@@ -64,5 +64,6 @@ namespace Wizja.classes
             }
             base.Follow(playerLocation, gameScreen);
         }
+
     }
 }

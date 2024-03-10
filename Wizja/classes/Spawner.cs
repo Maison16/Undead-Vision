@@ -85,6 +85,7 @@ public class Spawner
     //Spawnuje przeciwników
     public void Spawn()
     {
+        player.gameTick++;
         if (currentRound >= rounds)
         {
             return;

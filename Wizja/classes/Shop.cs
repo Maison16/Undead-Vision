@@ -266,6 +266,7 @@ namespace Wizja.classes
             shopCanvas.Children.Clear();
             used[weaponList.IndexOf(w)] = 1;
             player.setWeapon(w);
+            hud.SetCurrentWeapon(w);
             ShowShop();
         }
 

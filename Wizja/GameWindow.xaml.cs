@@ -30,6 +30,8 @@ namespace Wizja
         public Spawner spawner;
         public Player player;
         public HUD hud;
+        int animTimer = 0;
+        bool walkin = false;
 
         private System.Timers.Timer gameTimer = new System.Timers.Timer();
         public GameWindow()
@@ -40,15 +42,14 @@ namespace Wizja
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
             
-            hud = new HUD(100, 10, 50, statCanvas);
+            hud = new HUD(100, 10, 1000, statCanvas);
             CreateEnemyCounter();
             CreatePathLabel();
             //Tworzenie shop
             itemshop = new Shop(gameCanvas, shopCanvas, hud, this);
-
             KeyUp += KeyIsUp;
             KeyDown += KeyIsDown;
-            testing_ERYK();
+            GameStarter();
             itemshop.initPlayer(player);
             itemshop.timerShopCheck.Start();
 
@@ -58,9 +59,6 @@ namespace Wizja
             gameTimer.Interval = 16; //16 MILISEKUND
             gameTimer.Elapsed += GameTick;
             gameTimer.Start(); //od razu zaczyna timer gameTimer
-
-
-
         }
 
         private void CreatePathLabel()
@@ -75,6 +73,7 @@ namespace Wizja
             Canvas.SetLeft(pathLabel, 3100);
             Canvas.SetTop(pathLabel, 1650);
             pathCanvas.Children.Add(pathLabel);
+            pathLabel.Visibility = Visibility.Hidden;
 
         }
         private void GameTick(object sender, ElapsedEventArgs e)
@@ -98,6 +97,24 @@ namespace Wizja
                         skullIcon.Visibility = Visibility.Hidden;
                     }
 
+                    animTimer = (animTimer+1)%32;
+
+                    if(walkin)
+                    {
+                        if(animTimer >= 0 && animTimer < 16)
+                        {
+                            player.playerImage.Fill = new ImageBrush(player.rotatedPlayer1);
+                        }
+                        else
+                        {
+                            player.playerImage.Fill = new ImageBrush(player.rotatedPlayer2);
+                        }
+                    }
+                    else
+                    {
+                        player.playerImage.Fill = new ImageBrush(player.rotatedPlayer);
+                    }
+
                 });
             }
             catch { }
@@ -105,7 +122,7 @@ namespace Wizja
 
        
 
-        private void testing_ERYK()
+        private void GameStarter()
         {
             player = new Player(gameCanvas, hud, objectLoader.GetListMapObjects());
             player.MouseMoveHandler(gameCanvas);
@@ -114,7 +131,6 @@ namespace Wizja
             int[][] enemyLists = new int[5][];
 
 
-           
             spawner = new Spawner(enemiesSpawner, 5, gameCanvas, player);
             enemyLists[0] = new int[] { 75, 25, 0, 0 };
             enemyLists[1] = new int[] { 55, 35, 15, 5 };
@@ -174,18 +190,22 @@ namespace Wizja
             if (e.Key == Key.W)
             {
                 direction[0] = true;
+                walkin = true;
             }
             else if (e.Key == Key.A)
             {
                 direction[1] = true;
+                walkin = true;
             }
             else if (e.Key == Key.S)
             {
                 direction[2] = true;
+                walkin = true;
             }
             else if (e.Key == Key.D)
             {
                 direction[3] = true;
+                walkin = true;
             }
             else if (e.Key == Key.B)
             {
@@ -214,6 +234,11 @@ namespace Wizja
             else if (e.Key == Key.B)
             {
                 isBpressed = false;
+            }
+
+            if (!direction.Contains(true))
+            {
+                walkin = false;
             }
         }
         public bool getB()
