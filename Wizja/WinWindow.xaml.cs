@@ -17,19 +17,19 @@ using Wizja.classes;
 namespace Wizja
 {
     /// <summary>
-    /// Logika interakcji dla klasy DeathWindow.xaml
+    /// Logika interakcji dla klasy winWindow.xaml
     /// </summary>
-    public partial class DeathWindow : Window
+    public partial class WinWindow : Window
     {
         HUD hud;
-        public DeathWindow(HUD hud)
+        public WinWindow(HUD hud)
         {
             InitializeComponent();
             this.hud = hud;
             var deathBackground = new ImageBrush();
             deathBackground.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/menu/menuBackground.png"));
-            deathCanvas.Background = deathBackground;
-            
+            winCanvas.Background = deathBackground;
+
             Label score = new Label();
             score.Content = "Score: " + hud.totalPoints.ToString();
             score.FontSize = 82;
@@ -37,30 +37,31 @@ namespace Wizja
             score.Foreground = Brushes.White;
             Canvas.SetLeft(score, 800);
             Canvas.SetTop(score, 450);
-            deathCanvas.Children.Add(score);
+            winCanvas.Children.Add(score);
 
             var logo = new ImageBrush();
-            logo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/menu/defeat.png"));
+            logo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/menu/victory.png"));
 
             Rectangle recLogo = new Rectangle
             {
                 Width = 1300,
-                Height = 500,
+                Height = 480,
                 Fill = logo
             };
-            Canvas.SetLeft(recLogo, 310);
+            Canvas.SetLeft(recLogo, 340);
             Canvas.SetTop(recLogo, 50);
-            deathCanvas.Children.Add(recLogo);
-            SoundPlayer deathSound = new SoundPlayer("sound/death.wav");
-            deathSound.Play();
+            winCanvas.Children.Add(recLogo);
 
+            SoundPlayer deathSound = new SoundPlayer("sound/finish.wav");
+            deathSound.Play();
         }
         private void closeWindow(object sender, RoutedEventArgs e)
         {
-            
+
             MainWindow backToMenu = new MainWindow();
             backToMenu.Show();
             this.Close();
         }
     }
 }
+
