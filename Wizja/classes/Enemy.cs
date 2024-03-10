@@ -111,17 +111,27 @@ public class Enemy
         dirY = (dy + MinusOrPlus() * rnd.Next(24, 48)) / distance;
         Canvas.SetLeft(enemyImage, x);
         Canvas.SetTop(enemyImage, y);
+        if (distance >= 1650) // Jeżeli player jest daleko wydostań się z pułapki
+        {
+            dirX = (dx) / distance;
+            dirY = (dy) / distance;
+            x += dirX * movingSpeed*125;
+            y += dirY * movingSpeed*125;
+            Canvas.SetLeft(enemyImage, x);
+            Canvas.SetTop(enemyImage, y);
+            return;
+        }
         Rect hitbox = new Rect(Canvas.GetLeft(obj), Canvas.GetTop(obj), obj.Width, obj.Height);
         if (IsColision(hitbox))
         {
             x -= dirX * movingSpeed;
-            y += dirY * movingSpeed;
+            y -= dirY * movingSpeed;
             Canvas.SetLeft(enemyImage, x);
             Canvas.SetTop(enemyImage, y);
             if (IsColision(hitbox))
             {
                 x -= dirX * movingSpeed;
-                y -= dirY * movingSpeed;
+                y += dirY * movingSpeed;
                 Canvas.SetLeft(enemyImage, x);
                 Canvas.SetTop(enemyImage, y);
                 if (IsColision(hitbox))
