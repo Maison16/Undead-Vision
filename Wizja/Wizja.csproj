@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="res\sounds\**" />
+    <EmbeddedResource Remove="res\sounds\**" />
+    <None Remove="res\sounds\**" />
+    <Page Remove="res\sounds\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="res\armor.png" />
     <None Remove="res\background1.png" />
     <None Remove="res\chapel.png" />
@@ -41,7 +48,6 @@
     <None Remove="res\skull.png" />
     <None Remove="res\SlowZombie.png" />
     <None Remove="res\smg.png" />
-    <None Remove="res\sounds\shoot.wav" />
     <None Remove="res\TankSkeleton.png" />
     <None Remove="res\tombstone.png" />
     <None Remove="res\tree.png" />
@@ -136,9 +142,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\smg.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="res\sounds\shoot.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\TankSkeleton.png">
