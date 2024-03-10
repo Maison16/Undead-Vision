@@ -58,7 +58,7 @@ namespace Wizja
             {
                 gameCanvas.Dispatcher.Invoke(() =>
                 {
-                    MovementHandler.Step(direction, objectLoader.GetListMovingObjects(), this.GetRectanglesByName("Enemy"), objectLoader.GetListMapObjects());
+                    MovementHandler.Step(direction, objectLoader.GetListMovingObjects(), this.GetRectanglesByName("Enemy"), this.GetRectanglesByName("SpawnerObject"), objectLoader.GetListMapObjects());
 
 
                     //Testowanie Przeciwników
