@@ -54,7 +54,6 @@ public class Enemy
         healthPoints -= takenDamage;
         if (healthPoints > 0)
         {
-            Console.WriteLine(!isLiving);
             return !isLiving; //True jeżeli żyje
         }
         else

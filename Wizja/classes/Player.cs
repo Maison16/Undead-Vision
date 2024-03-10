@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Xml.Linq;
 using Wizja.classes.guns;
 using Wizja.Enemies;
-using static Wizja.classes.Shop;
 namespace Wizja.classes
 {
     public class Player
@@ -25,29 +18,53 @@ namespace Wizja.classes
         private List<Rectangle> obstacles;
         private List<Enemy> allEnemies;
         private Weapon weapon;
-        public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
         public static ImageSource flashLightSource = new BitmapImage(new Uri("pack://application:,,,/res/flashlight.png"));
         public HUD hud;
+        public int gameTick =0;
         //odtwarzanie  strzału
-        public SoundPlayer shoot = new SoundPlayer("sound/shoot.wav");
-    
+        int isWalking = 0;
+        public TransformedBitmap rotatedPlayer = new TransformedBitmap();
+        public TransformedBitmap rotatedPlayer1 = new TransformedBitmap();
+        public TransformedBitmap rotatedPlayer2 = new TransformedBitmap();
+
+
+        public SoundPlayer shoot;
+
         public void setWeapon(Weapon w)
         {
             this.weapon = w;
         }
+        public Weapon getWeapon()
+        {
+            return weapon;
+        }
         public Player(Canvas gameCanvas, HUD hud, List<Rectangle> obstacles)
         {
             healthPoints = 100;
-            movingSpeed = 4;
+            movingSpeed = 4.5;
             this.hud = hud;
             this.obstacles = obstacles;
             this.allEnemies = allEnemies;
 
+            // tutaj wczytuje obraz playera nasz nowy player to rotated player
+           
+            rotatedPlayer.BeginInit();
+            rotatedPlayer.Source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
+            rotatedPlayer.Transform = new RotateTransform(-90);
+            rotatedPlayer.EndInit();
+            rotatedPlayer1.BeginInit();
+            rotatedPlayer1.Source = new BitmapImage(new Uri("pack://application:,,,/res/PlayerWalk1.png"));
+            rotatedPlayer1.Transform = new RotateTransform(-90);
+            rotatedPlayer1.EndInit();
+            rotatedPlayer2.BeginInit();
+            rotatedPlayer2.Source = new BitmapImage(new Uri("pack://application:,,,/res/PlayerWalk2.png"));
+            rotatedPlayer2.Transform = new RotateTransform(-90);
+            rotatedPlayer2.EndInit();
             playerImage = new Rectangle()
             {
-                Width = 47,
-                Height = 75,
-                Fill = new ImageBrush(source)
+                Width = 75,
+                Height = 47,
+                Fill = new ImageBrush(rotatedPlayer)
             };
             flashLightImage = new Rectangle()
             {
@@ -83,9 +100,11 @@ namespace Wizja.classes
         Canvas gameCanvas;
         public void MouseMoveHandler(Canvas gameCanvas)
         {
+
             this.gameCanvas = gameCanvas;
             gameCanvas.MouseMove += MouseMove;
             gameCanvas.MouseLeftButtonDown += MouseLeftButtonDown;
+
         }
 
         private void MouseMove(object sender, MouseEventArgs e)
@@ -93,10 +112,10 @@ namespace Wizja.classes
             Point mousePosition = e.GetPosition(gameCanvas);
             Point playerPosition = new Point(Canvas.GetLeft(flashLightImage) + flashLightImage.Width / 2, Canvas.GetTop(flashLightImage) + flashLightImage.Height / 2);
             double angle = Math.Atan2(mousePosition.Y - playerPosition.Y, mousePosition.X - playerPosition.X) * (180 / Math.PI);
-            RotateDarknes(angle);
+            RotateDarkness(angle);
             RotatePlayer(angle);
         }
-        private void RotateDarknes(double angle)
+        private void RotateDarkness(double angle)
         {
             flashLightImage.RenderTransformOrigin = new Point(0.5, 0.5);
             RotateTransform rotateTransform = new RotateTransform(angle);
@@ -123,19 +142,52 @@ namespace Wizja.classes
 
         public void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point endPoint;
-            Point playerPos = new Point(Canvas.GetLeft(playerImage), Canvas.GetTop(playerImage));
+            if (gameTick > weapon.coolDown)
+            {
+                gameTick = 0;
+                Point endPoint;
+                Point playerPos = new Point(Canvas.GetLeft(playerImage), Canvas.GetTop(playerImage));
 
-            playerPos = new Point(Canvas.GetLeft(playerImage) + playerImage.Width / 2, Canvas.GetTop(playerImage) + playerImage.Height / 2);
+                playerPos = new Point(Canvas.GetLeft(playerImage) + playerImage.Width / 2, Canvas.GetTop(playerImage) + playerImage.Height / 2);
 
-            // pojebana matma z chatu do endpointu strzalu
-            double flashlightAngle = ((RotateTransform)flashLightImage.RenderTransform).Angle;
-            Vector direction = new Vector(Math.Cos(flashlightAngle * Math.PI / 180), Math.Sin(flashlightAngle * Math.PI / 180));
-            // double distance = 1000;
-            // endPoint = new Point(playerPos.X + direction.X * distance, playerPos.Y + direction.Y * distance);
+                // pojebana matma z chatu do endpointu strzalu
+                double flashlightAngle = ((RotateTransform)flashLightImage.RenderTransform).Angle;
+                Vector direction = new Vector(Math.Cos(flashlightAngle * Math.PI / 180), Math.Sin(flashlightAngle * Math.PI / 180));
+                // double distance = 1000;
+                // endPoint = new Point(playerPos.X + direction.X * distance, playerPos.Y + direction.Y * distance);
+                ChoiceSound();
+                shoot.Play();
+                weapon.Shoot(playerPos, direction, obstacles, allEnemies, gameCanvas);
+            }
+        }
+        public void ChoiceSound()
+        {
+            if (weapon.name == "Family Gun")
+            {
+                shoot = new SoundPlayer("sound/eeee.wav");
+            }
+            else if (weapon.name == "Pistol")
+            {
+                shoot = new SoundPlayer("sound/shoot.wav");
+            }
+            else if (weapon.name == "SMG")
+            {
+                shoot = new SoundPlayer("sound/shoot.wav");
 
-            shoot.Play();
-            weapon.Shoot(playerPos, direction, obstacles, allEnemies, gameCanvas);
+            }
+            else if (weapon.name == "M4A1")
+            {
+                shoot = new SoundPlayer("sound/shoot.wav");
+
+            }
+            else if (weapon.name == "Shotgun")
+            {
+                shoot = new SoundPlayer("sound/ShotgunShot.wav");
+            }
+            else 
+            {
+                shoot = new SoundPlayer("sound/shoot.wav");
+            }
         }
 
         public void SetAllEnemies(List<Enemy> allEnemies)

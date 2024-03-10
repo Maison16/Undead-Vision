@@ -13,7 +13,8 @@ namespace Wizja.classes
     {
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Ghost.png"));
         //    public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
-        public ShootingZombie() : base(15, 10, 20, 3.5, source,86,104)
-        { }
+        public ShootingZombie() : base(10, 10, 20, 4.5, source,86,104)
+        {
+        }
     }
 }

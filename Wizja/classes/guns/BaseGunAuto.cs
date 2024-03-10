@@ -18,7 +18,10 @@ namespace Wizja.classes.guns
     public class BaseGunAuto : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/smg.png"));
-        public BaseGunAuto() : base("SMG", 3, 400, 300, img) { } // obrazenia, zasieg, koszt
+        public BaseGunAuto() : base("SMG", 3, 400, 300, img)  // obrazenia, zasieg, koszt
+        {
+            this.SetCoolDown(4);
+        } 
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {

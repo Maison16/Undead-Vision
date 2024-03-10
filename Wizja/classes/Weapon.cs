@@ -19,7 +19,7 @@ namespace Wizja.classes
         public double range { get; set; } // max zasieg wystrzeliwanego pocisku
         public int cost { get; set; } // koszt w sklepie
         public BitmapImage img { get; set; }
-
+        public int coolDown { get; set; }
         public Weapon(string name, int dmg, double range, int cost, BitmapImage img)
         {
             this.name = name;
@@ -40,6 +40,10 @@ namespace Wizja.classes
             return new Vector(newX, newY);
         }
 
+        public void SetCoolDown(int cd) 
+        {
+            this.coolDown = cd;
+        }
         public abstract void Shoot(Point playerPos, Vector direction, List<Rectangle> mapObjects, List<Enemy> enemies, Canvas gameCanvas);
     }
 }
