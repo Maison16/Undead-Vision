@@ -36,7 +36,7 @@ namespace Wizja.classes
         public Player(Canvas gameCanvas, HUD hud, List<Rectangle> obstacles)
         {
             healthPoints = 100;
-            movingSpeed = 4;
+            movingSpeed = 4.5;
             this.hud = hud;
             this.obstacles = obstacles;
             this.allEnemies = allEnemies;

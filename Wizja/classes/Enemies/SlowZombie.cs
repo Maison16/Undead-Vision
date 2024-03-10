@@ -13,7 +13,7 @@ namespace Wizja.classes
     {
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/SlowZombie.png"));
         //    public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
-        public SlowZombie() : base(5, 10, 10, 2, source,64,64)
+        public SlowZombie() : base(5, 10, 10, 2.5, source,64,64)
         { }
     }
 }
