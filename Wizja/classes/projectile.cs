@@ -45,6 +45,7 @@ namespace Wizja.classes
                             if (target.IsDead(damage))
                             {
                                 gameCanvas.Children.Remove(target.enemyImage);
+                                hitBoxes.Remove(hitbox);
                             }
 
                             break;

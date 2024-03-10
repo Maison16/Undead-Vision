@@ -18,7 +18,8 @@ namespace Wizja
     {
         bool[] direction = new bool[4];
         bool isBpressed = false;
-
+        private int waveNumber = 0;
+        private int enemyCount = 0;
         //Testy przeciwników
         private ObjectLoader objectLoader;
         private Shop itemshop;
@@ -66,12 +67,9 @@ namespace Wizja
                 gameCanvas.Dispatcher.Invoke(() =>
                 {
                     MovementHandler.Step(direction, objectLoader.GetListMovingObjects(), this.GetRectanglesByName("Enemy"), this.GetRectanglesByName("SpawnerObject"), objectLoader.GetListMapObjects());
-
-
                     //po przerwie spawnuje nowych przeciwników
                     if (hud.GetTime() == 0)
                     {
-                        enemyCounterLabel.Visibility = Visibility.Visible;
                         skullIcon.Visibility = Visibility.Visible;
                         spawner.Spawn();
                         spawner.MoveEveryOne(player, objectLoader.GetListMapObjects());
@@ -79,7 +77,6 @@ namespace Wizja
                     }
                     else
                     {
-                        enemyCounterLabel.Visibility = Visibility.Hidden;
                         skullIcon.Visibility = Visibility.Hidden;
                     }
 
@@ -132,20 +129,10 @@ namespace Wizja
                 Height = 50,
                 Fill = skullImage
             };
-            Canvas.SetLeft(skullIcon, 900);
+            Canvas.SetLeft(skullIcon, 925);
             Canvas.SetTop(skullIcon, 30);
             statCanvas.Children.Add(skullIcon);
             skullIcon.Visibility = Visibility.Hidden;
-            enemyCounterLabel = new Label
-            {
-                Content = $"",
-                FontSize = 50,
-                Foreground = Brushes.Gold
-            };
-            Canvas.SetLeft(enemyCounterLabel, 950);
-            Canvas.SetTop(enemyCounterLabel, 15);
-            statCanvas.Children.Add(enemyCounterLabel);
-            enemyCounterLabel.Visibility = Visibility.Hidden;
         }
 
         // Zwraca obiekty typu rectangle o podanej nazwie dla przeciwnika "Enemy"

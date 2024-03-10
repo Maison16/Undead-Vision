@@ -8,7 +8,7 @@ public class Spawner
 {
     private int[] frequency; //Częstotliwość między spawnem przeciwników, w każdej rundzie może być inna
     private List<SpawnerObject> enemiesSpawner = new List<SpawnerObject>(); // Dajemy pozycje wszystkich puntków spawnujących
-    private List<Enemy>[] enemies; //Przetrzymuje przeciwnków
+    public List<Enemy>[] enemies; //Przetrzymuje przeciwnków
     private int rounds;//Liczba rund
     private int enemyCurrentNumber = 0;
     private int currentRound = 0;
@@ -202,5 +202,9 @@ public class Spawner
         }
 
         return allEnemies;
+    }
+    public int EnemyCount(int i)
+    {
+       return enemies[i].Count();
     }
 }
