@@ -92,7 +92,8 @@ namespace Wizja
                         skullIcon.Visibility = Visibility.Visible;
                         spawner.Spawn();
                         spawner.MoveEveryOne(player, objectLoader.GetListMapObjects());
-                        EndOfGame();
+                        EndOfGameLose();
+                        EndOfGameWin();
                     }
                     else
                     {
@@ -132,13 +133,23 @@ namespace Wizja
 
         }
 
-        private void EndOfGame()
+        private void EndOfGameLose()
         {
-            if (player.healthPoints == 0 || ( spawner.AllDead() && spawner.currentRound == 5))
+            if (player.healthPoints == 0)
             {
                 DeathWindow deathWindow = new DeathWindow(hud);
                 gameTimer.Stop();
                 deathWindow.Show();
+                this.Close();
+            }
+        }
+        private void EndOfGameWin()
+        {
+            if(spawner.AllDead() && spawner.currentRound == 5)
+            {
+                WinWindow winWindow = new WinWindow(hud);
+                gameTimer.Stop();
+                winWindow.Show();
                 this.Close();
             }
         }
