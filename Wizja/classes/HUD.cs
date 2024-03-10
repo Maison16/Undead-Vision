@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Wizja.classes.guns;
 
 namespace Wizja.classes
 {
@@ -31,6 +32,12 @@ namespace Wizja.classes
         private ImageBrush coinImage = new ImageBrush();
         private ImageBrush clockImage = new ImageBrush();
         public int totalPoints;
+        public Weapon CurrentWeapon;
+        Rectangle weaponRect = new Rectangle
+        {
+            Width = 100,
+            Height = 100,
+        };
 
         //odtwarzanie dzwięku
         public SoundPlayer start = new SoundPlayer("sound/start.wav");
@@ -42,7 +49,10 @@ namespace Wizja.classes
             this.time = time;
             this.money = money;
             this.statCanvas = statCanvas;
-
+            SetCurrentWeapon(new StartGun());
+            Canvas.SetLeft(weaponRect, 10);
+            Canvas.SetTop(weaponRect, 970);
+            statCanvas.Children.Add(weaponRect);
             Rectangle statBar = new Rectangle
             {
                 Width = statCanvas.Width,
@@ -228,6 +238,11 @@ namespace Wizja.classes
         private void MoneyLabelSet()
         {
             moneyLabel.Content = $"{money}";
+        }
+        public void SetCurrentWeapon(Weapon w)
+        {
+            this.CurrentWeapon = w;
+            weaponRect.Fill = new ImageBrush(w.img);
         }
     }
 }
