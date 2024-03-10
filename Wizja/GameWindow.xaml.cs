@@ -40,12 +40,11 @@ namespace Wizja
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
             
-            hud = new HUD(100, 10, 50, statCanvas);
+            hud = new HUD(100, 10, 1000, statCanvas);
             CreateEnemyCounter();
             CreatePathLabel();
             //Tworzenie shop
             itemshop = new Shop(gameCanvas, shopCanvas, hud, this);
-
             KeyUp += KeyIsUp;
             KeyDown += KeyIsDown;
             testing_ERYK();
@@ -58,9 +57,6 @@ namespace Wizja
             gameTimer.Interval = 16; //16 MILISEKUND
             gameTimer.Elapsed += GameTick;
             gameTimer.Start(); //od razu zaczyna timer gameTimer
-
-
-
         }
 
         private void CreatePathLabel()
@@ -114,7 +110,6 @@ namespace Wizja
             int[][] enemyLists = new int[5][];
 
 
-           
             spawner = new Spawner(enemiesSpawner, 5, gameCanvas, player);
             enemyLists[0] = new int[] { 75, 25, 0, 0 };
             enemyLists[1] = new int[] { 55, 35, 15, 5 };

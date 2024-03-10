@@ -18,7 +18,7 @@ namespace Wizja.classes.guns
     public class FamilyGun : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/familyguy.png"));
-        public FamilyGun() : base("Family Gun", 8, 700, 600, img) { }
+        public FamilyGun() : base("Family Gun", 8, 700, 600, img) { this.SetCoolDown(20); }
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {

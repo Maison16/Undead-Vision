@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Xml.Linq;
 using Wizja.classes.guns;
 using Wizja.Enemies;
-using static Wizja.classes.Shop;
 namespace Wizja.classes
 {
     public class Player
@@ -28,9 +21,10 @@ namespace Wizja.classes
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
         public static ImageSource flashLightSource = new BitmapImage(new Uri("pack://application:,,,/res/flashlight.png"));
         public HUD hud;
+        public int gameTick =0;
         //odtwarzanie  strzału
-        public SoundPlayer shoot = new SoundPlayer("sound/shoot.wav");
-    
+        public SoundPlayer shoot;
+
         public void setWeapon(Weapon w)
         {
             this.weapon = w;
@@ -83,9 +77,11 @@ namespace Wizja.classes
         Canvas gameCanvas;
         public void MouseMoveHandler(Canvas gameCanvas)
         {
+
             this.gameCanvas = gameCanvas;
             gameCanvas.MouseMove += MouseMove;
             gameCanvas.MouseLeftButtonDown += MouseLeftButtonDown;
+
         }
 
         private void MouseMove(object sender, MouseEventArgs e)
@@ -123,19 +119,52 @@ namespace Wizja.classes
 
         public void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point endPoint;
-            Point playerPos = new Point(Canvas.GetLeft(playerImage), Canvas.GetTop(playerImage));
+            if (gameTick > weapon.coolDown)
+            {
+                gameTick = 0;
+                Point endPoint;
+                Point playerPos = new Point(Canvas.GetLeft(playerImage), Canvas.GetTop(playerImage));
 
-            playerPos = new Point(Canvas.GetLeft(playerImage) + playerImage.Width / 2, Canvas.GetTop(playerImage) + playerImage.Height / 2);
+                playerPos = new Point(Canvas.GetLeft(playerImage) + playerImage.Width / 2, Canvas.GetTop(playerImage) + playerImage.Height / 2);
 
-            // pojebana matma z chatu do endpointu strzalu
-            double flashlightAngle = ((RotateTransform)flashLightImage.RenderTransform).Angle;
-            Vector direction = new Vector(Math.Cos(flashlightAngle * Math.PI / 180), Math.Sin(flashlightAngle * Math.PI / 180));
-            // double distance = 1000;
-            // endPoint = new Point(playerPos.X + direction.X * distance, playerPos.Y + direction.Y * distance);
+                // pojebana matma z chatu do endpointu strzalu
+                double flashlightAngle = ((RotateTransform)flashLightImage.RenderTransform).Angle;
+                Vector direction = new Vector(Math.Cos(flashlightAngle * Math.PI / 180), Math.Sin(flashlightAngle * Math.PI / 180));
+                // double distance = 1000;
+                // endPoint = new Point(playerPos.X + direction.X * distance, playerPos.Y + direction.Y * distance);
+                ChoiceSound();
+                shoot.Play();
+                weapon.Shoot(playerPos, direction, obstacles, allEnemies, gameCanvas);
+            }
+        }
+        public void ChoiceSound()
+        {
+            if (weapon.name == "Family Gun")
+            {
+                shoot = new SoundPlayer("sound/eeee.wav");
+            }
+            else if (weapon.name == "Pistol")
+            {
+                shoot = new SoundPlayer("sound/shoot.wav");
+            }
+            else if (weapon.name == "SMG")
+            {
+                shoot = new SoundPlayer("sound/shoot.wav");
 
-            shoot.Play();
-            weapon.Shoot(playerPos, direction, obstacles, allEnemies, gameCanvas);
+            }
+            else if (weapon.name == "M4A1")
+            {
+                shoot = new SoundPlayer("sound/shoot.wav");
+
+            }
+            else if (weapon.name == "Shotgun")
+            {
+                shoot = new SoundPlayer("sound/ShotgunShot.wav");
+            }
+            else 
+            {
+                shoot = new SoundPlayer("sound/shoot.wav");
+            }
         }
 
         public void SetAllEnemies(List<Enemy> allEnemies)
