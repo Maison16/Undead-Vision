@@ -22,7 +22,7 @@ namespace Wizja.classes.guns
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
-            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 6, 500, 5, targets, enemies, gameCanvas);
+            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 6, this.range, this.dmg, targets, enemies, gameCanvas);
         }
     }
 }

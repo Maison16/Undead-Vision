@@ -35,8 +35,6 @@ namespace Wizja.classes
             this.weapon = w;
         }
         public Player(Canvas gameCanvas, HUD hud, List<Rectangle> obstacles)
-
-
         {
             healthPoints = 100;
             movingSpeed = 4;
@@ -66,7 +64,7 @@ namespace Wizja.classes
             gameCanvas.Children.Add(flashLightImage);
             playerImage.RenderTransformOrigin = new Point(0.5, 0.5);
 
-            this.weapon = new StartGun();
+            this.weapon = new Shotgun();
         }
         public void TakeDamage(int damage)
         {

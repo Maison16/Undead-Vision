@@ -29,6 +29,16 @@ namespace Wizja.classes
             this.cost = cost;
             this.img = img;
         }
+        public Vector RotateVector(Vector vector, float angle)
+        {
+            double cosTheta = (float)Math.Cos(angle);
+            double sinTheta = (float)Math.Sin(angle);
+
+            double newX = vector.X * cosTheta - vector.Y * sinTheta;
+            double newY = vector.X * sinTheta + vector.Y * cosTheta;
+
+            return new Vector(newX, newY);
+        }
 
         public abstract void Shoot(Point playerPos, Vector direction, List<Rectangle> mapObjects, List<Enemy> enemies, Canvas gameCanvas);
     }
