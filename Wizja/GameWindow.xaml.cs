@@ -79,7 +79,7 @@ namespace Wizja
         }
         private void GameTick(object sender, ElapsedEventArgs e)
         {
-            try
+            try //timer obsługa
             {
                 gameCanvas.Dispatcher.Invoke(() =>
                 {
@@ -101,7 +101,7 @@ namespace Wizja
                 });
             }
             catch { }
-        }
+        } 
 
        
 
