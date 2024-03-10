@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Wizja.Enemies;
+using System.Net;
 
 namespace Wizja.classes
 {
@@ -112,6 +113,12 @@ namespace Wizja.classes
         {
             /// Sekcja ogólna
 
+            LinearGradientBrush gradient = new LinearGradientBrush();
+            gradient.StartPoint = new Point(0.5, 0);
+            gradient.EndPoint = new Point(0.5, 1);
+            gradient.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x37, 0x00, 0x00), 0));
+            gradient.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xB1, 0x00, 0x00), 1));
+
             // Zewnetrzne tlo
             shopCanvas.Background = Brushes.DarkRed;
 
@@ -120,7 +127,8 @@ namespace Wizja.classes
             {
                 Width = 1640,
                 Height = 750,
-                Fill = Brushes.DarkSalmon
+                Fill = Brushes.Tan
+
             };
             Canvas.SetLeft(insideBackground, 10);
             Canvas.SetTop(insideBackground, 60);
@@ -142,7 +150,7 @@ namespace Wizja.classes
             closeButton.FontWeight = FontWeights.Bold;
             closeButton.Width = 100;
             closeButton.Height = 40;
-            closeButton.Background = Brushes.Red;
+            closeButton.Background = gradient;
             closeButton.Foreground = Brushes.White;
             closeButton.BorderBrush = Brushes.Black;
             closeButton.BorderThickness = new Thickness(3);
@@ -159,8 +167,8 @@ namespace Wizja.classes
             weaponsLabel.FontSize = 24;
             weaponsLabel.FontWeight = FontWeights.Bold;
             weaponsLabel.Foreground = Brushes.White;
-            weaponsLabel.Background = Brushes.DarkRed;
-            weaponsLabel.BorderBrush = Brushes.DarkRed;
+            weaponsLabel.Background = gradient;
+            weaponsLabel.BorderBrush = gradient;
             weaponsLabel.BorderThickness = new Thickness(5);
             Canvas.SetLeft(weaponsLabel, 300);
             Canvas.SetTop(weaponsLabel, 70);
@@ -175,8 +183,8 @@ namespace Wizja.classes
             armorLabel.FontSize = 24;
             armorLabel.FontWeight = FontWeights.Bold;
             armorLabel.Foreground = Brushes.White;
-            armorLabel.Background = Brushes.DarkRed;
-            armorLabel.BorderBrush = Brushes.DarkRed;
+            armorLabel.Background = gradient;
+            armorLabel.BorderBrush = gradient;
             armorLabel.BorderThickness = new Thickness(5);
             Canvas.SetLeft(armorLabel, 1170);
             Canvas.SetTop(armorLabel, 70);

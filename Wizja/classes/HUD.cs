@@ -53,11 +53,18 @@ namespace Wizja.classes
             Canvas.SetLeft(weaponRect, 10);
             Canvas.SetTop(weaponRect, 970);
             statCanvas.Children.Add(weaponRect);
+
+            LinearGradientBrush gradient = new LinearGradientBrush();
+            gradient.StartPoint = new Point(0.5, 0);
+            gradient.EndPoint = new Point(0.5, 1);
+            gradient.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x37, 0x00, 0x00), 0));
+            gradient.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xB1, 0x00, 0x00), 1));
+
             Rectangle statBar = new Rectangle
             {
                 Width = statCanvas.Width,
                 Height = statCanvas.Height,
-                Fill = Brushes.DarkRed
+                Fill = gradient
             };
             Canvas.SetLeft(statBar, 0);
             Canvas.SetTop(statBar, 0);
@@ -76,7 +83,7 @@ namespace Wizja.classes
             {
                 Content = $"{hp}",
                 FontSize = 50,
-                Foreground = Brushes.Gold
+                Foreground = Brushes.White
             };
             Canvas.SetLeft(hpLabel, 100);
             Canvas.SetTop(hpLabel, 15);
@@ -97,7 +104,7 @@ namespace Wizja.classes
             {
                 Content = $"{time}s",
                 FontSize = 50,
-                Foreground = Brushes.Gold
+                Foreground = Brushes.White
             };
             Canvas.SetLeft(timeLabel, 950);
             Canvas.SetTop(timeLabel, 15);
@@ -117,7 +124,7 @@ namespace Wizja.classes
             {
                 Content = $"{money}",
                 FontSize = 50,
-                Foreground = Brushes.Gold
+                Foreground = Brushes.White
             };
             Canvas.SetLeft(moneyLabel, 1700);
             Canvas.SetTop(moneyLabel, 15);
@@ -136,7 +143,7 @@ namespace Wizja.classes
             {
                 Content = "Press 'B' to open Shop",
                 FontSize = 32,
-                Foreground = Brushes.Gold
+                Foreground = Brushes.White
             };
             Canvas.SetLeft(nearLabel, 1595);
             Canvas.SetTop(nearLabel, 1030);
