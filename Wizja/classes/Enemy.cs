@@ -11,17 +11,17 @@ public class Enemy
     public int healthPoints;
     public int damagePoints;
     public int value; // Wartość pięniedzy które opuszcza po śmierci
-    private double movingSpeed;
+    protected double movingSpeed;
     public Rectangle enemyImage;
     public bool isLiving = false; // True jężeli przeciwnik żyje oraz jest na mapie
-    private int coolDown = 62; // Co ileś ticków zadaje obrażenia
-    private int tickCount = 0;
-    static private Player player;
+    protected int coolDown = 62; // Co ileś ticków zadaje obrażenia
+    protected int tickCount = 0;
+    static protected Player player;
     
     //odtwarzanie asynchronicznie dostawania hitka
     public SoundPlayer auch = new SoundPlayer("sound/auch.wav");
 
-    public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource, int Width, int Height)
+     public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource, int Width, int Height)
     {
 
         this.healthPoints = helthPoints;
@@ -72,7 +72,7 @@ public class Enemy
         player = player1;
     }
     // Porusz przeciwników w strone playera 
-    public void Follow(Rectangle playerLocation, Canvas gameScreen)
+    virtual public void Follow(Rectangle playerLocation, Canvas gameScreen)
     {
         Random rnd = new Random();
         double x = Canvas.GetLeft(enemyImage);
