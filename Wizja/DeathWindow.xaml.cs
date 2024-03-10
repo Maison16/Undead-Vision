@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,6 +38,9 @@ namespace Wizja
             Canvas.SetLeft(score, 800);
             Canvas.SetTop(score, 450);
             deathCanvas.Children.Add(score);
+
+            SoundPlayer deathSound = new SoundPlayer("sound/death.wav");
+            deathSound.Play();
         }
         private void closeWindow(object sender, RoutedEventArgs e)
         {

@@ -114,13 +114,14 @@ namespace Wizja
             int[][] enemyLists = new int[5][];
 
 
+           
             spawner = new Spawner(enemiesSpawner, 5, gameCanvas, player);
             enemyLists[0] = new int[] { 75, 25, 0, 0 };
-            enemyLists[1] = new int[] { 60, 35, 15, 0 };
-            enemyLists[2] = new int[] { 40, 35, 25, 0 };
+            enemyLists[1] = new int[] { 55, 35, 15, 5 };
+            enemyLists[2] = new int[] { 35, 35, 20, 10 };
             enemyLists[3] = new int[] { 15, 40, 35, 10 };
             enemyLists[4] = new int[] { 5, 40, 35, 20 };
-            spawner.GenerateEnemies(enemyLists[0], 12, 0, 125);
+            spawner.GenerateEnemies(enemyLists[0], 1, 0, 125);
             spawner.GenerateEnemies(enemyLists[1], 24, 1, 115);
             spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);
             spawner.GenerateEnemies(enemyLists[3], 48, 3, 105);
@@ -132,7 +133,7 @@ namespace Wizja
 
         private void EndOfGame()
         {
-            if (player.healthPoints == 0)
+            if (player.healthPoints == 0 || ( spawner.AllDead() && spawner.currentRound == 5))
             {
                 DeathWindow deathWindow = new DeathWindow(hud);
                 gameTimer.Stop();

@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="res\sounds\**" />
+    <EmbeddedResource Remove="res\sounds\**" />
+    <None Remove="res\sounds\**" />
+    <Page Remove="res\sounds\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="res\armor.png" />
     <None Remove="res\background1.png" />
     <None Remove="res\chapel.png" />
