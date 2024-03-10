@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Media;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -16,10 +17,13 @@ public class Enemy
     private int coolDown = 62; // Co ileś ticków zadaje obrażenia
     private int tickCount = 0;
     static private Player player;
-
+    
+    //odtwarzanie asynchronicznie dostawania hitka
+    public SoundPlayer auch = new SoundPlayer("sound/auch.wav");
 
     public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource, int Width, int Height)
     {
+
         this.healthPoints = helthPoints;
         this.damagePoints = damagePoints;
         this.value = value;
@@ -147,11 +151,12 @@ public class Enemy
         return i;
     }
 
-    public int DealDamage()
+    public int DealDamage() 
     {
         if (tickCount == 0)
         {
             tickCount++;
+            auch.Play();
             return damagePoints;
         }
         else if (tickCount < coolDown)
@@ -164,4 +169,5 @@ public class Enemy
         }
         return 0;
     }
+
 }

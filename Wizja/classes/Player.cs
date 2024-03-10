@@ -28,8 +28,9 @@ namespace Wizja.classes
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
         public static ImageSource flashLightSource = new BitmapImage(new Uri("pack://application:,,,/res/flashlight.png"));
         public HUD hud;
-        public SoundPlayer piu = new SoundPlayer("piu.wav");
-
+        //odtwarzanie  strzału
+        public SoundPlayer shoot = new SoundPlayer("sound/shoot.wav");
+    
         public void setWeapon(Weapon w)
         {
             this.weapon = w;
@@ -135,7 +136,7 @@ namespace Wizja.classes
             // double distance = 1000;
             // endPoint = new Point(playerPos.X + direction.X * distance, playerPos.Y + direction.Y * distance);
 
-            piu.Play();
+            shoot.Play();
             weapon.Shoot(playerPos, direction, obstacles, allEnemies, gameCanvas);
         }
 
