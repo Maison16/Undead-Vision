@@ -109,7 +109,7 @@ public class Spawner
             }
         }
         tickCount++;
-        if (AllDead() && currentRound < rounds)
+        if (AllDead() && currentRound <= rounds)
         {
             player.hud.SetTime(30);
             enemyCurrentNumber = 0;
