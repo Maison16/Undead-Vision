@@ -151,6 +151,7 @@ namespace Wizja
         {
             if (player.healthPoints == 0 || ( spawner.AllDead() && spawner.currentRound == 5))
             {
+                ObjectLoader.hitObjects.Clear();
                 DeathWindow deathWindow = new DeathWindow(hud);
                 gameTimer.Stop();
                 deathWindow.Show();

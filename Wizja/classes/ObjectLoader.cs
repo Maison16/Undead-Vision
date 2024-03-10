@@ -7,7 +7,7 @@ namespace Wizja.classes
 {
     public class ObjectLoader
     {
-        static private List<Rectangle> hitObjects = new List<Rectangle>();
+        static public List<Rectangle> hitObjects = new List<Rectangle>();
         static private List<Rectangle> movingObjects = new List<Rectangle>();
         static private Canvas gameCanvas;
         private ImageBrush sanctuaryImage = new ImageBrush();
