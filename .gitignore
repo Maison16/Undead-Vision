@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Wizja/bin/Debug/net8.0-windows/Wizja.dll
+/Wizja/bin/Debug/net8.0-windows/Wizja.exe
