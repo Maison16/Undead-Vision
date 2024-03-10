@@ -97,8 +97,8 @@ namespace Wizja
             enemyLists[0] = new int[] { 75, 25, 0, 0 };
             enemyLists[1] = new int[] { 60, 35, 15, 0 };
             enemyLists[2] = new int[] { 40, 35, 25, 0 };
-            enemyLists[3] = new int[] { 25, 40, 25, 0 };
-            enemyLists[4] = new int[] { 10, 45, 45, 0 };
+            enemyLists[3] = new int[] { 15, 40, 35, 10 };
+            enemyLists[4] = new int[] { 5, 40, 35, 20 };
             spawner.GenerateEnemies(enemyLists[0], 12, 0, 125);
             spawner.GenerateEnemies(enemyLists[1], 24, 1, 115);
             spawner.GenerateEnemies(enemyLists[2], 36, 2, 110);

@@ -32,7 +32,6 @@ public class Enemy
             Name = "Enemy"
         };
         enemyImage.RenderTransformOrigin = new Point(0.5, 0.5);
-        Console.WriteLine(enemyImage.Tag);
     }
 
     //Sprawdza kolizje między potworem a drugim obiektem

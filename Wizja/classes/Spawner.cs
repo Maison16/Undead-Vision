@@ -159,6 +159,10 @@ public class Spawner
     }
     private Rectangle ColisionWithBulding(Enemy enemy, List<Rectangle> mapObject)
     {
+        if (enemy.GetType().ToString().Contains("ShootingZombie"))
+        {
+            return player.playerImage;
+        }
         foreach (Rectangle rectangle in mapObject)
         {
             Rect building = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rectangle.Width, rectangle.Height);

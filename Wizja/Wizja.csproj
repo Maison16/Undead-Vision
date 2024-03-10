@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -20,6 +20,7 @@
     <None Remove="res\fenceHorizontal.png" />
     <None Remove="res\fenceVertical.png" />
     <None Remove="res\flashlight.png" />
+    <None Remove="res\Ghost.png" />
     <None Remove="res\grandcross.png" />
     <None Remove="res\ground.png" />
     <None Remove="res\hpIcon.png" />
@@ -64,6 +65,9 @@
     </Resource>
     <Resource Include="res\chapel.png" />
     <Resource Include="res\flashlight.png" />
+    <Resource Include="res\Ghost.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
