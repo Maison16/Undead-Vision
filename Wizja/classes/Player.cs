@@ -172,12 +172,12 @@ namespace Wizja.classes
             }
             else if (weapon.name == "SMG")
             {
-                shoot = new SoundPlayer("sound/shoot.wav");
+                shoot = new SoundPlayer("sound/smg.wav");
 
             }
             else if (weapon.name == "M4A1")
             {
-                shoot = new SoundPlayer("sound/shoot.wav");
+                shoot = new SoundPlayer("sound/rfileShot.wav");
 
             }
             else if (weapon.name == "Shotgun")
@@ -186,7 +186,7 @@ namespace Wizja.classes
             }
             else 
             {
-                shoot = new SoundPlayer("sound/shoot.wav");
+                shoot = new SoundPlayer("sound/stoneDrop.wav");
             }
         }
 

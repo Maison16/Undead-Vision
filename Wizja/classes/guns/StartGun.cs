@@ -18,7 +18,7 @@ namespace Wizja.classes.guns
     public class StartGun : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/rock.png"));
-        public StartGun() : base("Pistol", 1, 150, 100, img) { this.SetCoolDown(20); }
+        public StartGun() : base("Kamien", 1, 200, 100, img) { this.SetCoolDown(20); }
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {

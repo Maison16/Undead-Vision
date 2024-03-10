@@ -18,7 +18,7 @@ namespace Wizja.classes.guns
     public class BaseGun : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/pistol.png"));
-        public BaseGun() : base("Pistol", 1, 250, 100, img) // obrazenia, zasieg, koszt
+        public BaseGun() : base("Pistol", 2, 350, 100, img) // obrazenia, zasieg, koszt
         {
             this.SetCoolDown(15);
         } 
