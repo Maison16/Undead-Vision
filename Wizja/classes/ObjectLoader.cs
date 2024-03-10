@@ -30,7 +30,7 @@ namespace Wizja.classes
         {
             sanctuaryImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/chapel.png"));
             tombstoneImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/tombstone.png"));
-            treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
+            treeImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/tree.png"));
             grandCrossImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/grandcross.png"));
             backgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/ground.png"));
             woodenFenceHorizontal.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/fenceHorizontal.png"));
@@ -42,9 +42,32 @@ namespace Wizja.classes
         {
             BuildMap(backgroundImage);
             BuildFences();
-            BuildConstrution(300, 800, sanctuaryImage, 200, 300);
-            BuildConstrution(3800, 3500, sanctuaryImage, 200, 300);
-            BuildConstrution(4600, 2000, sanctuaryImage, 200, 300);
+            BuildConstrution(400, 800, sanctuaryImage, 300, 400);
+
+            BuildConstrution(3800, 900, treeImage, 200, 300);
+            BuildConstrution(1000, 1200, treeImage, 200, 300);
+            BuildConstrution(2300, 300, treeImage, 200, 300);
+            BuildConstrution(5400, 3200, treeImage, 200, 300);
+            BuildConstrution(1800, 3200, treeImage, 200, 300);
+            BuildConstrution(1000, 200, treeImage, 200, 300);
+            BuildConstrution(1000, 200, treeImage, 200, 300);
+            BuildConstrution(5400, 200, treeImage, 200, 300);
+            BuildConstrution(4600, 300, treeImage, 200, 300);
+            BuildConstrution(3600, 600, tombstoneImage, 50, 50);
+            BuildConstrution(3600, 400, tombstoneImage, 50, 50);
+            BuildConstrution(3800, 600, tombstoneImage, 50, 50);
+            BuildConstrution(3800, 400, tombstoneImage, 50, 50);
+            BuildConstrution(4600, 100, tombstoneImage, 50, 50);
+            BuildConstrution(2700, 2000, grandCrossImage, 66, 100);
+            BuildConstrution(2500, 2000, grandCrossImage, 66, 100);
+            BuildConstrution(1100, 2000, treeImage, 200, 250);
+            BuildConstrution(5000, 1600, treeImage, 200, 250);
+
+            BuildConstrution(3400, 3200, sanctuaryImage, 300, 400);
+            BuildConstrution(3800, 3200, treeImage, 200, 300);
+            BuildConstrution(3100, 3200, treeImage, 200, 300);
+
+            BuildConstrution(4600, 1900, sanctuaryImage, 300, 400);
             BuildConstrution(5000, 2310, tombstoneImage, 50, 50);
             BuildConstrution(5000, 2510, tombstoneImage, 50, 50);
             BuildConstrution(5000, 2710, tombstoneImage, 50, 50);
@@ -57,6 +80,21 @@ namespace Wizja.classes
             BuildConstrution(4400, 2310, tombstoneImage, 50, 50);
             BuildConstrution(4400, 2510, tombstoneImage, 50, 50);
             BuildConstrution(4400, 2710, tombstoneImage, 50, 50);
+
+            BuildConstrution(100, 550, grandCrossImage, 66, 100);
+            BuildConstrution(300, 350, grandCrossImage, 100, 150);
+            BuildConstrution(500, 150, grandCrossImage, 140, 200);
+            BuildConstrution(700, 350, grandCrossImage, 100, 150);
+            BuildConstrution(900, 550, grandCrossImage, 66, 100);
+
+            BuildConstrution(200, 3500, tombstoneImage, 50, 50);
+            BuildConstrution(400, 3500, tombstoneImage, 50, 50);
+            BuildConstrution(600, 3500, tombstoneImage, 50, 50);
+            BuildConstrution(800, 3500, tombstoneImage, 50, 50);
+            BuildConstrution(200, 3700, tombstoneImage, 50, 50);
+            BuildConstrution(400, 3700, tombstoneImage, 50, 50);
+            BuildConstrution(600, 3700, tombstoneImage, 50, 50);
+            BuildConstrution(800, 3700, tombstoneImage, 50, 50);
 
 
 

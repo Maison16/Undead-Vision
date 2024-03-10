@@ -57,7 +57,7 @@ namespace Wizja.classes
         bool onePress = true;
         private void NearChecker(object sender, EventArgs e)
         {
-            shopRange = new Rect(Canvas.GetLeft(shopBuild)-20, Canvas.GetTop(shopBuild)-20, shopBuild.Width+40, shopBuild.Height+40);
+            shopRange = new Rect(Canvas.GetLeft(shopBuild)-50, Canvas.GetTop(shopBuild)-50, shopBuild.Width+100, shopBuild.Height+100);
             playerHitBox = new Rect(Canvas.GetLeft(player.playerImage), Canvas.GetTop(player.playerImage), player.playerImage.Width, player.playerImage.Height);
             if ((playerHitBox.IntersectsWith(shopRange))&&(hud.GetTime()>0))
             {
