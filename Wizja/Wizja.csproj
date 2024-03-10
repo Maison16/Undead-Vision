@@ -1,12 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="res\sounds\**" />
+    <EmbeddedResource Remove="res\sounds\**" />
+    <None Remove="res\sounds\**" />
+    <Page Remove="res\sounds\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="res\armor.png" />
