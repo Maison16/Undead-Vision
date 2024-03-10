@@ -23,6 +23,10 @@
     <None Remove="res\coinIcon.png" />
     <None Remove="res\familyguy.png" />
     <None Remove="res\FastZombie.png" />
+    <None Remove="res\FastZombieLF1.png" />
+    <None Remove="res\FastZombieLF2.png" />
+    <None Remove="res\FastZombieRF1.png" />
+    <None Remove="res\FastZombieRF2.png" />
     <None Remove="res\fenceFlipped.png" />
     <None Remove="res\fenceHorizontal.png" />
     <None Remove="res\fenceVertical.png" />
@@ -58,12 +62,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="res\FastZombieRF1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="res\clockIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\coinIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="res\FastZombieLF1.png" />
+    <Resource Include="res\FastZombieLF2.png" />
+    <Resource Include="res\FastZombieRF2.png" />
     <Resource Include="res\fenceFlipped.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
