@@ -9,17 +9,19 @@ using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
+using System.Numerics;
 
 namespace Wizja.classes
 {
     public static class MovementHandler
     {
         static Player Player;
+        private static Label pathLabel;
 
-
-        public static void initialize(Player player)
+        public static void initialize(Player player, Label PathLabel)
         {
             Player = player;
+            pathLabel=PathLabel;
         }
 
         public static void Step(bool[] direction, List<Rectangle> movableEntities1, List<Rectangle> movableEntities2, List<Rectangle> movableEntities3, List<Rectangle> staticobjects)
@@ -29,6 +31,7 @@ namespace Wizja.classes
             {
                 if (TryUp(staticobjects))
                 {
+                    Canvas.SetTop(pathLabel, Canvas.GetTop(pathLabel) + Player.movingSpeed);
                     GoUp(movableEntities1);
                     GoUp(movableEntities2);
                     GoUp(movableEntities3);
@@ -37,6 +40,7 @@ namespace Wizja.classes
             if (direction[1])
                 if (TryLeft(staticobjects))
                 {
+                    Canvas.SetLeft(pathLabel, Canvas.GetLeft(pathLabel) + Player.movingSpeed);
                     GoLeft(movableEntities1);
                     GoLeft(movableEntities2);
                     GoLeft(movableEntities3);
@@ -45,14 +49,15 @@ namespace Wizja.classes
             if (direction[2])
                 if (TryDown(staticobjects))
                 {
+                    Canvas.SetTop(pathLabel, Canvas.GetTop(pathLabel) - Player.movingSpeed);
                     GoDown(movableEntities1);
                     GoDown(movableEntities2);
                     GoDown(movableEntities3);
                 }
-
             if (direction[3])
                 if (TryRight(staticobjects))
                 {
+                    Canvas.SetLeft(pathLabel, Canvas.GetLeft(pathLabel) - Player.movingSpeed);
                     GoRight(movableEntities1);
                     GoRight(movableEntities2);
                     GoRight(movableEntities3);

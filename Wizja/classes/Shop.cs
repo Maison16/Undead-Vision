@@ -59,11 +59,11 @@ namespace Wizja.classes
         {
             shopRange = new Rect(Canvas.GetLeft(shopBuild)-50, Canvas.GetTop(shopBuild)-50, shopBuild.Width+100, shopBuild.Height+100);
             playerHitBox = new Rect(Canvas.GetLeft(player.playerImage), Canvas.GetTop(player.playerImage), player.playerImage.Width, player.playerImage.Height);
-            if ((playerHitBox.IntersectsWith(shopRange))&&(hud.GetTime()>0))
+            if ((playerHitBox.IntersectsWith(shopRange)) && (hud.GetTime() > 0))
             {
                 hud.NearShopShow();
                 ShopIsOpen();
-
+                gameWindow.pathLabel.Visibility = Visibility.Hidden;
                 if (gameWindow.getB() == true)
                 {
                     if (isShow == false && onePress == true)
@@ -90,6 +90,10 @@ namespace Wizja.classes
                 ShopIsClose();
                 shopCanvas.Children.Clear();
                 shopCanvas.Background = null;
+                if (hud.GetTime() > 0)
+                {
+                    gameWindow.pathLabel.Visibility = Visibility.Visible;
+                }
             }
         }
 

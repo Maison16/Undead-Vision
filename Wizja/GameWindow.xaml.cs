@@ -1,4 +1,6 @@
 ﻿using System.Media;
+using System.Reflection.Emit;
+using System.Security.Policy;
 using System.Threading;
 using System.Timers;
 using System.Windows;
@@ -8,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wizja.classes;
+using Label = System.Windows.Controls.Label;
 
 namespace Wizja
 {
@@ -18,14 +21,12 @@ namespace Wizja
     {
         bool[] direction = new bool[4];
         bool isBpressed = false;
-        private int waveNumber = 0;
-        private int enemyCount = 0;
         //Testy przeciwników
         private ObjectLoader objectLoader;
         private Shop itemshop;
-        private Label enemyCounterLabel;
         private Rectangle skullIcon;
         private ImageBrush skullImage = new ImageBrush();
+        public Label pathLabel;
         public Spawner spawner;
         public Player player;
         public HUD hud;
@@ -41,6 +42,7 @@ namespace Wizja
             
             hud = new HUD(100, 10, 50, statCanvas);
             CreateEnemyCounter();
+            CreatePathLabel();
             //Tworzenie shop
             itemshop = new Shop(gameCanvas, shopCanvas, hud, this);
 
@@ -60,6 +62,21 @@ namespace Wizja
 
 
         }
+
+        private void CreatePathLabel()
+        {
+            pathLabel = new Label
+            {
+                Content = $"TO SHOP",
+                FontSize = 50,
+                Foreground = Brushes.White,
+                FontWeight = FontWeights.Bold
+            };
+            Canvas.SetLeft(pathLabel, 3100);
+            Canvas.SetTop(pathLabel, 1650);
+            pathCanvas.Children.Add(pathLabel);
+
+        }
         private void GameTick(object sender, ElapsedEventArgs e)
         {
             try
@@ -70,6 +87,7 @@ namespace Wizja
                     //po przerwie spawnuje nowych przeciwników
                     if (hud.GetTime() == 0)
                     {
+                        pathLabel.Visibility = Visibility.Hidden;
                         skullIcon.Visibility = Visibility.Visible;
                         spawner.Spawn();
                         spawner.MoveEveryOne(player, objectLoader.GetListMapObjects());
@@ -84,11 +102,14 @@ namespace Wizja
             }
             catch { }
         }
+
+       
+
         private void testing_ERYK()
         {
             player = new Player(gameCanvas, hud, objectLoader.GetListMapObjects());
             player.MouseMoveHandler(gameCanvas);
-            MovementHandler.initialize(player);
+            MovementHandler.initialize(player, pathLabel);
             List<Point> enemiesSpawner = new List<Point>() { new Point(5500, 500), new Point(5500, 3500), new Point(500, 500), new Point(500, 3500) };
             int[][] enemyLists = new int[5][];
 
