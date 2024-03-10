@@ -35,7 +35,6 @@ namespace Wizja.classes
             }
             foreach (Enemy target in enemies)
             {
-                UpdateEndWithCollision(target.enemyImage);
                 if (target.enemyImage != null && hitBoxes.Count > 0)
                 {
                     foreach (Rect hitbox in hitBoxes)
@@ -47,7 +46,6 @@ namespace Wizja.classes
                                 gameCanvas.Children.Remove(target.enemyImage);
                                 hitBoxes.Remove(hitbox);
                             }
-
                             break;
                         }
                     }
