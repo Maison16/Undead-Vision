@@ -25,7 +25,7 @@ namespace Wizja.classes
         private List<Rectangle> obstacles;
         private List<Enemy> allEnemies;
         private Weapon weapon;
-        public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
+        //public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
         public static ImageSource flashLightSource = new BitmapImage(new Uri("pack://application:,,,/res/flashlight.png"));
         public HUD hud;
         //odtwarzanie  strzału
@@ -35,6 +35,10 @@ namespace Wizja.classes
         {
             this.weapon = w;
         }
+        public Weapon getWeapon()
+        {
+            return weapon;
+        }
         public Player(Canvas gameCanvas, HUD hud, List<Rectangle> obstacles)
         {
             healthPoints = 100;
@@ -43,11 +47,18 @@ namespace Wizja.classes
             this.obstacles = obstacles;
             this.allEnemies = allEnemies;
 
+            // tutaj wczytuje obraz playera nasz nowy player to rotated player
+            TransformedBitmap rotatedPlayer = new TransformedBitmap();
+            rotatedPlayer.BeginInit();
+            rotatedPlayer.Source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
+            rotatedPlayer.Transform = new RotateTransform(-90);
+            rotatedPlayer.EndInit();
+
             playerImage = new Rectangle()
             {
-                Width = 47,
-                Height = 75,
-                Fill = new ImageBrush(source)
+                Width = 75,
+                Height = 47,
+                Fill = new ImageBrush(rotatedPlayer)
             };
             flashLightImage = new Rectangle()
             {
