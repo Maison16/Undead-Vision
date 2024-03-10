@@ -55,7 +55,7 @@ namespace Wizja.classes
                 Width = 3000,
                 Height = 3000,
                 Fill = new ImageBrush(flashLightSource),
-                Opacity = 0.98
+                Opacity = 0.97
             };
             Panel.SetZIndex(flashLightImage, int.MaxValue);
             Canvas.SetLeft(playerImage, 3000);
@@ -95,12 +95,31 @@ namespace Wizja.classes
             Point playerPosition = new Point(Canvas.GetLeft(flashLightImage) + flashLightImage.Width / 2, Canvas.GetTop(flashLightImage) + flashLightImage.Height / 2);
             double angle = Math.Atan2(mousePosition.Y - playerPosition.Y, mousePosition.X - playerPosition.X) * (180 / Math.PI);
             RotateDarknes(angle);
+            RotatePlayer(angle);
         }
         private void RotateDarknes(double angle)
         {
             flashLightImage.RenderTransformOrigin = new Point(0.5, 0.5);
             RotateTransform rotateTransform = new RotateTransform(angle);
             flashLightImage.RenderTransform = rotateTransform;
+        }
+        private void RotatePlayer(double angle)
+        {
+            playerImage.RenderTransformOrigin = new Point(0.5, 0.5);
+            RotateTransform rotateTransform = new RotateTransform(angle);
+            TransformGroup transformGroup = new TransformGroup();
+
+            //player.RenderTransform = rotateTransform;
+            if (Math.Abs(angle) > 90)
+            {
+                ScaleTransform reflectTransform = new ScaleTransform(1, -1);
+                transformGroup.Children.Add(reflectTransform);
+                transformGroup.Children.Add(rotateTransform);
+            }
+            else
+                transformGroup.Children.Add(rotateTransform);
+            playerImage.RenderTransform = transformGroup;
+
         }
 
         public void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

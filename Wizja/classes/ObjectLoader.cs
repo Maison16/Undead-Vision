@@ -47,10 +47,9 @@ namespace Wizja.classes
             BuildConstrution(3800, 900, treeImage, 200, 300);
             BuildConstrution(1000, 1200, treeImage, 200, 300);
             BuildConstrution(2300, 300, treeImage, 200, 300);
-            BuildConstrution(5400, 3200, treeImage, 200, 300);
+            BuildConstrution(5300, 3000, treeImage, 200, 300);
             BuildConstrution(1800, 3200, treeImage, 200, 300);
-            BuildConstrution(1000, 200, treeImage, 200, 300);
-            BuildConstrution(1000, 200, treeImage, 200, 300);
+            BuildConstrution(1400, 400, treeImage, 200, 300);
             BuildConstrution(5400, 200, treeImage, 200, 300);
             BuildConstrution(4600, 300, treeImage, 200, 300);
             BuildConstrution(3600, 600, tombstoneImage, 50, 50);
