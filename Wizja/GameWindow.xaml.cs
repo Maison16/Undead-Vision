@@ -30,6 +30,8 @@ namespace Wizja
         public Spawner spawner;
         public Player player;
         public HUD hud;
+        int animTimer = 0;
+        bool walkin = false;
 
         private System.Timers.Timer gameTimer = new System.Timers.Timer();
         public GameWindow()
@@ -93,6 +95,24 @@ namespace Wizja
                     else
                     {
                         skullIcon.Visibility = Visibility.Hidden;
+                    }
+
+                    animTimer = (animTimer+1)%32;
+
+                    if(walkin)
+                    {
+                        if(animTimer >= 0 && animTimer < 16)
+                        {
+                            player.playerImage.Fill = new ImageBrush(player.rotatedPlayer1);
+                        }
+                        else
+                        {
+                            player.playerImage.Fill = new ImageBrush(player.rotatedPlayer2);
+                        }
+                    }
+                    else
+                    {
+                        player.playerImage.Fill = new ImageBrush(player.rotatedPlayer);
                     }
 
                 });
@@ -170,18 +190,22 @@ namespace Wizja
             if (e.Key == Key.W)
             {
                 direction[0] = true;
+                walkin = true;
             }
             else if (e.Key == Key.A)
             {
                 direction[1] = true;
+                walkin = true;
             }
             else if (e.Key == Key.S)
             {
                 direction[2] = true;
+                walkin = true;
             }
             else if (e.Key == Key.D)
             {
                 direction[3] = true;
+                walkin = true;
             }
             else if (e.Key == Key.B)
             {
@@ -210,6 +234,11 @@ namespace Wizja
             else if (e.Key == Key.B)
             {
                 isBpressed = false;
+            }
+
+            if (!direction.Contains(true))
+            {
+                walkin = false;
             }
         }
         public bool getB()
