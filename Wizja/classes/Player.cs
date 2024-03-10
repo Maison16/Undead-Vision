@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,6 +28,7 @@ namespace Wizja.classes
         public static ImageSource source = new BitmapImage(new Uri("pack://application:,,,/res/Player.png"));
         public static ImageSource flashLightSource = new BitmapImage(new Uri("pack://application:,,,/res/flashlight.png"));
         public HUD hud;
+        public SoundPlayer piu = new SoundPlayer("piu.wav");
 
         public void setWeapon(Weapon w)
         {
@@ -114,6 +116,7 @@ namespace Wizja.classes
             // double distance = 1000;
             // endPoint = new Point(playerPos.X + direction.X * distance, playerPos.Y + direction.Y * distance);
 
+            piu.Play();
             weapon.Shoot(playerPos, direction, obstacles, allEnemies, gameCanvas);
         }
 

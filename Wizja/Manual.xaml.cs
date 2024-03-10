@@ -25,6 +25,19 @@ namespace Wizja
             var menuBackground = new ImageBrush();
             menuBackground.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/menu/menuBackground.png"));
             manualCanvas.Background = menuBackground;
+
+            var manual = new ImageBrush();
+            manual.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/menu/bigmanual.png"));
+
+            Rectangle image = new Rectangle
+            {
+                Width = 1365,
+                Height = 475,
+                Fill = manual
+            };
+            Canvas.SetLeft(image, 277);
+            Canvas.SetTop(image, 200);
+            manualCanvas.Children.Add(image);
         }
         private void closeWindow(object sender, RoutedEventArgs e)
         {

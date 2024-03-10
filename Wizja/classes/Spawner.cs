@@ -1,7 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Wizja.Enemies;
 
@@ -120,7 +118,7 @@ public class Spawner
         }
     }
     //Przesuwa wszystkie potwory i sprawdza czy mogą one zatakować gracza
-    public void MoveEveryOne(Player player, List <Rectangle> mapObject)
+    public void MoveEveryOne(Player player, List<Rectangle> mapObject)
     {
         for (int i = 0; i < rounds; i++)
         {
@@ -129,7 +127,7 @@ public class Spawner
                 enemy.SetPlayer(player);
                 Rectangle playerImage = player.playerImage;
 
-                if (enemy.isLiving )
+                if (enemy.isLiving)
                 {
                     Rect hitbox = new Rect(Canvas.GetLeft(playerImage), Canvas.GetTop(playerImage), playerImage.Width, playerImage.Height);
                     Rectangle rec = ColisionWithBulding(enemy, mapObject);
@@ -137,7 +135,7 @@ public class Spawner
                     {
                         enemy.BreakCollision(rec, gameScreen, playerImage);
                     }
-                    else 
+                    else
                     {
                         enemy.Follow(playerImage, gameScreen);
                     }
@@ -150,16 +148,16 @@ public class Spawner
             }
         }
     }
-    private bool AllDead() 
+    private bool AllDead()
     {
-        foreach (Enemy en in enemies[currentRound]) 
+        foreach (Enemy en in enemies[currentRound])
         {
-            if(en.isLiving)
-            return false;
+            if (en.isLiving)
+                return false;
         }
         return true;
     }
-    private Rectangle ColisionWithBulding(Enemy enemy,List<Rectangle> mapObject) 
+    private Rectangle ColisionWithBulding(Enemy enemy, List<Rectangle> mapObject)
     {
         foreach (Rectangle rectangle in mapObject)
         {
@@ -170,19 +168,21 @@ public class Spawner
             }
         }
         return player.playerImage;
-    } 
+    }
     //Sprawdza który z spawnerów są najbliżej playera i powinny spawnować przeciwników
     public List<SpawnerObject> TheClosestSpawners()
     {
         List<SpawnerObject> result = new List<SpawnerObject>();
-        SpawnerObject maxSpawnerObj = enemiesSpawner.ElementAt(1);
+        SpawnerObject maxSpawnerObj = enemiesSpawner.ElementAt(0);
         double maxDistance = maxSpawnerObj.DistanceToPlayer(player.playerImage);
         foreach (SpawnerObject spawnerObj in enemiesSpawner.Skip(1))
         {
-            if (maxDistance < spawnerObj.DistanceToPlayer(player.playerImage))
+            double distance = spawnerObj.DistanceToPlayer(player.playerImage);
+            if (maxDistance > distance)
             {
                 result.Add(maxSpawnerObj);
                 maxSpawnerObj = spawnerObj;
+                maxDistance = distance;
             }
             else
             {
