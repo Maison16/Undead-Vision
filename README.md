@@ -1,4 +1,4 @@
-![Alt Text](https://github.com/Maison16/Wizja/blob/master/Wizja/res/biglogo.png)
+![Alt Text](https://github.com/Maison16/Wizja/blob/master/Wizja/res/biglogoREADME.png)
 ---
 Undead Vision is a project that was created for a Game jam organised by a VR student research group on a Bialystok University of Technology. 
 
