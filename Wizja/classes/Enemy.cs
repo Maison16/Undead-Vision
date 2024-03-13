@@ -1,6 +1,7 @@
 ﻿using System.Media;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -20,11 +21,13 @@ public class Enemy
     protected int tickCount = 0;
     static protected Player player;
     protected Canvas upperCanvas;
-    
+    public DispatcherTimer timerBlackout;
+    public DispatcherTimer timerPinging;
     //odtwarzanie asynchronicznie dostawania hitka
     public SoundPlayer auch = new SoundPlayer("sound/auch.wav");
 
-     public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource, int Width, int Height, Canvas upperCanvas)
+
+    public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource, int Width, int Height, Canvas upperCanvas)
     {
         this.upperCanvas = upperCanvas;
         this.healthPoints = helthPoints;
@@ -46,6 +49,26 @@ public class Enemy
         };
         enemyImage.RenderTransformOrigin = new Point(0.5, 0.5);
         this.upperCanvas = upperCanvas;
+        timerBlackout = new DispatcherTimer();
+        timerPinging = new DispatcherTimer();
+        timerBlackout.Interval = TimeSpan.FromMilliseconds(500);
+        timerPinging.Interval = TimeSpan.FromMilliseconds(1500);
+        timerPinging.Tick += Pinging;
+        timerBlackout.Tick += Blackout;
+    }
+
+    private void Blackout(object sender, EventArgs e)
+    {
+        pointer.Visibility = Visibility.Hidden;
+        timerBlackout.Stop();
+        timerPinging.Start();
+    }
+
+    private void Pinging(object sender, EventArgs e)
+    {
+        pointer.Visibility = Visibility.Visible;
+        timerPinging.Stop();
+        timerBlackout.Start();
     }
 
     //Sprawdza kolizje między potworem a drugim obiektem

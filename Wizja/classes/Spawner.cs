@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Wizja.Enemies;
 
 namespace Wizja.classes;
@@ -16,6 +17,7 @@ public class Spawner
     private Canvas gameScreen;
     private Canvas upperCanvas;
     private Player player;
+
 
 
     public Spawner(List<Point> enemiesSpawner, int rounds, Canvas gameScreen, Player player, Canvas upperCanvas)
@@ -114,6 +116,8 @@ public class Spawner
                 upperCanvas.Children.Add(pointer);
                 temp.isLiving = true;
                 enemyCurrentNumber++;
+
+                temp.timerBlackout.Start();
             }
         }
         tickCount++;
@@ -146,6 +150,7 @@ public class Spawner
                     else
                     {
                         enemy.Follow(playerImage, gameScreen);
+                        
                     }
                     if (enemy.IsColision(hitbox))
                     {
