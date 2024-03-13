@@ -42,7 +42,7 @@ namespace Wizja
             objectLoader = new ObjectLoader(gameCanvas);
             //dodawanie obiektu hudu
             
-            hud = new HUD(100, 10, 300, statCanvas);
+            hud = new HUD(100, 10, 0, statCanvas);
             CreateEnemyCounter();
             CreatePathLabel();
             //Tworzenie shop
