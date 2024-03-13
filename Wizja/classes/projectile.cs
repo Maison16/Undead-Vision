@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.Eventing.Reader;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Wizja.Enemies;
 using T = System.Timers;
 
@@ -16,7 +18,7 @@ namespace Wizja.classes
         private Canvas gameCanvas;
         private Line projectileLine;
         private double range;
-        private T.Timer timer;
+        private T.Timer timer; 
 
         public Projectile(double startX, double startY, Vector direction, double thickness, double range, int damage, List<Rectangle> mapObjects, List<Enemy> enemies, Canvas gameCanvas)
         {
@@ -35,12 +37,31 @@ namespace Wizja.classes
             }
             foreach (Enemy target in enemies)
             {
+                bool isHited = false;
                 if (target.enemyImage != null && hitBoxes.Count > 0)
                 {
                     foreach (Rect hitbox in hitBoxes)
                     {
                         if (hitbox.IntersectsWith(new Rect(Canvas.GetLeft(target.enemyImage), Canvas.GetTop(target.enemyImage), target.enemyImage.Width, target.enemyImage.Height)))
                         {
+                            DispatcherTimer hitVisualizaionTimer = new DispatcherTimer();
+                            hitVisualizaionTimer.Interval = TimeSpan.FromMilliseconds(200);
+                            bool tick = false;
+                            hitVisualizaionTimer.Tick += (sender, e) =>
+                            {
+                                if(!tick)
+                                {
+                                    target.enemyImage.Opacity = 0.4;
+                                    tick = true;    
+                                }
+                                else
+                                {
+                                    target.enemyImage.Opacity = 1;
+                                    tick = false;
+                                    hitVisualizaionTimer.Stop();
+                                }
+                            };
+                            hitVisualizaionTimer.Start();
                             if (target.IsDead(damage))
                             {
                                 gameCanvas.Children.Remove(target.enemyImage);

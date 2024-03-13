@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Wizja.classes;
 
 namespace Wizja.Enemies;
@@ -170,6 +171,29 @@ public class Enemy
         {
             tickCount++;
             auch.Play();
+            DispatcherTimer hitVisualizaionTimer = new DispatcherTimer();
+            hitVisualizaionTimer.Interval = TimeSpan.FromMilliseconds(100);
+            bool tick = false;
+            int hitCounter = 0;
+            hitVisualizaionTimer.Tick += (sender, e) =>
+            {
+                if (!tick)
+                {
+                    player.playerImage.Opacity = 0.4;
+                    tick = true;
+                }
+                else
+                {
+                    player.playerImage.Opacity = 1;
+                    tick = false;
+                    hitCounter++;
+                }
+                if(hitCounter==4)
+                {
+                    hitVisualizaionTimer.Stop();
+                }
+            };
+            hitVisualizaionTimer.Start();
             return damagePoints;
         }
         else if (tickCount < coolDown)
