@@ -44,11 +44,15 @@ namespace Wizja.classes
                     {
                         if (hitbox.IntersectsWith(new Rect(Canvas.GetLeft(target.enemyImage), Canvas.GetTop(target.enemyImage), target.enemyImage.Width, target.enemyImage.Height)))
                         {
+                            target.HoldMove(gameCanvas);
                             DispatcherTimer hitVisualizaionTimer = new DispatcherTimer();
                             hitVisualizaionTimer.Interval = TimeSpan.FromMilliseconds(200);
                             bool tick = false;
+                            double y = Canvas.GetTop(target.enemyImage);
+                            double x = Canvas.GetLeft(target.enemyImage);
                             hitVisualizaionTimer.Tick += (sender, e) =>
                             {
+                                
                                 if(!tick)
                                 {
                                     target.enemyImage.Opacity = 0.4;
