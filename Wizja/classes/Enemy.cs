@@ -1,6 +1,7 @@
 ﻿using System.Media;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -14,17 +15,21 @@ public class Enemy
     public int value; // Wartość pięniedzy które opuszcza po śmierci
     protected double movingSpeed;
     public Rectangle enemyImage;
+    public Rectangle pointer;
     public bool isLiving = false; // True jężeli przeciwnik żyje oraz jest na mapie
     protected int coolDown = 62; // Co ileś ticków zadaje obrażenia
     protected int tickCount = 0;
     static protected Player player;
-    
+    protected Canvas upperCanvas;
+    public DispatcherTimer timerBlackout;
+    public DispatcherTimer timerPinging;
     //odtwarzanie asynchronicznie dostawania hitka
     public SoundPlayer auch = new SoundPlayer("sound/auch.wav");
 
-     public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource, int Width, int Height)
-    {
 
+    public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource, int Width, int Height, Canvas upperCanvas)
+    {
+        this.upperCanvas = upperCanvas;
         this.healthPoints = helthPoints;
         this.damagePoints = damagePoints;
         this.value = value;
@@ -36,7 +41,34 @@ public class Enemy
             Fill = new ImageBrush(imageSource),
             Name = "Enemy"
         };
+        pointer = new Rectangle()
+        {
+            Width = 10,
+            Height = 10,
+            Fill = Brushes.DarkRed,
+        };
         enemyImage.RenderTransformOrigin = new Point(0.5, 0.5);
+        this.upperCanvas = upperCanvas;
+        timerBlackout = new DispatcherTimer();
+        timerPinging = new DispatcherTimer();
+        timerBlackout.Interval = TimeSpan.FromMilliseconds(500);
+        timerPinging.Interval = TimeSpan.FromMilliseconds(1500);
+        timerPinging.Tick += Pinging;
+        timerBlackout.Tick += Blackout;
+    }
+
+    private void Blackout(object sender, EventArgs e)
+    {
+        pointer.Visibility = Visibility.Hidden;
+        timerBlackout.Stop();
+        timerPinging.Start();
+    }
+
+    private void Pinging(object sender, EventArgs e)
+    {
+        pointer.Visibility = Visibility.Visible;
+        timerPinging.Stop();
+        timerBlackout.Start();
     }
 
     //Sprawdza kolizje między potworem a drugim obiektem
@@ -63,6 +95,7 @@ public class Enemy
             {
                 player.hud.ChangeMoney(value);
                 isLiving = false;//False jeżeli nie
+                upperCanvas.Children.Remove(pointer);
             }
             return !isLiving;
         }
@@ -90,6 +123,8 @@ public class Enemy
             y += dirY * movingSpeed;
             Canvas.SetLeft(enemyImage, x);
             Canvas.SetTop(enemyImage, y);
+            Canvas.SetLeft(pointer, x + (enemyImage.Width / 2));
+            Canvas.SetTop(pointer, y + (enemyImage.Height / 2));
         }
         else if (distance >= 40) // Jeżeli player jest daleko Losuj bardziej jego scieżke
         {
@@ -99,16 +134,18 @@ public class Enemy
             y += dirY * movingSpeed;
             Canvas.SetLeft(enemyImage, x);
             Canvas.SetTop(enemyImage, y);
+            Canvas.SetLeft(pointer, x + (enemyImage.Width / 2));
+            Canvas.SetTop(pointer, y + (enemyImage.Height / 2)-10);
         }
     }
     public void HoldMove(Canvas gameScreen)
     {
         DispatcherTimer waitAfterHit = new DispatcherTimer();
         waitAfterHit.Interval = TimeSpan.FromMilliseconds(1000);
-        movingSpeed -= 1;
+        movingSpeed -= 0.8;
         waitAfterHit.Tick += (sender, e) =>
         {
-            movingSpeed += 1;
+            movingSpeed += 0.8;
             waitAfterHit.Stop();
         };
         waitAfterHit.Start();
