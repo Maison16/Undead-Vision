@@ -20,7 +20,7 @@ namespace Wizja.classes
         public static ImageSource sourceRF1 = new BitmapImage(new Uri("pack://application:,,,/res/FastZombieRF1.png"));
         public static ImageSource sourceRF2 = new BitmapImage(new Uri("pack://application:,,,/res/FastZombieRF2.png"));
         //    public Enemy(int helthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
-        public SlowZombie() : base(5, 10, 10, 2, source,64,64)
+        public SlowZombie(Canvas upperCanvas) : base(5, 10, 10, 2, source,64,64, upperCanvas)
         {
             enemyImage = base.enemyImage;
         }

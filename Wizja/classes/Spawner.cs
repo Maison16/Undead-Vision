@@ -14,11 +14,13 @@ public class Spawner
     public int currentRound = 0;
     private int tickCount = 0;
     private Canvas gameScreen;
+    private Canvas upperCanvas;
     private Player player;
 
 
-    public Spawner(List<Point> enemiesSpawner, int rounds, Canvas gameScreen, Player player)
+    public Spawner(List<Point> enemiesSpawner, int rounds, Canvas gameScreen, Player player, Canvas upperCanvas)
     {
+        this.upperCanvas = upperCanvas;
         this.rounds = rounds;
         frequency = new int[rounds];
         this.enemies = new List<Enemy>[rounds];
@@ -66,16 +68,16 @@ public class Spawner
         switch (enemyID)
         {
             case 1:
-                enemies[noRound].Add(new SlowZombie());
+                enemies[noRound].Add(new SlowZombie(upperCanvas));
                 break;
             case 2:
-                enemies[noRound].Add(new Wolf());
+                enemies[noRound].Add(new Wolf(upperCanvas));
                 break;
             case 3:
-                enemies[noRound].Add(new TankSkeleton());
+                enemies[noRound].Add(new TankSkeleton(upperCanvas));
                 break;
             case 4:
-                enemies[noRound].Add(new ShootingZombie());
+                enemies[noRound].Add(new ShootingZombie(upperCanvas));
                 break;
 
 
@@ -94,6 +96,7 @@ public class Spawner
         {
             Enemy temp;
             Rectangle obj;
+            Rectangle pointer;
             foreach (SpawnerObject spawnerObj in TheClosestSpawners())
             {
                 if (enemies[currentRound].Count() <= enemyCurrentNumber)
@@ -102,9 +105,13 @@ public class Spawner
                 }
                 temp = enemies[currentRound].ElementAt(enemyCurrentNumber);
                 obj = temp.enemyImage;
+                pointer = temp.pointer;
                 Canvas.SetLeft(obj, Canvas.GetLeft(spawnerObj.place));
                 Canvas.SetTop(obj, Canvas.GetTop(spawnerObj.place));
+                Canvas.SetLeft(pointer, Canvas.GetLeft(spawnerObj.place)+temp.enemyImage.Width / 2);
+                Canvas.SetTop(pointer, Canvas.GetTop(spawnerObj.place) + temp.enemyImage.Height / 2);
                 gameScreen.Children.Add(obj);
+                upperCanvas.Children.Add(pointer);
                 temp.isLiving = true;
                 enemyCurrentNumber++;
             }

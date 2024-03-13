@@ -11,7 +11,7 @@
         WindowStyle="None" Background="Black">
     <Grid KeyUp="KeyIsUp" KeyDown="KeyIsDown">
         <Canvas x:Name="gameCanvas" Margin="-2040,-1460,-2040,-1460" Height="4000" Width="6000" Focusable="True"/>
-        <Canvas x:Name="pathCanvas" Margin="-2040,-1460,-2040,-1460" Height="4000" Width="6000" Focusable="True"/>
+        <Canvas x:Name="upperCanvas" Margin="-2040,-1460,-2040,-1460" Height="4000" Width="6000" Focusable="True"/>
         <Canvas x:Name="statCanvas" Margin="0,0,0,980" Height="100" Width="1920" Focusable="True"/>
         <Canvas x:Name="shopCanvas" Margin="130,130,130,130" Height="820" Width="1660" Focusable="True"/>
     </Grid>

@@ -72,7 +72,7 @@ namespace Wizja
             };
             Canvas.SetLeft(pathLabel, 3100);
             Canvas.SetTop(pathLabel, 1650);
-            pathCanvas.Children.Add(pathLabel);
+            upperCanvas.Children.Add(pathLabel);
             pathLabel.Visibility = Visibility.Hidden;
 
         }
@@ -132,7 +132,7 @@ namespace Wizja
             int[][] enemyLists = new int[5][];
 
 
-            spawner = new Spawner(enemiesSpawner, 5, gameCanvas, player);
+            spawner = new Spawner(enemiesSpawner, 5, gameCanvas, player, upperCanvas);
             enemyLists[0] = new int[] { 75, 25, 0, 0 };
             enemyLists[1] = new int[] { 55, 35, 15, 5 };
             enemyLists[2] = new int[] { 35, 35, 20, 10 };
