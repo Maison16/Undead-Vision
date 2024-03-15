@@ -1,82 +1,59 @@
 ﻿using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Wizja.Enemies;
+using static System.Net.Mime.MediaTypeNames;
 using T = System.Timers;
 
 namespace Wizja.classes
 {
     public class Projectile
     {
-        private Point start;
-        private Point end;
-        private double thickness;
-        private List<Rect> hitBoxes;
-        private Canvas gameCanvas;
-        private Line projectileLine;
-        private double range;
-        private T.Timer timer; 
+        private Point start; // poczatek linii
+        private Point end; // koniec linii
 
-        public Projectile(double startX, double startY, Vector direction, double thickness, double range, int damage, List<Rectangle> mapObjects, List<Enemy> enemies, Canvas gameCanvas)
+        private int damage; // obrazenia pocisku
+        private double thickness; // grubos linii
+        private Color color; // kolor linii
+
+        private List<Rect> hitBoxes; // lista hitboxow generowanych w celu znalezienia konca linii etc
+        private Line projectileLine; // linia rysowana na canvasie
+
+        private Canvas gameCanvas; // canvas
+        private T.Timer timer; // timer
+
+        public Projectile(double startX, double startY, Vector direction, double thickness, double range, int damage, Color color, List<Rectangle> mapObjects, List<Enemy> enemies, Canvas gameCanvas)
         {
             this.start = new Point(startX, startY);
+            this.end = new Point(start.X + direction.X * range, start.Y + direction.Y * range); // obliczenie konca linii
+
+            this.damage = damage;
             this.thickness = thickness;
+            this.color = color;
             this.gameCanvas = gameCanvas;
-            this.range = range;
 
-            this.end = new Point(start.X + direction.X * range, start.Y + direction.Y * range);
+            this.hitBoxes = GenerateHitBoxes(); // wygeneruj hitboxy aby potem sprawdzic
 
-            this.hitBoxes = GenerateHitBoxes();
-            DrawLine();
+            // dla kazdej przeszkody na mapie sprawdz czy nachodzi ona z linia strzalu
             foreach (Rectangle target in mapObjects)
             {
-                UpdateEndWithCollision(target);
-            }
-            foreach (Enemy target in enemies)
-            {
-                bool isHited = false;
-                if (target.enemyImage != null && hitBoxes.Count > 0)
-                {
-                    foreach (Rect hitbox in hitBoxes)
-                    {
-                        if (hitbox.IntersectsWith(new Rect(Canvas.GetLeft(target.enemyImage), Canvas.GetTop(target.enemyImage), target.enemyImage.Width, target.enemyImage.Height)))
-                        {
-                            target.HoldMove(gameCanvas);
-                            DispatcherTimer hitVisualizaionTimer = new DispatcherTimer();
-                            hitVisualizaionTimer.Interval = TimeSpan.FromMilliseconds(200);
-                            bool tick = false;
-                            double y = Canvas.GetTop(target.enemyImage);
-                            double x = Canvas.GetLeft(target.enemyImage);
-                            hitVisualizaionTimer.Tick += (sender, e) =>
-                            {
-                                
-                                if(!tick)
-                                {
-                                    target.enemyImage.Opacity = 0.4;
-                                    tick = true;    
-                                }
-                                else
-                                {
-                                    target.enemyImage.Opacity = 1;
-                                    tick = false;
-                                    hitVisualizaionTimer.Stop();
-                                }
-                            };
-                            hitVisualizaionTimer.Start();
-                            if (target.IsDead(damage))
-                            {
-                                gameCanvas.Children.Remove(target.enemyImage);
-                                hitBoxes.Remove(hitbox);
-                            }
-                            break;
-                        }
-                    }
+                if (Collision(target)){
+                    break;
                 }
             }
+            // dla kazdego przeciwnika na mapie sprawdz czy nachodzi on z linia strzalu
+            foreach (Enemy target in enemies)
+            {
+                CollisionWithEnemy(target);
+            }
+            // narysuj linie po ustaleniu konca linii
+            DrawLine();
 
+            // timer do zanikania
             timer = new T.Timer();
             timer.Interval = 40;
             timer.Elapsed += OnTimerElapsed;
@@ -95,7 +72,7 @@ namespace Wizja.classes
         public void DrawLine()
         {
             projectileLine = new Line();
-            projectileLine.Stroke = Brushes.LightGoldenrodYellow;
+            projectileLine.Stroke = new SolidColorBrush(color);
             projectileLine.StrokeThickness = thickness;
             projectileLine.X1 = start.X;
             projectileLine.Y1 = start.Y;
@@ -123,18 +100,65 @@ namespace Wizja.classes
             return hitBoxes;
         }
 
-        private void UpdateEndWithCollision(Rectangle target)
+        private bool Collision(Rectangle target)
         {
             foreach (Rect hitbox in hitBoxes)
             {
                 if (hitbox.IntersectsWith(new Rect(Canvas.GetLeft(target), Canvas.GetTop(target), target.Width, target.Height)))
                 {
-                    end = new Point(hitbox.X + hitbox.Width / 2, hitbox.Y + hitbox.Height / 2);
-                    projectileLine.X2 = end.X;
-                    projectileLine.Y2 = end.Y;
-                    break;
+                    this.end.X = hitbox.X + hitbox.Width / 2;
+                    this.end.Y = hitbox.Y + hitbox.Height / 2;
+                    return true;
                 }
             }
+            return false;
+        }
+
+        private bool CollisionWithEnemy(Enemy target)
+        {
+            if (target.enemyImage != null && hitBoxes.Count > 0)
+            {
+                foreach (Rect hitbox in hitBoxes)
+                {
+                    if (hitbox.IntersectsWith(new Rect(Canvas.GetLeft(target.enemyImage), Canvas.GetTop(target.enemyImage), target.enemyImage.Width, target.enemyImage.Height)))
+                    {
+                        target.HoldMove(gameCanvas);
+                        DispatcherTimer hitVisualizaionTimer = new DispatcherTimer();
+                        hitVisualizaionTimer.Interval = TimeSpan.FromMilliseconds(200);
+                        bool tick = false;
+
+                        // update pozycji pocisku
+                        double y = Canvas.GetTop(target.enemyImage);
+                        double x = Canvas.GetLeft(target.enemyImage);
+
+                        // funkcja matiego do knockbacku dla przeciwnikow
+                        hitVisualizaionTimer.Tick += (sender, e) =>
+                        {
+                            if (!tick)
+                            {
+                                target.enemyImage.Opacity = 0.4;
+                                tick = true;
+                            }
+                            else
+                            {
+                                target.enemyImage.Opacity = 1;
+                                tick = false;
+                                hitVisualizaionTimer.Stop();
+                            }
+                        };
+                        hitVisualizaionTimer.Start();
+
+                        // deal damage to the target and if its dead remove it from the canvas
+                        if (target.IsDead(damage))
+                        {
+                            gameCanvas.Children.Remove(target.enemyImage);
+                            hitBoxes.Remove(hitbox);
+                        }
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

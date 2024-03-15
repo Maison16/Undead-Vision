@@ -25,8 +25,7 @@ namespace Wizja.classes.guns
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
-            // grubosc linii, zasieg, obrazenia
-            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 5, this.range, this.dmg, targets, enemies, gameCanvas);
+            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 5, this.range, this.dmg, Colors.Gold, targets, enemies, gameCanvas);
         }
     }
 }
