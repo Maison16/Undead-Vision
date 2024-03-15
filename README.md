@@ -1,6 +1,6 @@
 ![Alt Text](https://github.com/Maison16/Wizja/blob/master/Wizja/res/menu/biglogoREADME.png)
 ---
-Undead Vision is a project that was created for a Game jam organised by a VR student research group on a Bialystok University of Technology. 
+Undead Vision is a project that was created for a Game jam organised by a student research group on a Bialystok University of Technology. 
 
 We had 48 hours to finish the game and randomly picked topic was "Vision".
 
