@@ -45,10 +45,13 @@ namespace Wizja.classes
                     break;
                 }
             }
-            // dla kazdego przeciwnika na mapie sprawdz czy nachodzi on z linia strzalu
-            foreach (Enemy target in enemies)
+            // dla kazdego hitboxa linii strzalu sprawdzamy czy nachodzi z przeciwnikem
+            foreach (Rect bulletHitbox in hitBoxes)
             {
-                CollisionWithEnemy(target);
+                if (CollisionCheckEnemy(bulletHitbox, enemies))
+                {
+                    break;
+                }
             }
             // narysuj linie po ustaleniu konca linii
             DrawLine();
@@ -114,6 +117,28 @@ namespace Wizja.classes
             return false;
         }
 
+        private bool CollisionCheckEnemy(Rect bulletHitbox, List<Enemy> enemies)
+        {   
+                foreach(Enemy target in enemies)
+                {
+                    Rect enemyHitbox = new Rect(Canvas.GetLeft(target.enemyImage), Canvas.GetTop(target.enemyImage), target.enemyImage.Width, target.enemyImage.Height);
+                    if (bulletHitbox.IntersectsWith(enemyHitbox)){
+                        // update pozycji konca linii strzalu
+                        this.end.X = bulletHitbox.X + bulletHitbox.Width / 2;
+                        this.end.Y = bulletHitbox.Y + bulletHitbox.Height / 2;
+                        // deal damage to the target and if its health == 0 remove it from the canvas
+                        if (target.IsDead(damage))
+                        {
+                            //gameCanvas.Children.Remove(target.enemyImage);
+                            //enemies.Remove(target);
+                        }
+                        return true;
+                    }
+                }
+            return false;
+        }
+
+        /*
         private bool CollisionWithEnemy(Enemy target)
         {
             if (target.enemyImage != null && hitBoxes.Count > 0)
@@ -127,7 +152,6 @@ namespace Wizja.classes
                         hitVisualizaionTimer.Interval = TimeSpan.FromMilliseconds(200);
                         bool tick = false;
 
-                        // update pozycji pocisku
                         double y = Canvas.GetTop(target.enemyImage);
                         double x = Canvas.GetLeft(target.enemyImage);
 
@@ -148,7 +172,7 @@ namespace Wizja.classes
                         };
                         hitVisualizaionTimer.Start();
 
-                        // deal damage to the target and if its dead remove it from the canvas
+                        // deal damage to the target and if its health == 0 remove it from the canvas
                         if (target.IsDead(damage))
                         {
                             gameCanvas.Children.Remove(target.enemyImage);
@@ -160,5 +184,6 @@ namespace Wizja.classes
             }
             return false;
         }
+        */
     }
 }
