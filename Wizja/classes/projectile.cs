@@ -26,7 +26,7 @@ namespace Wizja.classes
         private Canvas gameCanvas; // canvas
         private T.Timer timer; // timer
 
-        public Projectile(double startX, double startY, Vector direction, double thickness, double range, int damage, Color color, List<Rectangle> mapObjects, List<Enemy> enemies, Canvas gameCanvas)
+        public Projectile(double startX, double startY, Vector direction, double thickness, double range, int damage, bool pierce, Color color, List<Rectangle> mapObjects, List<Enemy> enemies, Canvas gameCanvas)
         {
             this.start = new Point(startX, startY); // poczatek linii
             this.end = new Point(start.X + direction.X * range, start.Y + direction.Y * range); // obliczenie konca linii
@@ -45,11 +45,12 @@ namespace Wizja.classes
                     break;
                 }
             }
-            bool pierce = true;
+
             // dla kazdego hitboxa linii strzalu sprawdzamy czy nachodzi z przeciwnikem
+            List<Enemy> enemiesCopy = new List<Enemy>(enemies);
             foreach (Rect bulletHitbox in hitBoxes)
             {
-                if (CollisionCheckEnemy(bulletHitbox, enemies) && !pierce){
+                if (CollisionCheckEnemy(bulletHitbox, pierce, enemiesCopy) && !pierce){
                     break;
                 }
             }
@@ -116,16 +117,18 @@ namespace Wizja.classes
             return false;
         }
 
-        private bool CollisionCheckEnemy(Rect bulletHitbox, List<Enemy> enemies)
+        private bool CollisionCheckEnemy(Rect bulletHitbox, bool pierce, List<Enemy> enemies)
         {   
                 foreach(Enemy target in enemies)
                 {
                     Rect enemyHitbox = new Rect(Canvas.GetLeft(target.enemyImage), Canvas.GetTop(target.enemyImage), target.enemyImage.Width, target.enemyImage.Height);
                     if (bulletHitbox.IntersectsWith(enemyHitbox)){
-                        // update pozycji konca linii strzalu
-                        this.end.X = bulletHitbox.X + bulletHitbox.Width / 2;
-                        this.end.Y = bulletHitbox.Y + bulletHitbox.Height / 2;
-                        //enemies.Remove(target);    
+                    // update pozycji konca linii strzalu
+                        if (!pierce){
+                            this.end.X = bulletHitbox.X + bulletHitbox.Width / 2;
+                            this.end.Y = bulletHitbox.Y + bulletHitbox.Height / 2;
+                        }
+                        enemies.Remove(target);    
 
                         if (target.IsDead(damage)){ // zadaj obrazenia
                             gameCanvas.Children.Remove(target.enemyImage); // jezeli przeciwnik nie zyje, usuwamy go z canvasu

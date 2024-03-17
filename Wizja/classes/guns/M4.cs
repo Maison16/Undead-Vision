@@ -18,11 +18,11 @@ namespace Wizja.classes.guns
     public class M4 : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/m4.png"));
-        public M4() : base("M4A1", 5, 550, 400, img) { this.SetCoolDown(20); }
+        public M4() : base("M4A1", 5, 550, 400, false, img) { this.SetCoolDown(20); }
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
-            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 6, this.range, this.dmg, Colors.Red, targets, enemies, gameCanvas);
+            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 6, this.range, this.dmg, this.pierce, Colors.Red, targets, enemies, gameCanvas);
         }
     }
 }

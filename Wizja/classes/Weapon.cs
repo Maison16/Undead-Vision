@@ -18,9 +18,10 @@ namespace Wizja.classes
         public int dmg { get; set; } // ilosc obrazen
         public double range { get; set; } // max zasieg wystrzeliwanego pocisku
         public int cost { get; set; } // koszt w sklepie
+        protected bool pierce; // czy przebija przeciwnika
         public BitmapImage img { get; set; }
         public int coolDown { get; set; }
-        public Weapon(string name, int dmg, double range, int cost, BitmapImage img)
+        public Weapon(string name, int dmg, double range, int cost, bool pierce, BitmapImage img)
         {
             this.name = name;
             this.dmg = dmg;
@@ -28,6 +29,7 @@ namespace Wizja.classes
             this.range = range;
             this.cost = cost;
             this.img = img;
+            this.pierce = pierce;
         }
         public Vector RotateVector(Vector vector, float angle)
         {

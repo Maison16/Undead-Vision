@@ -18,12 +18,12 @@ namespace Wizja.classes.guns
     public class StartGun : Weapon
     {
         public static BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/res/rock.png"));
-        public StartGun() : base("Kamien", 1, 200, 100, img) { this.SetCoolDown(20); }
+        public StartGun() : base("Kamien", 1, 200, 100, false, img) { this.SetCoolDown(20); }
 
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
             Color color = Colors.Silver;
-            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 4, this.range, this.dmg, color, targets, enemies, gameCanvas);
+            Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 4, this.range, this.dmg, this.pierce, color, targets, enemies, gameCanvas);
         }
     }
 }
