@@ -18,7 +18,7 @@ namespace Wizja.classes
         public static ImageSource source2 = new BitmapImage(new Uri("pack://application:,,,/res/WolfRF1.png"));
         //    public Enemy(int healthPoints, int damagePoints, int value, double movingSpeed, ImageSource imageSource)
 
-        public Wolf(Canvas upperCanvas) : base(7, 10, 10, 4, source, 74, 119, upperCanvas)
+        public Wolf(Canvas upperCanvas) : base(7, 10, 10, 4.5, source, 74, 119, upperCanvas)
         { }
         int i = 0, j = 0;
         override public void Follow(Rectangle playerLocation, Canvas gameScreen)
