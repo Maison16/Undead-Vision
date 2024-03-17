@@ -1,7 +1,7 @@
-﻿using System.Windows;
+﻿using System.Numerics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 using Wizja.Enemies;
 
 namespace Wizja.classes;
@@ -11,7 +11,7 @@ public class Spawner
     private List<SpawnerObject> enemiesSpawner = new List<SpawnerObject>(); // Dajemy pozycje wszystkich puntków spawnujących
     public List<Enemy>[] enemies; //Przetrzymuje przeciwnków
     private int rounds;//Liczba rund
-    private int enemyCurrentNumber = 0;
+    private int spawnedEnemyCurrentCount = 0;
     public int currentRound = 0;
     private int tickCount = 0;
     private Canvas gameScreen;
@@ -57,7 +57,7 @@ public class Spawner
             {
                 GetEnemies(3, noRound);
             }
-            else if (value <= wave[0] + wave[1] + wave[2]+ wave[3])
+            else if (value <= wave[0] + wave[1] + wave[2] + wave[3])
             {
                 GetEnemies(4, noRound);
             }
@@ -101,21 +101,21 @@ public class Spawner
             Rectangle pointer;
             foreach (SpawnerObject spawnerObj in TheClosestSpawners())
             {
-                if (enemies[currentRound].Count() <= enemyCurrentNumber)
+                if (enemies[currentRound].Count() <= spawnedEnemyCurrentCount)
                 {
                     break;
                 }
-                temp = enemies[currentRound].ElementAt(enemyCurrentNumber);
+                temp = enemies[currentRound].ElementAt(spawnedEnemyCurrentCount);
                 obj = temp.enemyImage;
                 pointer = temp.pointer;
                 Canvas.SetLeft(obj, Canvas.GetLeft(spawnerObj.place));
                 Canvas.SetTop(obj, Canvas.GetTop(spawnerObj.place));
-                Canvas.SetLeft(pointer, Canvas.GetLeft(spawnerObj.place)+temp.enemyImage.Width / 2);
+                Canvas.SetLeft(pointer, Canvas.GetLeft(spawnerObj.place) + temp.enemyImage.Width / 2);
                 Canvas.SetTop(pointer, Canvas.GetTop(spawnerObj.place) + temp.enemyImage.Height / 2);
                 gameScreen.Children.Add(obj);
                 upperCanvas.Children.Add(pointer);
                 temp.isLiving = true;
-                enemyCurrentNumber++;
+                spawnedEnemyCurrentCount++;
 
                 temp.timerBlackout.Start();
             }
@@ -124,7 +124,7 @@ public class Spawner
         if (AllDead() && currentRound <= rounds)
         {
             player.hud.SetTime(30);
-            enemyCurrentNumber = 0;
+            spawnedEnemyCurrentCount = 0;
             currentRound++;
             tickCount = 0;
         }
@@ -150,7 +150,7 @@ public class Spawner
                     else
                     {
                         enemy.Follow(playerImage, gameScreen);
-                        
+
                     }
                     if (enemy.IsColision(hitbox))
                     {
@@ -163,7 +163,7 @@ public class Spawner
     }
     public bool AllDead()
     {
-        if (currentRound >= rounds) 
+        if (currentRound >= rounds)
         {
             return true;
         }
@@ -187,7 +187,7 @@ public class Spawner
                 hg -= 60;
             else if (rectangle.Height > 40)
                 hg -= 30;
-            Rect building = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rectangle.Width-30, hg);
+            Rect building = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rectangle.Width - 30, hg);
             if (enemy.IsColision(building))
             {
                 return rectangle;
@@ -229,8 +229,9 @@ public class Spawner
 
         return allEnemies;
     }
-    public int EnemyCount(int i)
+    public List<Enemy> GetListOfLivingEnemies()
     {
-       return enemies[i].Count();
+        var allLivingEnemies = GetAllEnemies().Where(x => x.isLiving == true).ToList();
+        return allLivingEnemies;
     }
 }
