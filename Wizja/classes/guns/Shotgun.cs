@@ -24,7 +24,7 @@ namespace Wizja.classes.guns
         public override void Shoot(Point playerPos, Vector direction, List<Rectangle> targets, List<Enemy> enemies, Canvas gameCanvas)
         {
             Random random = new Random();
-            Color color = Colors.Lime;
+            Color color = Colors.Tomato;
 
             double newRange1 = random.Next(-50, 1);
             Projectile projectile = new Projectile(playerPos.X, playerPos.Y, direction, 6, this.range + newRange1, this.dmg, this.pierce, color, targets, enemies, gameCanvas);
