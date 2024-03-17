@@ -28,28 +28,28 @@ namespace Wizja.classes
 
         public Projectile(double startX, double startY, Vector direction, double thickness, double range, int damage, Color color, List<Rectangle> mapObjects, List<Enemy> enemies, Canvas gameCanvas)
         {
-            this.start = new Point(startX, startY);
+            this.start = new Point(startX, startY); // poczatek linii
             this.end = new Point(start.X + direction.X * range, start.Y + direction.Y * range); // obliczenie konca linii
 
-            this.damage = damage;
-            this.thickness = thickness;
-            this.color = color;
+            this.damage = damage; // obrazenia
+            this.thickness = thickness; // grubosc linii
+            this.color = color; // kolor
             this.gameCanvas = gameCanvas;
 
-            this.hitBoxes = GenerateHitBoxes(); // wygeneruj hitboxy aby potem sprawdzic
+            this.hitBoxes = GenerateHitBoxes(direction); // wygeneruj hitboxy dla linii strzalu
 
             // dla kazdej przeszkody na mapie sprawdz czy nachodzi ona z linia strzalu
             foreach (Rectangle target in mapObjects)
             {
-                if (Collision(target)){
+                if (CollisionCheckMapObject(target)){
                     break;
                 }
             }
+            bool pierce = true;
             // dla kazdego hitboxa linii strzalu sprawdzamy czy nachodzi z przeciwnikem
             foreach (Rect bulletHitbox in hitBoxes)
             {
-                if (CollisionCheckEnemy(bulletHitbox, enemies))
-                {
+                if (CollisionCheckEnemy(bulletHitbox, enemies) && !pierce){
                     break;
                 }
             }
@@ -84,14 +84,13 @@ namespace Wizja.classes
             gameCanvas.Children.Add(projectileLine);
         }
 
-        public List<Rect> GenerateHitBoxes()
+        public List<Rect> GenerateHitBoxes(Vector direction)
         {
             List<Rect> hitBoxes = new List<Rect>();
             double distance = Point.Subtract(end, start).Length;
-            Vector direction = (end - start) / distance;
 
-            int numHitBoxes = (int)(distance / 10);
-            double halfThickness = thickness / 2.0;
+            int numHitBoxes = (int)(distance / 10); // ilosc hitboxow na linie
+            double halfThickness = thickness / 2.0; // polowa grubosci linii
 
             for (int i = 0; i < numHitBoxes; i++)
             {
@@ -103,7 +102,7 @@ namespace Wizja.classes
             return hitBoxes;
         }
 
-        private bool Collision(Rectangle target)
+        private bool CollisionCheckMapObject(Rectangle target)
         {
             foreach (Rect hitbox in hitBoxes)
             {
@@ -126,11 +125,10 @@ namespace Wizja.classes
                         // update pozycji konca linii strzalu
                         this.end.X = bulletHitbox.X + bulletHitbox.Width / 2;
                         this.end.Y = bulletHitbox.Y + bulletHitbox.Height / 2;
-                        // deal damage to the target and if its health == 0 remove it from the canvas
-                        if (target.IsDead(damage))
-                        {
-                            //gameCanvas.Children.Remove(target.enemyImage);
-                            //enemies.Remove(target);
+                        //enemies.Remove(target);    
+
+                        if (target.IsDead(damage)){ // zadaj obrazenia
+                            gameCanvas.Children.Remove(target.enemyImage); // jezeli przeciwnik nie zyje, usuwamy go z canvasu
                         }
                         return true;
                     }

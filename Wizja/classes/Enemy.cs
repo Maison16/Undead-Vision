@@ -96,6 +96,9 @@ public class Enemy
                 player.hud.ChangeMoney(value);
                 isLiving = false;//False jeżeli nie
                 upperCanvas.Children.Remove(pointer);
+                // zmniejszamy hitbox do 0x0, usuwanie przy smierci powodowalo bugi, a to dziala just fine
+                enemyImage.Width = 0;
+                enemyImage.Height = 0;
             }
             return !isLiving;
         }
