@@ -82,7 +82,7 @@ namespace Wizja.classes
             gameCanvas.Children.Add(flashLightImage);
             playerImage.RenderTransformOrigin = new Point(0.5, 0.5);
 
-            this.weapon = new Shotgun(); // bron na start
+            this.weapon = new StartGun(); // bron na start
         }
         public void TakeDamage(int damage)
         {
