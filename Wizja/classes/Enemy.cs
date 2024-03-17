@@ -52,7 +52,7 @@ public class Enemy
         timerBlackout = new DispatcherTimer();
         timerPinging = new DispatcherTimer();
         timerBlackout.Interval = TimeSpan.FromMilliseconds(500);
-        timerPinging.Interval = TimeSpan.FromMilliseconds(1500);
+        timerPinging.Interval = TimeSpan.FromMilliseconds(2500);
         timerPinging.Tick += Pinging;
         timerBlackout.Tick += Blackout;
     }
