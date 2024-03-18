@@ -69,6 +69,7 @@ namespace Wizja.classes
         {
             gameCanvas.Dispatcher.Invoke(() =>
             {
+                timer.Stop();
                 gameCanvas.Children.Remove(projectileLine);
             });
         }
@@ -123,12 +124,13 @@ namespace Wizja.classes
                 {
                     Rect enemyHitbox = new Rect(Canvas.GetLeft(target.enemyImage), Canvas.GetTop(target.enemyImage), target.enemyImage.Width, target.enemyImage.Height);
                     if (bulletHitbox.IntersectsWith(enemyHitbox)){
-                    // update pozycji konca linii strzalu
-                        if (!pierce){
+                        target.HoldMove(gameCanvas); // knocback
+                        
+                        if (!pierce){  // update pozycji konca linii strzalu
                             this.end.X = bulletHitbox.X + bulletHitbox.Width / 2;
                             this.end.Y = bulletHitbox.Y + bulletHitbox.Height / 2;
                         }
-                        enemies.Remove(target);    
+                        enemies.Remove(target); // usuwamy z listy przeciwnikow aby nie udrzeyc przeciwnika kilka razy 1 strzalem
 
                         if (target.IsDead(damage)){ // zadaj obrazenia
                             gameCanvas.Children.Remove(target.enemyImage); // jezeli przeciwnik nie zyje, usuwamy go z canvasu
@@ -138,53 +140,5 @@ namespace Wizja.classes
                 }
             return false;
         }
-
-        /*
-        private bool CollisionWithEnemy(Enemy target)
-        {
-            if (target.enemyImage != null && hitBoxes.Count > 0)
-            {
-                foreach (Rect hitbox in hitBoxes)
-                {
-                    if (hitbox.IntersectsWith(new Rect(Canvas.GetLeft(target.enemyImage), Canvas.GetTop(target.enemyImage), target.enemyImage.Width, target.enemyImage.Height)))
-                    {
-                        target.HoldMove(gameCanvas);
-                        DispatcherTimer hitVisualizaionTimer = new DispatcherTimer();
-                        hitVisualizaionTimer.Interval = TimeSpan.FromMilliseconds(200);
-                        bool tick = false;
-
-                        double y = Canvas.GetTop(target.enemyImage);
-                        double x = Canvas.GetLeft(target.enemyImage);
-
-                        // funkcja matiego do knockbacku dla przeciwnikow
-                        hitVisualizaionTimer.Tick += (sender, e) =>
-                        {
-                            if (!tick)
-                            {
-                                target.enemyImage.Opacity = 0.4;
-                                tick = true;
-                            }
-                            else
-                            {
-                                target.enemyImage.Opacity = 1;
-                                tick = false;
-                                hitVisualizaionTimer.Stop();
-                            }
-                        };
-                        hitVisualizaionTimer.Start();
-
-                        // deal damage to the target and if its health == 0 remove it from the canvas
-                        if (target.IsDead(damage))
-                        {
-                            gameCanvas.Children.Remove(target.enemyImage);
-                            hitBoxes.Remove(hitbox);
-                        }
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        */
     }
 }
