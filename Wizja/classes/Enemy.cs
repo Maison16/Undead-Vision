@@ -141,6 +141,7 @@ public class Enemy
             Canvas.SetTop(pointer, y + (enemyImage.Height / 2)-10);
         }
     }
+
     public void HoldMove(Canvas gameScreen)
     {
         DispatcherTimer waitAfterHit = new DispatcherTimer();
@@ -152,7 +153,8 @@ public class Enemy
             waitAfterHit.Stop();
         };
         waitAfterHit.Start();
-        }
+    }
+
     public void BreakCollision(Rectangle obj, Canvas gameScreen, Rectangle playerLocation)
     {
         double x = Canvas.GetLeft(enemyImage);
