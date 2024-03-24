@@ -137,54 +137,6 @@ namespace Wizja.classes
                     }
                 }
             return false;
-        }
-
-        /*
-        private bool CollisionWithEnemy(Enemy target)
-        {
-            if (target.enemyImage != null && hitBoxes.Count > 0)
-            {
-                foreach (Rect hitbox in hitBoxes)
-                {
-                    if (hitbox.IntersectsWith(new Rect(Canvas.GetLeft(target.enemyImage), Canvas.GetTop(target.enemyImage), target.enemyImage.Width, target.enemyImage.Height)))
-                    {
-                        target.HoldMove(gameCanvas);
-                        DispatcherTimer hitVisualizaionTimer = new DispatcherTimer();
-                        hitVisualizaionTimer.Interval = TimeSpan.FromMilliseconds(200);
-                        bool tick = false;
-
-                        double y = Canvas.GetTop(target.enemyImage);
-                        double x = Canvas.GetLeft(target.enemyImage);
-
-                        // funkcja matiego do knockbacku dla przeciwnikow
-                        hitVisualizaionTimer.Tick += (sender, e) =>
-                        {
-                            if (!tick)
-                            {
-                                target.enemyImage.Opacity = 0.4;
-                                tick = true;
-                            }
-                            else
-                            {
-                                target.enemyImage.Opacity = 1;
-                                tick = false;
-                                hitVisualizaionTimer.Stop();
-                            }
-                        };
-                        hitVisualizaionTimer.Start();
-
-                        // deal damage to the target and if its health == 0 remove it from the canvas
-                        if (target.IsDead(damage))
-                        {
-                            gameCanvas.Children.Remove(target.enemyImage);
-                            hitBoxes.Remove(hitbox);
-                        }
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        */
+        } 
     }
 }
