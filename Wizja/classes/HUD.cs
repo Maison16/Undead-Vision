@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,7 +10,8 @@ using Wizja.classes.guns;
 namespace Wizja.classes
 {
     public class HUD
-    {   private DispatcherTimer timer = new DispatcherTimer();  
+    {
+        private DispatcherTimer timer = new DispatcherTimer();
         private Canvas statCanvas;
         private int hp;
         private int time;
@@ -26,6 +20,7 @@ namespace Wizja.classes
         private Label hpLabel;
         private Label timeLabel;
         private Label nearLabel;
+        private Label enemyCounter;
         private Rectangle clockIcon;
         private Rectangle nearBox;
         private ImageBrush hpImage = new ImageBrush();
@@ -96,7 +91,7 @@ namespace Wizja.classes
                 Height = 50,
                 Fill = clockImage
             };
-            Canvas.SetLeft(clockIcon, 900);
+            Canvas.SetLeft(clockIcon, 1000);
             Canvas.SetTop(clockIcon, 30);
             statCanvas.Children.Add(clockIcon);
 
@@ -104,12 +99,26 @@ namespace Wizja.classes
             {
                 Content = $"{time}s",
                 FontSize = 50,
-                Foreground = Brushes.White
+                Foreground = Brushes.White,
+                FontFamily = new FontFamily("Algerian")
+
             };
-            Canvas.SetLeft(timeLabel, 950);
+            Canvas.SetLeft(timeLabel, 1050);
             Canvas.SetTop(timeLabel, 15);
             statCanvas.Children.Add(timeLabel);
             coinImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/res/coinIcon.png"));
+
+            enemyCounter = new Label
+            {
+                Content = "CURRENT ENEMIES: 0",
+                FontSize = 50,
+                Foreground = Brushes.White,
+                FontFamily = new FontFamily("Algerian")
+            };
+            Canvas.SetLeft(enemyCounter, 450);
+            Canvas.SetTop(enemyCounter, 15);
+            statCanvas.Children.Add(enemyCounter);
+
             Rectangle coinIcon = new Rectangle
             {
                 Width = 50,
@@ -124,7 +133,9 @@ namespace Wizja.classes
             {
                 Content = $"{money}",
                 FontSize = 50,
-                Foreground = Brushes.White
+                Foreground = Brushes.White,
+                FontFamily = new FontFamily("Algerian")
+
             };
             Canvas.SetLeft(moneyLabel, 1700);
             Canvas.SetTop(moneyLabel, 15);
@@ -149,9 +160,9 @@ namespace Wizja.classes
             Canvas.SetTop(nearLabel, 1030);
             statCanvas.Children.Add(nearLabel);
 
-            
+
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1000); 
+            timer.Interval = TimeSpan.FromMilliseconds(1000);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -175,6 +186,17 @@ namespace Wizja.classes
             if (time == 29)
             {
                 finish.Play();
+            }
+        }
+        public void UpdateCounterOfEnemy(int maxEnemies, int stillLivingEnemies)
+        {
+            if (time == 0)
+            {
+                enemyCounter.Content = $"CURRENT ENEMIES: {stillLivingEnemies}/{maxEnemies}";
+            }
+            else
+            {
+                enemyCounter.Content = $"CURRENT ENEMIES: 0";
             }
         }
         public void NearShopShow()
@@ -219,7 +241,7 @@ namespace Wizja.classes
         public void ChangeMoney(int Money)
         {
             money += Money;
-            if(Money >= 0) 
+            if (Money >= 0)
             {
                 totalPoints += Money;
             }

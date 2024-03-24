@@ -90,6 +90,7 @@ namespace Wizja
                         skullIcon.Visibility = Visibility.Visible;
                         spawner.Spawn();
                         spawner.MoveEveryOne(player, objectLoader.GetListMapObjects());
+                        hud.UpdateCounterOfEnemy(spawner.enemies[spawner.currentRound].Count(), spawner.GetListOfLivingEnemies().Count());
                         EndOfGameLose();
                         EndOfGameWin();
                     }
@@ -179,7 +180,7 @@ namespace Wizja
                 Height = 50,
                 Fill = skullImage
             };
-            Canvas.SetLeft(skullIcon, 925);
+            Canvas.SetLeft(skullIcon, 1115);
             Canvas.SetTop(skullIcon, 30);
             statCanvas.Children.Add(skullIcon);
             skullIcon.Visibility = Visibility.Hidden;

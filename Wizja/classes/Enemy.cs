@@ -2,10 +2,12 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Wizja.classes;
+using T = System.Timers;
 
 namespace Wizja.Enemies;
 public class Enemy
@@ -84,9 +86,31 @@ public class Enemy
     //public bool IsDead(int takenDamage,Map mapa)
     public bool IsDead(int takenDamage)
     {
+        DispatcherTimer hitVisualizaionTimer = new DispatcherTimer();
+        hitVisualizaionTimer.Interval = TimeSpan.FromMilliseconds(200);
+        bool tick = false;
+
+        // funkcja matiego do knockbacku dla przeciwnikow
+        hitVisualizaionTimer.Tick += (sender, e) =>
+        {
+            if (!tick)
+            {
+                this.enemyImage.Opacity = 0.4;
+                tick = true;
+            }
+            else
+            {
+                this.enemyImage.Opacity = 1;
+                tick = false;
+                hitVisualizaionTimer.Stop();
+            }
+        };
+        hitVisualizaionTimer.Start();
+
         healthPoints -= takenDamage;
         if (healthPoints > 0)
         {
+            
             return !isLiving; //True jeżeli żyje
         }
         else
@@ -103,6 +127,7 @@ public class Enemy
             return !isLiving;
         }
     }
+
     public void SetPlayer(Player player1)
     {
         player = player1;
